@@ -1611,7 +1611,7 @@ function AdminLogin({ onLogin }) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (form.password === "admin123") { onLogin(); toast("¡Bienvenida al panel! 👋"); }
+      if (form.password === "VenetusKids26") { onLogin(); toast("¡Bienvenida al panel! 👋"); }
       else toast("Contraseña incorrecta. Usa: admin123", "error");
     }, 800);
   };
