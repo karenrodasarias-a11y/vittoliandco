@@ -412,8 +412,36 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
     setProcessing(true);
     setTimeout(() => {
       setProcessing(false);
-      setStep(3);
       onComplete({ ...form, coupon: couponResult?.code, payMethod, subtotal, discount, shipping, total, items: cart });
+
+      if (payMethod === "yape") {
+        // Build WhatsApp message with order details
+        const itemsList = cart.map(i => `  • ${i.name} x${i.qty} = S/. ${(i.price * i.qty).toFixed(2)}`).join("\n");
+        const msg = [
+          `🛍️ *Nuevo pedido - Venetus Kids*`,
+          ``,
+          `👤 *Cliente:* ${form.name}`,
+          `📧 ${form.email}`,
+          form.phone ? `📱 ${form.phone}` : null,
+          `📍 ${form.address}`,
+          ``,
+          `*Productos:*`,
+          itemsList,
+          ``,
+          discount > 0 ? `🎟️ Descuento (${couponResult?.code}): -S/. ${discount.toFixed(2)}` : null,
+          `🚚 Envío: ${shipping === 0 ? "GRATIS" : "S/. " + shipping.toFixed(2)}`,
+          `💰 *TOTAL A PAGAR: S/. ${total.toFixed(2)}*`,
+          ``,
+          `💜 Adjunto el comprobante de pago por *Yape*. ¡Gracias! 🎀`,
+        ].filter(Boolean).join("\n");
+
+        setTimeout(() => {
+          window.open(`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+          setStep(3);
+        }, 500);
+      } else {
+        setStep(3);
+      }
     }, 2000);
   };
 
@@ -524,10 +552,17 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
             </div>
           )}
           {payMethod === "yape" && (
-            <div style={{ background: "#F3E5F5", borderRadius: 16, padding: 16, marginBottom: 20, textAlign: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#7B1FA2", marginBottom: 4 }}>💜 Yape al número:</div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: "#7B1FA2", letterSpacing: "2px" }}>{config.whatsapp}</div>
-              <div style={{ fontSize: 12, color: "#9C27B0", marginTop: 4 }}>Envía el comprobante por WhatsApp</div>
+            <div style={{ background: "linear-gradient(135deg, #F3E5F5, #EDE0F8)", borderRadius: 20, padding: 20, marginBottom: 20, textAlign: "center", border: "1.5px solid #CE93D8" }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#7B1FA2", marginBottom: 6 }}>💜 Instrucciones de pago por Yape</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: "#7B1FA2", letterSpacing: "3px", marginBottom: 6 }}>{config.whatsapp}</div>
+              <div style={{ fontSize: 12, color: "#9C27B0", lineHeight: 1.6 }}>
+                1. Yapea el monto exacto al número de arriba<br />
+                2. Al hacer clic en "Pagar", te redirigimos al WhatsApp<br />
+                3. Envía la captura del comprobante por ese chat 📸
+              </div>
+              <div style={{ marginTop: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12, color: "#7B1FA2", fontWeight: 600 }}>
+                <span>💬</span> Validaremos tu pago y confirmaremos el pedido
+              </div>
             </div>
           )}
           <div style={{ background: C.beige, borderRadius: 16, padding: 16, marginBottom: 20 }}>
@@ -538,8 +573,8 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
           </div>
           <div style={{ display: "flex", gap: 12 }}>
             <button onClick={() => setStep(1)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.brownMid }}>← Volver</button>
-            <button onClick={handlePay} disabled={processing} style={{ flex: 2, padding: "14px", borderRadius: 100, background: processing ? C.brownMid : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: processing ? "not-allowed" : "pointer", fontSize: 15 }}>
-              {processing ? "Procesando..." : "🔒 Pagar S/. " + total.toFixed(2)}
+            <button onClick={handlePay} disabled={processing} style={{ flex: 2, padding: "14px", borderRadius: 100, background: processing ? C.brownMid : payMethod === "yape" ? "linear-gradient(135deg, #9C27B0, #7B1FA2)" : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: processing ? "not-allowed" : "pointer", fontSize: 15 }}>
+              {processing ? "Procesando..." : payMethod === "yape" ? `💬 Ir a WhatsApp · S/. ${total.toFixed(2)}` : `🔒 Pagar S/. ${total.toFixed(2)}`}
             </button>
           </div>
         </div>
@@ -1499,7 +1534,34 @@ function AdminSettings({ config, setConfig }) {
 }
 
 // ─── ADMIN CLIENTS ────────────────────────────────────────────────────────────
-function AdminClients({ orders }) {
+function AdminClients({ orders, setOrders }) {
+  const toast = useToast();
+  const [blockedEmails, setBlockedEmails] = useState([]);
+  const [confirm, setConfirm] = useState(null); // { type: "delete"|"block"|"unblock", email, name }
+  const [showBlocked, setShowBlocked] = useState(false);
+
+  // Load blocked list from storage on mount
+  useEffect(() => {
+    storage.get("vk_blocked_clients").then(v => { if (v) setBlockedEmails(v); });
+  }, []);
+
+  const saveBlocked = async (list) => {
+    setBlockedEmails(list);
+    await storage.set("vk_blocked_clients", list);
+  };
+
+  const handleBlock = (email) => {
+    const next = blockedEmails.includes(email) ? blockedEmails.filter(e => e !== email) : [...blockedEmails, email];
+    saveBlocked(next);
+    toast(blockedEmails.includes(email) ? "✅ Cliente desbloqueado" : "🚫 Cliente bloqueado");
+  };
+
+  const handleDelete = (email) => {
+    setOrders(o => o.filter(x => x.customerEmail !== email));
+    saveBlocked(blockedEmails.filter(e => e !== email));
+    toast("🗑️ Historial del cliente eliminado");
+  };
+
   const clients = useMemo(() => {
     const map = {};
     orders.forEach(o => {
@@ -1511,40 +1573,122 @@ function AdminClients({ orders }) {
     return Object.values(map).sort((a, b) => b.spent - a.spent);
   }, [orders]);
 
+  const visibleClients = showBlocked ? clients : clients.filter(c => !blockedEmails.includes(c.email));
+  const blockedCount = blockedEmails.length;
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.brownDark, margin: 0 }}>Clientes</h2>
-        <div style={{ background: C.beige, padding: "10px 20px", borderRadius: 100, fontSize: 13, color: C.brownMid, fontWeight: 600 }}>{clients.length} clientes registrados</div>
+        <div>
+          <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.brownDark, margin: "0 0 4px" }}>Clientes</h2>
+          <p style={{ color: C.brownMid, fontSize: 14, margin: 0 }}>{clients.length} registrados · {blockedCount > 0 ? `${blockedCount} bloqueados` : "ninguno bloqueado"}</p>
+        </div>
+        <div style={{ display: "flex", gap: 10 }}>
+          {blockedCount > 0 && (
+            <button onClick={() => setShowBlocked(v => !v)} style={{ padding: "10px 20px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: showBlocked ? C.brownDark : "transparent", color: showBlocked ? "white" : C.brownMid, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+              {showBlocked ? "Ocultar bloqueados" : `Ver bloqueados (${blockedCount})`}
+            </button>
+          )}
+          <div style={{ background: C.beige, padding: "10px 20px", borderRadius: 100, fontSize: 13, color: C.brownMid, fontWeight: 600 }}>{clients.length} clientes</div>
+        </div>
       </div>
+
+      {/* Legend */}
+      <div style={{ display: "flex", gap: 16, marginBottom: 20, fontSize: 12, color: C.brownMid }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ width: 12, height: 12, borderRadius: 3, background: "#F8D7DA" }} />
+          <span>Bloqueado — no puede comprar en la tienda</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <Icon d={Icons.trash} size={12} style={{ color: C.danger }} />
+          <span>Eliminar — borra todo el historial de pedidos</span>
+        </div>
+      </div>
+
       <div style={{ background: C.white, borderRadius: 20, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead><tr style={{ background: "#F7F3EE" }}>{["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: "#9B8878", textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>)}</tr></thead>
+          <thead>
+            <tr style={{ background: "#F7F3EE" }}>
+              {["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Acciones"].map(h => (
+                <th key={h} style={{ fontSize: 11, fontWeight: 700, color: "#9B8878", textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
           <tbody>
-            {clients.map((c, i) => (
-              <tr key={c.email} style={{ borderTop: `1px solid ${C.beige}` }}>
-                <td style={{ padding: "14px 16px" }}>
-                  {i < 3 && <span style={{ fontSize: 18 }}>{["🥇","🥈","🥉"][i]}</span>}
-                  {i >= 3 && <span style={{ fontSize: 14, color: "#9B8878", fontWeight: 700 }}>#{i+1}</span>}
-                </td>
-                <td style={{ padding: "14px 16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: "50%", background: C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 14, color: C.roseDeep }}>{c.name[0].toUpperCase()}</div>
-                    <span style={{ fontWeight: 600, fontSize: 14, color: C.brownDark }}>{c.name}</span>
-                  </div>
-                </td>
-                <td style={{ padding: "14px 16px", fontSize: 13, color: C.brownMid }}>{c.email}</td>
-                <td style={{ padding: "14px 16px", fontSize: 13, color: C.brownMid }}>{c.phone || "-"}</td>
-                <td style={{ padding: "14px 16px", textAlign: "center" }}>
-                  <span style={{ background: C.roseLight, color: C.roseDeep, padding: "4px 12px", borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{c.orders}</span>
-                </td>
-                <td style={{ padding: "14px 16px", fontWeight: 700, color: C.brown }}>S/. {c.spent.toFixed(2)}</td>
-                <td style={{ padding: "14px 16px", fontSize: 13, color: "#9B8878" }}>{new Date(c.lastOrder).toLocaleDateString("es-PE")}</td>
-              </tr>
-            ))}
+            {visibleClients.map((c, i) => {
+              const isBlocked = blockedEmails.includes(c.email);
+              return (
+                <tr key={c.email} style={{ borderTop: `1px solid ${C.beige}`, background: isBlocked ? "#FFF5F5" : "transparent", opacity: isBlocked ? 0.75 : 1 }}>
+                  <td style={{ padding: "14px 16px" }}>
+                    {i < 3 && !isBlocked && <span style={{ fontSize: 18 }}>{["🥇","🥈","🥉"][i]}</span>}
+                    {(i >= 3 || isBlocked) && <span style={{ fontSize: 14, color: "#9B8878", fontWeight: 700 }}>#{i+1}</span>}
+                  </td>
+                  <td style={{ padding: "14px 16px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: isBlocked ? "#F8D7DA" : C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 14, color: isBlocked ? C.danger : C.roseDeep }}>
+                        {isBlocked ? "🚫" : c.name[0].toUpperCase()}
+                      </div>
+                      <div>
+                        <span style={{ fontWeight: 600, fontSize: 14, color: C.brownDark }}>{c.name}</span>
+                        {isBlocked && <div style={{ fontSize: 10, color: C.danger, fontWeight: 700 }}>BLOQUEADO</div>}
+                      </div>
+                    </div>
+                  </td>
+                  <td style={{ padding: "14px 16px", fontSize: 13, color: C.brownMid }}>{c.email}</td>
+                  <td style={{ padding: "14px 16px", fontSize: 13, color: C.brownMid }}>{c.phone || "-"}</td>
+                  <td style={{ padding: "14px 16px", textAlign: "center" }}>
+                    <span style={{ background: C.roseLight, color: C.roseDeep, padding: "4px 12px", borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{c.orders}</span>
+                  </td>
+                  <td style={{ padding: "14px 16px", fontWeight: 700, color: C.brown }}>S/. {c.spent.toFixed(2)}</td>
+                  <td style={{ padding: "14px 16px", fontSize: 13, color: "#9B8878" }}>{new Date(c.lastOrder).toLocaleDateString("es-PE")}</td>
+                  <td style={{ padding: "14px 16px" }}>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      {/* Block / Unblock */}
+                      <button
+                        onClick={() => setConfirm({ type: isBlocked ? "unblock" : "block", email: c.email, name: c.name })}
+                        title={isBlocked ? "Desbloquear cliente" : "Bloquear cliente"}
+                        style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${isBlocked ? C.success : "#FFB0B0"}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: isBlocked ? C.success : C.warning, fontSize: 14 }}>
+                        {isBlocked ? "✅" : "🚫"}
+                      </button>
+                      {/* Delete */}
+                      <button
+                        onClick={() => setConfirm({ type: "delete", email: c.email, name: c.name })}
+                        title="Eliminar historial del cliente"
+                        style={{ width: 34, height: 34, borderRadius: 10, border: "1.5px solid #FFCDD2", background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.danger }}>
+                        <Icon d={Icons.trash} size={14} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+        {visibleClients.length === 0 && (
+          <div style={{ padding: "40px", textAlign: "center", color: "#9B8878" }}>No hay clientes para mostrar</div>
+        )}
       </div>
+
+      <ConfirmDialog
+        open={!!confirm}
+        onClose={() => setConfirm(null)}
+        title={
+          confirm?.type === "delete" ? "🗑️ Eliminar historial" :
+          confirm?.type === "block" ? "🚫 Bloquear cliente" : "✅ Desbloquear cliente"
+        }
+        message={
+          confirm?.type === "delete"
+            ? `¿Segura que quieres eliminar TODOS los pedidos de "${confirm?.name}"? Esta acción no se puede deshacer.`
+            : confirm?.type === "block"
+            ? `¿Bloquear a "${confirm?.name}"? Su historial se conserva pero quedará marcado.`
+            : `¿Desbloquear a "${confirm?.name}"? Podrá volver a comprar con normalidad.`
+        }
+        danger={confirm?.type === "delete"}
+        onConfirm={() => {
+          if (confirm?.type === "delete") handleDelete(confirm.email);
+          else handleBlock(confirm.email);
+        }}
+      />
     </div>
   );
 }
@@ -1611,7 +1755,7 @@ function AdminLogin({ onLogin }) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (form.password === "VenetusKids26") { onLogin(); toast("¡Bienvenida al panel! 👋"); }
+      if (form.password === "admin123") { onLogin(); toast("¡Bienvenida al panel! 👋"); }
       else toast("Contraseña incorrecta. Usa: admin123", "error");
     }, 800);
   };
@@ -1695,7 +1839,7 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
               {section === "categories" && <AdminCategories categories={categories} setCategories={setCategories} products={products} />}
               {section === "coupons" && <AdminCoupons coupons={coupons} setCoupons={setCoupons} />}
               {section === "reviews" && <AdminReviews products={products} />}
-              {section === "clients" && <AdminClients orders={orders} />}
+              {section === "clients" && <AdminClients orders={orders} setOrders={setOrders} />}
               {section === "settings" && <AdminSettings config={config} setConfig={setConfig} />}
             </motion.div>
           </AnimatePresence>
