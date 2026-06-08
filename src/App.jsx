@@ -49,22 +49,22 @@ const Icons = {
 
 // ─── DESIGN TOKENS ─────────────────────────────────────────────────────────
 const C = {
-  // Little Daisy Dream palette — sage green, linen, warm whites
-  white:"#FFFFFF",snow:"#FAFAF8",cream:"#FAFAF8",
-  linen:"#F5F2EE",linen2:"#EDE8E2",linen3:"#D8D0C8",beige:"#F3EFE9",beigeDark:"#E5DDD4",
-  sage:"#899180",sageDark:"#6B7264",sageLight:"#C4C9BE",sagePale:"#EDF0EC",
-  rose:"#D4B8B5",rosePale:"#F5EEEC",roseLight:"#F5EEEC",roseDeep:"#9E7470",
-  sky:"#B8C8C0",skyLight:"#EDF3F0",sand:"#B8A898",sandLight:"#E8E0D8",
-  brown:"#7A6A5C",brownMid:"#5C5048",brownDark:"#2E2820",
-  charcoal:"#3D3830",muted:"#7A7068",faint:"#A89888",taupe:"#B5A99A",
-  success:"#6A9E78",warning:"#C8A860",danger:"#C07070",
+  white: "#FFFFFF", cream: "#FAFAF8", snow: "#FAFAF8",
+  linen: "#F5F2EE", linen2: "#EDE8E2", linen3: "#D8D0C8",
+  beige: "#F3EFE9", beigeDark: "#E5DDD4",
+  sage: "#899180", sageDark: "#6B7264", sageLight: "#C4C9BE", sagePale: "#EDF0EC",
+  rose: "#D4B8B5", rosePale: "#F5EEEC", roseLight: "#F5EEEC", roseDeep: "#9E7470",
+  sky: "#B8C8C0", skyLight: "#EDF3F0", sand: "#B8A898", sandLight: "#E8E0D8",
+  brown: "#7A6A5C", brownMid: "#5C5048", brownDark: "#2E2820", taupe: "#B5A99A",
+  charcoal: "#3D3830", muted: "#7A7068", faint: "#A89888",
+  success: "#6A9E78", warning: "#C8A860", danger: "#C07070",
 };
-const FONT = { serif:'"Cormorant Garamond","Georgia",serif', sans:'"DM Sans",system-ui,sans-serif' };
+const FONT = { serif: '"Cormorant Garamond","Georgia",serif', sans: '"DM Sans",system-ui,sans-serif' };
 
 // ─── INITIAL DATA ──────────────────────────────────────────────────────────
 const INIT_CONFIG = {
   storeName: "Venetus Kids", tagline: "Pequeños momentos, grandes recuerdos 💛",
-  heroTitle: "Pequeños momentos,\ngrandes recuerdos 💛",
+  heroTitle: "Para los primeros momentos\nde tu bebé",
   heroSubtitle: "Ropa y accesorios cómodos, seguros y adorables para acompañar cada etapa de tu bebé.",
   promoBanner: "🎀 ENVÍO GRATIS en compras mayores a S/. 150 · Usa el código VENETUS20 para 20% OFF",
   promoActive: true, whatsapp: "51999999999",
@@ -73,7 +73,7 @@ const INIT_CONFIG = {
   facebook: "https://facebook.com/venetuskids",
   email: "hola@venetuskids.pe",
   address: "Lima, Perú", freeShipping: 150, currency: "S/.",
-  primaryColor: "#D4898A", accentColor: "#8B6E52",
+  primaryColor: "#899180", accentColor: "#B5A99A",
   stripeKey: "", mpKey: "", paypalId: "",
   stripeEnabled: false, mpEnabled: false, paypalEnabled: false,
 };
@@ -133,7 +133,7 @@ function Toast() {
       <AnimatePresence>
         {toasts.map(t => (
           <motion.div key={t.id} initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            style={{ background: t.type === "error" ? C.danger : C.charcoal, color: C.white, padding: "12px 24px", borderRadius: 100, fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
+            style={{ background: t.type === "error" ? C.danger : C.charcoal, color: C.cream, padding: "12px 24px", borderRadius: 100, fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
             {t.msg}
           </motion.div>
         ))}
@@ -152,9 +152,9 @@ function Modal({ open, onClose, title, children, width = 600 }) {
         onClick={e => e.target === e.currentTarget && onClose()}>
         <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0 }}
           style={{ background: C.white, borderRadius: 24, width: "100%", maxWidth: width, maxHeight: "90vh", overflowY: "auto", boxShadow: "0 32px 80px rgba(0,0,0,0.25)" }}>
-          <div style={{ padding: "28px 32px", borderBottom: `1px solid ${C.linen}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h3 style={{ fontFamily: "serif", fontSize: 22, color: C.charcoal, margin: 0 }}>{title}</h3>
-            <button onClick={onClose} style={{ background: C.linen, border: "none", borderRadius: "50%", width: 36, height: 36, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+          <div style={{ padding: "28px 32px", borderBottom: `1px solid ${C.beige}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h3 style={{ fontFamily: FONT.serif, fontSize: 22, color: C.charcoal, margin: 0 }}>{title}</h3>
+            <button onClick={onClose} style={{ background: C.beige, border: "none", borderRadius: "50%", width: 36, height: 36, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
               <Icon d={Icons.x} size={16} />
             </button>
           </div>
@@ -171,7 +171,7 @@ function ConfirmDialog({ open, onClose, onConfirm, title, message, danger }) {
     <Modal open={open} onClose={onClose} title={title} width={420}>
       <p style={{ color: C.muted, marginBottom: 24, lineHeight: 1.6 }}>{message}</p>
       <div style={{ display: "flex", gap: 12 }}>
-        <button onClick={onClose} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
+        <button onClick={onClose} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
         <button onClick={() => { onConfirm(); onClose(); }} style={{ flex: 1, padding: "12px", borderRadius: 100, border: "none", background: danger ? C.danger : C.roseDeep, color: "white", cursor: "pointer", fontWeight: 600 }}>Confirmar</button>
       </div>
     </Modal>
@@ -187,23 +187,41 @@ function Field({ label, children, required }) {
     </div>
   );
 }
-const inputStyle = { width: "100%", padding: "11px 16px", borderRadius: 14, border: `1.5px solid ${C.linen3}`, background: C.white, color: C.charcoal, fontSize: 14, fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" };
+const inputStyle = { width: "100%", padding: "11px 16px", borderRadius: 14, border: `1.5px solid ${C.beigeDark}`, background: C.white, color: C.charcoal, fontSize: 14, fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" };
 const selectStyle = { ...inputStyle, cursor: "pointer" };
 
 // ─── STAT CARD ─────────────────────────────────────────────────────────────
-function StatCard({icon,label,value,sub,color=C.sage,trend}){
-  return(<motion.div whileHover={{y:-2}} style={{background:C.white,borderRadius:4,padding:"20px 22px",border:`1px solid ${C.linen2}`,display:"flex",flexDirection:"column",gap:12}}>
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
-      <div style={{width:40,height:40,borderRadius:3,background:color+"18",display:"flex",alignItems:"center",justifyContent:"center",color}}><Icon d={icon} size={17} strokeWidth={1.5}/></div>
-      {trend!==undefined&&<span style={{fontSize:10,fontWeight:600,color:trend>=0?C.success:C.danger,background:(trend>=0?C.success:C.danger)+"14",padding:"3px 8px",borderRadius:2,fontFamily:FONT.sans}}>{trend>=0?"↑":"↓"} {Math.abs(trend)}%</span>}
-    </div>
-    <div>
-      <div style={{fontSize:24,fontWeight:600,color:C.charcoal,fontFamily:FONT.serif,lineHeight:1}}>{value}</div>
-      <div style={{fontSize:12,color:C.muted,marginTop:3,fontFamily:FONT.sans}}>{label}</div>
-      {sub&&<div style={{fontSize:11,color:C.sage,marginTop:2,fontFamily:FONT.sans}}>{sub}</div>}
-    </div>
-  </motion.div>);
+function StatCard({ icon, label, value, sub, color = C.roseDeep, trend }) {
+  return (
+    <motion.div whileHover={{ y: -4 }}
+      style={{ background: C.white, borderRadius: 20, padding: "24px", boxShadow: "0 4px 24px rgba(139,110,82,0.08)", display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div style={{ width: 44, height: 44, borderRadius: 14, background: color + "20", display: "flex", alignItems: "center", justifyContent: "center", color }}>
+          <Icon d={icon} size={20} />
+        </div>
+        {trend !== undefined && (
+          <span style={{ fontSize: 12, fontWeight: 700, color: trend >= 0 ? C.success : C.danger, background: (trend >= 0 ? C.success : C.danger) + "15", padding: "4px 10px", borderRadius: 100 }}>
+            {trend >= 0 ? "↑" : "↓"} {Math.abs(trend)}%
+          </span>
+        )}
+      </div>
+      <div>
+        <div style={{ fontSize: 28, fontWeight: 700, color: C.charcoal, fontFamily: FONT.serif, lineHeight: 1 }}>{value}</div>
+        <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>{label}</div>
+        {sub && <div style={{ fontSize: 12, color: C.roseDeep, marginTop: 2 }}>{sub}</div>}
+      </div>
+    </motion.div>
+  );
 }
+
+// ─── BADGE COMPONENT ───────────────────────────────────────────────────────
+const badgeColors = {
+  nuevo: { bg: "#E8F3F8", text: "#2A6A8A" },
+  oferta: { bg: "#FFF0E8", text: "#C45000" },
+  mas_vendido: { bg: C.roseLight, text: C.roseDeep },
+  favorito: { bg: C.sandLight, text: C.brown },
+};
+const badgeLabels = { nuevo: "Nuevo", oferta: "Oferta", mas_vendido: "Más vendido", favorito: "Favorito" };
 function Badge({ badge }) {
   if (!badge || !badgeColors[badge]) return null;
   const { bg, text } = badgeColors[badge];
@@ -222,7 +240,7 @@ const statusConfig = {
   FAILED:    { label: "Fallido",    bg: "#F8D7DA", color: "#721C24" },
 };
 function StatusBadge({ status }) {
-  const s = statusConfig[status] || { label: status, bg: C.linen, color: C.muted };
+  const s = statusConfig[status] || { label: status, bg: C.beige, color: C.muted };
   return <span style={{ background: s.bg, color: s.color, padding: "4px 12px", borderRadius: 100, fontSize: 11, fontWeight: 700 }}>{s.label}</span>;
 }
 
@@ -247,7 +265,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
   return (
     <motion.div whileHover={{ y: -8 }} onHoverStart={() => setHover(true)} onHoverEnd={() => setHover(false)}
       style={{ background: C.white, borderRadius: 24, overflow: "hidden", boxShadow: "0 4px 20px rgba(139,110,82,0.08)", cursor: "pointer", position: "relative" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1.1", background: product.bg || C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1.1", background: product.bg || C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         <motion.span animate={{ scale: hover ? 1.1 : 1 }} transition={{ duration: 0.4 }} style={{ fontSize: 72, userSelect: "none" }}>{product.emoji}</motion.span>
         {product.badge && <div style={{ position: "absolute", top: 12, left: 12 }}><Badge badge={product.badge} /></div>}
         <motion.button animate={{ opacity: hover ? 1 : 0, scale: hover ? 1 : 0.8 }} onClick={e => { e.stopPropagation(); onWishlist(product.id); }}
@@ -265,7 +283,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
       </div>
       <div style={{ padding: 18 }}>
         <div style={{ fontSize: 11, color: C.roseDeep, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 4 }}>{cat?.name}</div>
-        <div style={{ fontFamily: "serif", fontSize: 18, fontWeight: 600, color: C.charcoal, marginBottom: 8, lineHeight: 1.3 }}>{product.name}</div>
+        <div style={{ fontFamily: FONT.serif, fontSize: 18, fontWeight: 600, color: C.charcoal, marginBottom: 8, lineHeight: 1.3 }}>{product.name}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
           <Stars rating={product.rating} />
           <span style={{ fontSize: 11, color: C.muted }}>({product.reviews})</span>
@@ -276,7 +294,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
             {product.oldPrice && <span style={{ fontSize: 12, color: C.muted, textDecoration: "line-through", marginLeft: 8 }}>S/. {product.oldPrice.toFixed(2)}</span>}
           </div>
           <motion.button whileTap={{ scale: 0.95 }} onClick={() => onAddCart(product)} disabled={product.stock === 0}
-            style={{ background: product.stock === 0 ? C.linen3 : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", padding: "8px 16px", borderRadius: 100, fontSize: 12, fontWeight: 600, cursor: product.stock === 0 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+            style={{ background: product.stock === 0 ? C.beigeDark : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", padding: "8px 16px", borderRadius: 100, fontSize: 12, fontWeight: 600, cursor: product.stock === 0 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", gap: 6 }}>
             <Icon d={Icons.cart} size={13} /> Añadir
           </motion.button>
         </div>
@@ -300,36 +318,36 @@ function CartSidebar({ open, onClose, cart, setCart, config, onCheckout }) {
       <motion.div initial={{ x: "100%" }} animate={{ x: open ? 0 : "100%" }} transition={{ type: "spring", damping: 28, stiffness: 280 }}
         style={{ position: "fixed", top: 0, right: 0, width: 420, height: "100vh", background: C.white, zIndex: 801, display: "flex", flexDirection: "column", padding: 32, overflowY: "auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-          <h2 style={{ fontFamily: "serif", fontSize: 24, color: C.charcoal, margin: 0 }}>Mi carrito 🛒</h2>
-          <button onClick={onClose} style={{ background: C.linen, border: "none", borderRadius: "50%", width: 38, height: 38, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 24, color: C.charcoal, margin: 0 }}>Mi carrito 🛒</h2>
+          <button onClick={onClose} style={{ background: C.beige, border: "none", borderRadius: "50%", width: 38, height: 38, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
             <Icon d={Icons.x} size={16} />
           </button>
         </div>
         {cart.length === 0 ? (
           <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
             <span style={{ fontSize: 64 }}>🛍️</span>
-            <p style={{ fontFamily: "serif", fontSize: 20, color: C.charcoal, margin: 0 }}>Tu carrito está vacío</p>
+            <p style={{ fontFamily: FONT.serif, fontSize: 20, color: C.charcoal, margin: 0 }}>Tu carrito está vacío</p>
             <p style={{ fontSize: 14, color: C.muted, margin: 0 }}>¡Agrega productos para comenzar!</p>
-            <button onClick={onClose} style={{ marginTop: 8, padding: "12px 28px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 14 }}>Ver productos</button>
+            <button onClick={onClose} style={{ marginTop: 8, padding: "12px 28px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 14 }}>Ver productos</button>
           </div>
         ) : (
           <>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0 }}>
               {cart.map(item => (
-                <div key={item.id} style={{ display: "flex", gap: 14, padding: "16px 0", borderBottom: `1px solid ${C.linen}` }}>
-                  <div style={{ width: 64, height: 64, borderRadius: 14, background: item.bg || C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>{item.emoji}</div>
+                <div key={item.id} style={{ display: "flex", gap: 14, padding: "16px 0", borderBottom: `1px solid ${C.beige}` }}>
+                  <div style={{ width: 64, height: 64, borderRadius: 14, background: item.bg || C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>{item.emoji}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 600, fontSize: 14, color: C.charcoal, marginBottom: 3 }}>{item.name}</div>
                     <div style={{ fontSize: 13, color: C.muted, marginBottom: 8 }}>S/. {item.price.toFixed(2)} c/u</div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                         <button onClick={() => setCart(c => c.map(x => x.id === item.id ? { ...x, qty: Math.max(1, x.qty - 1) } : x))}
-                          style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+                          style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
                           <Icon d={Icons.minus} size={12} />
                         </button>
                         <span style={{ fontSize: 14, fontWeight: 700, color: C.charcoal, minWidth: 20, textAlign: "center" }}>{item.qty}</span>
                         <button onClick={() => setCart(c => c.map(x => x.id === item.id ? { ...x, qty: x.qty + 1 } : x))}
-                          style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+                          style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
                           <Icon d={Icons.plus} size={12} />
                         </button>
                       </div>
@@ -342,7 +360,7 @@ function CartSidebar({ open, onClose, cart, setCart, config, onCheckout }) {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 24, paddingTop: 20, borderTop: `1px solid ${C.linen}` }}>
+            <div style={{ marginTop: 24, paddingTop: 20, borderTop: `1px solid ${C.beige}` }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
                 <span style={{ color: C.muted, fontSize: 14 }}>Subtotal</span>
                 <span style={{ color: C.charcoal, fontWeight: 600 }}>S/. {subtotal.toFixed(2)}</span>
@@ -351,15 +369,15 @@ function CartSidebar({ open, onClose, cart, setCart, config, onCheckout }) {
                 <span style={{ color: C.muted, fontSize: 14 }}>Envío</span>
                 <span style={{ color: shipping === 0 ? C.success : C.charcoal, fontWeight: 600 }}>{shipping === 0 ? "¡GRATIS! 🎉" : `S/. ${shipping.toFixed(2)}`}</span>
               </div>
-              {shipping > 0 && <div style={{ background: C.rosePale, padding: "10px 14px", borderRadius: 12, fontSize: 12, color: C.roseDeep, marginBottom: 16 }}>🚚 Agrega S/. {(config.freeShipping - subtotal).toFixed(2)} más para envío gratis</div>}
+              {shipping > 0 && <div style={{ background: C.roseLight, padding: "10px 14px", borderRadius: 12, fontSize: 12, color: C.roseDeep, marginBottom: 16 }}>🚚 Agrega S/. {(config.freeShipping - subtotal).toFixed(2)} más para envío gratis</div>}
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 20, fontWeight: 700, fontSize: 18 }}>
                 <span style={{ color: C.charcoal }}>Total</span>
                 <span style={{ color: C.brown }}>S/. {total.toFixed(2)}</span>
               </div>
-              <button onClick={onCheckout} style={{ width: "100%", padding: "15px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, fontSize: 15, cursor: "pointer", boxShadow: "0 8px 24px rgba(212,137,138,0.35)", marginBottom: 10 }}>
+              <button onClick={onCheckout} style={{ width: "100%", padding: "15px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, fontSize: 15, cursor: "pointer", boxShadow: "0 8px 24px rgba(212,137,138,0.35)", marginBottom: 10 }}>
                 Ir al pago ✨
               </button>
-              <button onClick={onClose} style={{ width: "100%", padding: "13px", borderRadius: 100, background: "transparent", color: C.muted, border: `1.5px solid ${C.linen3}`, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>
+              <button onClick={onClose} style={{ width: "100%", padding: "13px", borderRadius: 100, background: "transparent", color: C.muted, border: `1.5px solid ${C.beigeDark}`, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>
                 Seguir comprando
               </button>
             </div>
@@ -438,10 +456,10 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
     <Modal open title="¡Pedido confirmado! 🎉" onClose={() => { onClose(); setStep(0); }}>
       <div style={{ textAlign: "center", padding: "20px 0" }}>
         <div style={{ fontSize: 72, marginBottom: 20 }}>🎀</div>
-        <h3 style={{ fontFamily: "serif", fontSize: 26, color: C.charcoal, marginBottom: 12 }}>¡Gracias por tu compra!</h3>
+        <h3 style={{ fontFamily: FONT.serif, fontSize: 26, color: C.charcoal, marginBottom: 12 }}>¡Gracias por tu compra!</h3>
         <p style={{ color: C.muted, lineHeight: 1.7, marginBottom: 8 }}>Hemos recibido tu pedido. En breve recibirás una confirmación a <strong>{form.email}</strong>.</p>
         <p style={{ color: C.muted, fontSize: 14, marginBottom: 28 }}>Total pagado: <strong style={{ color: C.roseDeep }}>S/. {total.toFixed(2)}</strong></p>
-        <button onClick={() => { onClose(); setStep(0); }} style={{ padding: "14px 36px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>Volver a la tienda</button>
+        <button onClick={() => { onClose(); setStep(0); }} style={{ padding: "14px 36px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>Volver a la tienda</button>
       </div>
     </Modal>
   );
@@ -453,12 +471,12 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
         {steps.map((s, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-              <div style={{ width: 30, height: 30, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, background: i <= step ? C.roseDeep : C.linen, color: i <= step ? "white" : C.muted }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, background: i <= step ? C.roseDeep : C.beige, color: i <= step ? "white" : C.muted }}>
                 {i < step ? <Icon d={Icons.check} size={14} /> : i + 1}
               </div>
               <span style={{ fontSize: 13, fontWeight: 600, color: i === step ? C.charcoal : C.muted }}>{s}</span>
             </div>
-            {i < steps.length - 1 && <div style={{ flex: 1, height: 1.5, background: i < step ? C.roseDeep : C.linen3, margin: "0 12px" }} />}
+            {i < steps.length - 1 && <div style={{ flex: 1, height: 1.5, background: i < step ? C.roseDeep : C.beigeDark, margin: "0 12px" }} />}
           </div>
         ))}
       </div>
@@ -468,7 +486,7 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
         <div>
           <div style={{ maxHeight: 280, overflowY: "auto", marginBottom: 20 }}>
             {cart.map(item => (
-              <div key={item.id} style={{ display: "flex", gap: 14, padding: "12px 0", borderBottom: `1px solid ${C.linen}` }}>
+              <div key={item.id} style={{ display: "flex", gap: 14, padding: "12px 0", borderBottom: `1px solid ${C.beige}` }}>
                 <div style={{ fontSize: 32, width: 48, display: "flex", alignItems: "center", justifyContent: "center" }}>{item.emoji}</div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 600, fontSize: 14, color: C.charcoal }}>{item.name}</div>
@@ -478,20 +496,20 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
               </div>
             ))}
           </div>
-          <div style={{ background: C.linen, borderRadius: 16, padding: 16, marginBottom: 20 }}>
+          <div style={{ background: C.beige, borderRadius: 16, padding: 16, marginBottom: 20 }}>
             <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
               <input value={form.coupon} onChange={e => setForm(f => ({ ...f, coupon: e.target.value.toUpperCase() }))} placeholder="Código de cupón" style={{ ...inputStyle, flex: 1 }} />
               <button onClick={validateCoupon} style={{ padding: "11px 18px", borderRadius: 12, background: C.brown, color: "white", border: "none", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", fontSize: 13 }}>Aplicar</button>
             </div>
             {couponResult && <div style={{ fontSize: 13, color: C.success, fontWeight: 600 }}>✅ Cupón {couponResult.code}: -S/. {couponResult.discount.toFixed(2)}</div>}
           </div>
-          <div style={{ borderTop: `1px solid ${C.linen}`, paddingTop: 16 }}>
+          <div style={{ borderTop: `1px solid ${C.beige}`, paddingTop: 16 }}>
             {[["Subtotal", `S/. ${subtotal.toFixed(2)}`], discount > 0 && ["Descuento", `-S/. ${discount.toFixed(2)}`], ["Envío", shipping === 0 ? "¡GRATIS!" : `S/. ${shipping.toFixed(2)}`]].filter(Boolean).map(([k, v]) => (
               <div key={k} style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, fontSize: 14, color: C.muted }}><span>{k}</span><span style={{ color: k === "Descuento" ? C.success : C.charcoal }}>{v}</span></div>
             ))}
             <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 700, fontSize: 18, marginTop: 8 }}><span>Total</span><span style={{ color: C.brown }}>S/. {total.toFixed(2)}</span></div>
           </div>
-          <button onClick={() => setStep(1)} style={{ width: "100%", marginTop: 20, padding: "14px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Continuar →</button>
+          <button onClick={() => setStep(1)} style={{ width: "100%", marginTop: 20, padding: "14px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Continuar →</button>
         </div>
       )}
 
@@ -503,8 +521,8 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
           <Field label="Teléfono / WhatsApp"><input value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} placeholder="+51 999 999 999" style={inputStyle} /></Field>
           <Field label="Dirección de entrega" required><textarea value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} placeholder="Calle, distrito, ciudad..." style={{ ...inputStyle, resize: "vertical", minHeight: 80 }} /></Field>
           <div style={{ display: "flex", gap: 12 }}>
-            <button onClick={() => setStep(0)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>← Volver</button>
-            <button onClick={() => { if (!form.name || !form.email || !form.address) { toast("Completa los campos requeridos", "error"); return; } setStep(2); }} style={{ flex: 2, padding: "13px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Continuar →</button>
+            <button onClick={() => setStep(0)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>← Volver</button>
+            <button onClick={() => { if (!form.name || !form.email || !form.address) { toast("Completa los campos requeridos", "error"); return; } setStep(2); }} style={{ flex: 2, padding: "13px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Continuar →</button>
           </div>
         </div>
       )}
@@ -521,8 +539,8 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
               config.mpEnabled && { id: "mercadopago", label: "🟡 MercadoPago", desc: "Paga con tu cuenta MercadoPago" },
               config.paypalEnabled && { id: "paypal", label: "💙 PayPal", desc: "Paga con tu cuenta PayPal" },
             ].filter(Boolean).map(m => (
-              <div key={m.id} onClick={() => setPayMethod(m.id)} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 16, borderRadius: 16, border: `2px solid ${payMethod === m.id ? C.roseDeep : C.linen3}`, marginBottom: 10, cursor: "pointer", background: payMethod === m.id ? C.rosePale : "transparent", transition: "all 0.2s" }}>
-                <div style={{ width: 20, height: 20, borderRadius: "50%", border: `2px solid ${payMethod === m.id ? C.roseDeep : C.linen3}`, flexShrink: 0, marginTop: 2, background: payMethod === m.id ? C.roseDeep : "transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div key={m.id} onClick={() => setPayMethod(m.id)} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 16, borderRadius: 16, border: `2px solid ${payMethod === m.id ? C.roseDeep : C.beigeDark}`, marginBottom: 10, cursor: "pointer", background: payMethod === m.id ? C.roseLight : "transparent", transition: "all 0.2s" }}>
+                <div style={{ width: 20, height: 20, borderRadius: "50%", border: `2px solid ${payMethod === m.id ? C.roseDeep : C.beigeDark}`, flexShrink: 0, marginTop: 2, background: payMethod === m.id ? C.roseDeep : "transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {payMethod === m.id && <Icon d={Icons.check} size={11} className="" style={{ color: "white" }} />}
                 </div>
                 <div>
@@ -533,7 +551,7 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
             ))}
           </div>
           {(payMethod === "stripe" && config.stripeEnabled) && (
-            <div style={{ background: C.linen, borderRadius: 16, padding: 16, marginBottom: 20, fontSize: 13, color: C.muted }}>
+            <div style={{ background: C.beige, borderRadius: 16, padding: 16, marginBottom: 20, fontSize: 13, color: C.muted }}>
               💳 En producción, aquí aparece el formulario seguro de Stripe con tu clave pública: <strong>{config.stripeKey || "no configurada"}</strong>
             </div>
           )}
@@ -551,14 +569,14 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
               </div>
             </div>
           )}
-          <div style={{ background: C.linen, borderRadius: 16, padding: 16, marginBottom: 20 }}>
+          <div style={{ background: C.beige, borderRadius: 16, padding: 16, marginBottom: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 700, fontSize: 17 }}>
               <span style={{ color: C.charcoal }}>Total a pagar:</span>
               <span style={{ color: C.roseDeep }}>S/. {total.toFixed(2)}</span>
             </div>
           </div>
           <div style={{ display: "flex", gap: 12 }}>
-            <button onClick={() => setStep(1)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>← Volver</button>
+            <button onClick={() => setStep(1)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>← Volver</button>
             <button onClick={handlePay} disabled={processing} style={{ flex: 2, padding: "14px", borderRadius: 100, background: processing ? C.muted : payMethod === "yape" ? "linear-gradient(135deg, #9C27B0, #7B1FA2)" : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: processing ? "not-allowed" : "pointer", fontSize: 15 }}>
               {processing ? "Procesando..." : payMethod === "yape" ? `💬 Ir a WhatsApp · S/. ${total.toFixed(2)}` : `🔒 Pagar S/. ${total.toFixed(2)}`}
             </button>
@@ -570,34 +588,63 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
 }
 
 // ─── HERO SECTION ──────────────────────────────────────────────────────────
-function HeroSection({config,onShop}){
-  const pc=config.primaryColor||C.sage;
-  return(<div style={{maxWidth:1280,margin:"0 auto",padding:"0 48px",display:"grid",gridTemplateColumns:"1fr 1fr",minHeight:"88vh",alignItems:"center",gap:64}}>
-    <div>
-      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:0.1}} style={{fontSize:10,color:pc,textTransform:"uppercase",letterSpacing:"2.5px",margin:"0 0 18px",fontWeight:600,fontFamily:FONT.sans}}>{config.heroBadgeText||"Nueva Colección"}</motion.p>
-      <motion.h1 initial={{opacity:0,y:14}} animate={{opacity:1,y:0}} transition={{delay:0.2}} style={{fontFamily:FONT.serif,fontSize:"clamp(36px,3.8vw,56px)",fontWeight:300,lineHeight:1.15,color:C.charcoal,margin:"0 0 20px",letterSpacing:"0.3px"}}>
-        {(config.heroTitle||"").split("\n").map((l,i)=><span key={i}>{l}<br/></span>)}
-      </motion.h1>
-      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:0.3}} style={{fontSize:15,lineHeight:1.8,color:C.muted,maxWidth:420,margin:"0 0 36px",fontFamily:FONT.sans}}>{config.heroSubtitle}</motion.p>
-      <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:0.4}} style={{display:"flex",gap:14,alignItems:"center"}}>
-        <button onClick={onShop} style={{padding:"13px 28px",borderRadius:2,background:pc,color:"white",border:"none",fontWeight:600,fontSize:13,cursor:"pointer",letterSpacing:"0.4px",fontFamily:FONT.sans}}>{config.heroBtn1||"Ver colección"}</button>
-        <button onClick={onShop} style={{padding:"13px 20px",borderRadius:2,background:"transparent",color:C.charcoal,border:`1px solid ${C.linen3}`,fontWeight:400,fontSize:13,cursor:"pointer",letterSpacing:"0.3px",fontFamily:FONT.sans}}>{config.heroBtn2||"Nuestra historia"}</button>
-      </motion.div>
-      <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.7}} style={{display:"flex",gap:36,marginTop:52,paddingTop:32,borderTop:`1px solid ${C.linen2}`}}>
-        {[["5K+","Familias"],["200+","Productos"],["4.9","Valoración"]].map(([n,l])=><div key={l}><p style={{fontFamily:FONT.serif,fontSize:26,fontWeight:300,color:C.charcoal,margin:"0 0 3px"}}>{n}</p><p style={{fontSize:11,color:C.faint,margin:0,fontFamily:FONT.sans,letterSpacing:"0.3px"}}>{l}</p></div>)}
+function HeroSection({ config, onShop }) {
+  const pc = config.primaryColor || "#899180";
+  return (
+    <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "86vh", alignItems: "center", gap: 64 }}>
+      <div>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2.5px", margin: "0 0 18px", fontWeight: 600, fontFamily: FONT.sans }}>
+          {config.heroBadgeText || "Nueva Colección"}
+        </motion.p>
+        <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          style={{ fontFamily: FONT.serif, fontSize: "clamp(34px, 3.8vw, 54px)", fontWeight: 300, lineHeight: 1.15, color: C.charcoal, margin: "0 0 20px", letterSpacing: "0.3px" }}>
+          {(config.heroTitle || "").split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}
+        </motion.h1>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+          style={{ fontSize: 15, lineHeight: 1.8, color: C.muted, maxWidth: 420, margin: "0 0 34px", fontFamily: FONT.sans }}>
+          {config.heroSubtitle}
+        </motion.p>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ display: "flex", gap: 14, alignItems: "center" }}>
+          <button onClick={onShop} style={{ padding: "13px 28px", borderRadius: 2, background: pc, color: "white", border: "none", fontWeight: 600, fontSize: 13, cursor: "pointer", letterSpacing: "0.4px", fontFamily: FONT.sans }}>
+            {config.heroBtn1 || "Ver colección"}
+          </button>
+          <button onClick={onShop} style={{ padding: "13px 20px", borderRadius: 2, background: "transparent", color: C.charcoal, border: `1px solid ${C.linen3}`, fontWeight: 400, fontSize: 13, cursor: "pointer", letterSpacing: "0.3px", fontFamily: FONT.sans }}>
+            {config.heroBtn2 || "Nuestra historia"}
+          </button>
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
+          style={{ display: "flex", gap: 36, marginTop: 52, paddingTop: 30, borderTop: `1px solid ${C.linen2}` }}>
+          {[["5K+", "Familias"], ["200+", "Productos"], ["4.9", "Valoración"]].map(([n, l]) => (
+            <div key={l}>
+              <p style={{ fontFamily: FONT.serif, fontSize: 24, fontWeight: 300, color: C.charcoal, margin: "0 0 3px" }}>{n}</p>
+              <p style={{ fontSize: 11, color: C.faint, margin: 0, fontFamily: FONT.sans }}>{l}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15, duration: 0.7 }}
+        style={{ height: "74vh", borderRadius: 3, overflow: "hidden", position: "relative" }}>
+        {config.heroImage
+          ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          : <div style={{ width: "100%", height: "100%", background: "linear-gradient(160deg, #F5EEEC, #F5F2EE, #EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 86, marginBottom: 12 }}>👶🏻</div>
+                <p style={{ fontFamily: FONT.serif, fontSize: 17, color: C.muted, fontWeight: 300, letterSpacing: "0.5px" }}>{config.storeName}</p>
+              </div>
+            </div>
+        }
+        <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", bottom: 22, left: 22, background: "rgba(255,255,255,0.93)", backdropFilter: "blur(10px)", borderRadius: 3, padding: "11px 14px", boxShadow: "0 4px 18px rgba(0,0,0,0.07)", display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#EDF0EC", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>⭐</div>
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 600, color: C.charcoal, margin: "0 0 1px", fontFamily: FONT.sans }}>+500 reseñas verificadas</p>
+            <p style={{ fontSize: 10, color: C.faint, margin: 0, fontFamily: FONT.sans }}>Calificación 4.9 / 5</p>
+          </div>
+        </motion.div>
       </motion.div>
     </div>
-    <motion.div initial={{opacity:0,scale:0.98}} animate={{opacity:1,scale:1}} transition={{delay:0.15,duration:0.7}} style={{height:"75vh",borderRadius:3,overflow:"hidden",position:"relative"}}>
-      {config.heroImage?<img src={config.heroImage} alt="Hero" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
-      :<div style={{width:"100%",height:"100%",background:`linear-gradient(160deg,${C.rosePale||C.rosePale},${C.linen},${C.sagePale||C.sagePale})`,display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <div style={{textAlign:"center"}}><div style={{fontSize:90,marginBottom:12}}>👶🏻</div><p style={{fontFamily:FONT.serif,fontSize:18,color:C.muted,fontWeight:300,letterSpacing:"0.5px"}}>{config.storeName}</p></div>
-      </div>}
-      <motion.div animate={{y:[0,-8,0]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}} style={{position:"absolute",bottom:24,left:24,background:"rgba(255,255,255,0.93)",backdropFilter:"blur(10px)",borderRadius:3,padding:"11px 15px",boxShadow:"0 4px 20px rgba(0,0,0,0.08)",display:"flex",alignItems:"center",gap:10}}>
-        <div style={{width:34,height:34,borderRadius:"50%",background:C.sagePale||C.sagePale,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>⭐</div>
-        <div><p style={{fontSize:11,fontWeight:600,color:C.charcoal,margin:"0 0 1px",fontFamily:FONT.sans}}>+500 reseñas verificadas</p><p style={{fontSize:10,color:C.faint,margin:0,fontFamily:FONT.sans}}>Calificación 4.9 / 5</p></div>
-      </motion.div>
-    </motion.div>
-  </div>);
+  );
 }
 
 function Storefront({ products, categories, config, coupons, cart, setCart, wishlist, setWishlist, orders, setOrders }) {
@@ -658,221 +705,233 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
     toast("🎉 ¡Pedido realizado con éxito!");
   };
 
+  const pc = config.primaryColor || C.sage;
+  const ac = config.accentColor || C.sand;
+
   return (
-    <div>
-      {/* Promo banner */}
+    <div style={{ background: C.white, fontFamily: FONT.sans }}>
+
+      {/* Promo bar */}
       {config.promoActive && (
-        <div style={{ background: `linear-gradient(90deg, ${C.roseDeep}, ${C.sand}, ${C.roseDeep})`, backgroundSize: "200% 100%", animation: "shimmer 4s ease infinite", color: "white", textAlign: "center", padding: "10px 20px", fontSize: 12, fontWeight: 500 }}>
+        <div style={{ background: C.charcoal, color: "rgba(245,242,238,0.75)", textAlign: "center", padding: "9px 20px", fontSize: 11, letterSpacing: "0.3px", fontFamily: FONT.sans }}>
           {config.promoBanner}
         </div>
       )}
-      {/* Sticky Nav */}
-      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(250,246,240,0.92)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${C.linen}`, padding: "0 40px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: "serif", fontSize: 22, fontWeight: 600, color: C.brown }}>Venetus <span style={{ color: C.roseDeep }}>Kids</span> ✨</span>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ background: "none", border: "none", cursor: "pointer", color: C.faint, fontSize: 13, fontWeight: 500, padding: "8px 12px" }}>Productos</button>
-          <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: C.muted, padding: 8, display: "flex", alignItems: "center" }}>
-            <Icon d={Icons.cart} size={20} />
-            {cartCount > 0 && <span style={{ position: "absolute", top: 2, right: 2, background: C.roseDeep, color: "white", fontSize: 9, fontWeight: 700, width: 16, height: 16, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
-          </button>
+
+      {/* Nav */}
+      <nav style={{ position: "sticky", top: 0, zIndex: 200, background: "rgba(250,250,248,0.96)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${C.linen2}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.charcoal, letterSpacing: "1px" }}>{config.storeName}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+            {categories.slice(0, 4).map(cat => (
+              <button key={cat.id} onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
+                style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, fontFamily: FONT.sans, color: filterCat === cat.id ? pc : C.muted, fontWeight: filterCat === cat.id ? 500 : 400, borderBottom: `1px solid ${filterCat === cat.id ? pc : "transparent"}`, padding: "4px 0", transition: "all 0.15s" }}>
+                {cat.name}
+              </button>
+            ))}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: C.muted, display: "flex", padding: 4 }}>
+              <Icon d={Icons.cart} size={19} strokeWidth={1.4} />
+              {cartCount > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: pc, color: "white", fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
+            </button>
+          </div>
         </div>
-      </div>
+      </nav>
 
       {/* Hero */}
       <HeroSection config={config} onShop={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} />
 
       {/* Categories */}
-      <section style={{ padding: "80px", background: C.linen }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: C.roseDeep, marginBottom: 12 }}>Explorar</div>
-          <h2 style={{ fontFamily: "serif", fontSize: 40, color: C.charcoal, fontWeight: 400, marginBottom: 8 }}>Todo lo que tu bebé <em style={{ color: C.roseDeep }}>necesita</em> 🌸</h2>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          {categories.map((cat, i) => (
-            <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} viewport={{ once: true }}
-              whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(139,110,82,0.18)" }}
-              onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
-              style={{ borderRadius: 28, overflow: "hidden", cursor: "pointer", background: cat.color, aspectRatio: "4/3", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: 28, position: "relative", boxShadow: "0 4px 24px rgba(139,110,82,0.1)", transition: "all 0.3s" }}>
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 72 }}>{cat.emoji}</div>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(45,34,24,0.7) 0%, transparent 60%)" }} />
-              <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-                <div style={{ fontFamily: "serif", fontSize: 22, fontWeight: 600, color: "white", marginBottom: 4 }}>{cat.name}</div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)" }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      </div></section>
-
-    {/* Products */}
-      <section ref={productsRef} style={{ padding: "80px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 40, flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: C.roseDeep, marginBottom: 10 }}>Lo más amado</div>
-            <h2 style={{ fontFamily: "serif", fontSize: 40, color: C.charcoal, fontWeight: 400, margin: 0 }}>Productos <em style={{ color: C.roseDeep }}>destacados</em> ⭐</h2>
-          </div>
-          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{ position: "relative" }}>
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar..." style={{ ...inputStyle, paddingLeft: 36, width: 200 }} />
-              <Icon d={Icons.search} size={15} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: C.faint }} />
+      <section style={{ padding: "72px 0", background: C.linen, borderTop: `1px solid ${C.linen2}`, borderBottom: `1px solid ${C.linen2}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 28 }}>
+            <div>
+              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: FONT.sans }}>{config.categoriesSectionTitle || "Categorías"}</p>
+              <h2 style={{ fontFamily: FONT.serif, fontSize: 28, fontWeight: 300, color: C.charcoal, margin: 0 }}>Explorar colección</h2>
             </div>
-            <select value={sort} onChange={e => setSort(e.target.value)} style={{ ...selectStyle, width: 160 }}>
-              <option value="featured">Destacados</option>
-              <option value="newest">Más nuevos</option>
-              <option value="price_asc">Precio: menor a mayor</option>
-              <option value="price_desc">Precio: mayor a menor</option>
-            </select>
+            <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontFamily: FONT.sans, fontWeight: 500 }}>Ver todo →</button>
           </div>
-        </div>
-        {/* Category filter */}
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 36 }}>
-          {[{ id: "all", name: "Todos" }, ...categories].map(cat => (
-            <button key={cat.id} onClick={() => setFilterCat(cat.id)} style={{ padding: "9px 20px", borderRadius: 100, border: `1.5px solid ${filterCat === cat.id ? C.brown : C.linen3}`, background: filterCat === cat.id ? C.brown : "transparent", color: filterCat === cat.id ? "white" : C.muted, fontSize: 13, fontWeight: 500, cursor: "pointer", transition: "all 0.2s" }}>
-              {cat.emoji ? cat.emoji + " " : ""}{cat.name}
-            </button>
-          ))}
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
-          <AnimatePresence>
-            {filtered.map((p, i) => (
-              <motion.div key={p.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ delay: i * 0.04 }}>
-                <ProductCard product={p} categories={categories} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 14 }}>
+            {categories.map((cat, i) => (
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
+                onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
+                style={{ cursor: "pointer" }}>
+                <div style={{ aspectRatio: "3/4", borderRadius: 3, overflow: "hidden", background: cat.color || C.linen, marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", transition: "border-color 0.15s" }}>
+                  {cat.image ? <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>{cat.emoji}</div>}
+                </div>
+                <p style={{ fontFamily: FONT.sans, fontSize: 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : C.charcoal, margin: "0 0 2px", textAlign: "center" }}>{cat.name}</p>
+                <p style={{ fontSize: 10, color: C.faint, margin: 0, fontFamily: FONT.sans, textAlign: "center" }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>
               </motion.div>
             ))}
-          </AnimatePresence>
-        </div>
-        {filtered.length === 0 && (
-          <div style={{ textAlign: "center", padding: "60px 0", color: C.faint }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-            <p style={{ fontFamily: "serif", fontSize: 20 }}>No encontramos productos con esa búsqueda</p>
           </div>
-        )}
+        </div>
       </section>
 
-      {/* Emotional section */}
-      <section style={{ padding: "80px", background: `linear-gradient(135deg, ${C.rosePale} 0%, ${C.sagePale} 100%)`, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: C.roseDeep, marginBottom: 16 }}>Nuestra historia</div>
-          <p style={{ fontFamily: "serif", fontSize: 36, fontWeight: 300, fontStyle: "italic", color: C.charcoal, lineHeight: 1.5, marginBottom: 24 }}>"Porque cada detalle importa cuando se trata de tu bebé..."</p>
-          <p style={{ fontSize: 15, color: C.faint, lineHeight: 1.8, marginBottom: 32 }}>Somos mamás que entendemos la alegría inmensa y el amor sin límites que sientes al sostener a tu bebé. Por eso creamos {config.storeName}: para que cada prenda sea un abrazo suave, cada accesorio sea seguro, y cada momento con tu pequeño sea aún más especial.</p>
-          <p style={{ fontFamily: "serif", fontSize: 20, fontStyle: "italic", color: C.roseDeep }}>— Con amor, el equipo {config.storeName} 💛</p>
+      {/* Products */}
+      <section ref={productsRef} style={{ padding: "72px 0" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 36, flexWrap: "wrap", gap: 18 }}>
+            <div>
+              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: FONT.sans }}>Colección</p>
+              <h2 style={{ fontFamily: FONT.serif, fontSize: 28, fontWeight: 300, color: C.charcoal, margin: 0 }}>{config.productsSectionTitle || "Más queridos"}</h2>
+            </div>
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {[{ id: "all", name: "Todo" }, ...categories].map(cat => (
+                  <button key={cat.id} onClick={() => setFilterCat(cat.id)} style={{ padding: "6px 14px", borderRadius: 2, border: `1px solid ${filterCat === cat.id ? pc : C.linen3}`, background: filterCat === cat.id ? pc : "transparent", color: filterCat === cat.id ? "white" : C.muted, fontSize: 11, fontWeight: 500, cursor: "pointer", fontFamily: FONT.sans, transition: "all 0.15s" }}>
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+              <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: "7px 11px", borderRadius: 2, border: `1px solid ${C.linen3}`, background: C.white, color: C.charcoal, fontSize: 11, fontFamily: FONT.sans, cursor: "pointer", outline: "none" }}>
+                <option value="featured">Destacados</option>
+                <option value="newest">Nuevos</option>
+                <option value="price_asc">Precio ↑</option>
+                <option value="price_desc">Precio ↓</option>
+              </select>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px 20px" }}>
+            <AnimatePresence>
+              {filtered.map((p, i) => (
+                <motion.div key={p.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ delay: i * 0.03 }}>
+                  <ProductCard product={p} categories={categories} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} onDetail={setDetailProduct} config={config} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+          {filtered.length === 0 && (
+            <div style={{ textAlign: "center", padding: "60px 0" }}>
+              <p style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.faint }}>No encontramos productos con esa búsqueda</p>
+            </div>
+          )}
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          {[["#F8D7D7", "👨‍👩‍👧", "4/3"], ["#D4E8F0", "🤱", "1/1"], ["#F0E8D4", "👶🏻", "1/1"]].map(([bg, em, ar], i) => (
-            <div key={i} style={{ borderRadius: 20, background: bg, aspectRatio: ar, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 56, gridColumn: i === 0 ? "1/-1" : "auto" }}>{em}</div>
-          ))}
+      </section>
+
+      {/* About */}
+      <section style={{ padding: "72px 0", background: C.linen, borderTop: `1px solid ${C.linen2}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+          <div>
+            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600, fontFamily: FONT.sans }}>Nuestra historia</p>
+            <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: C.charcoal, lineHeight: 1.35, marginBottom: 18 }}>"{config.aboutTitle}"</h2>
+            <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.85, marginBottom: 28, fontFamily: FONT.sans }}>{config.aboutText}</p>
+            <p style={{ fontFamily: FONT.serif, fontSize: 16, fontStyle: "italic", color: pc, margin: 0 }}>— Con amor, el equipo {config.storeName}</p>
+          </div>
+          <div style={{ borderRadius: 3, overflow: "hidden" }}>
+            {config.aboutImage ? <img src={config.aboutImage} alt="Nosotros" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover" }} /> : <div style={{ aspectRatio: "4/3", background: `linear-gradient(135deg, ${C.sagePale}, ${C.rosePale})`, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3 }}><div style={{ textAlign: "center" }}><div style={{ fontSize: 56, marginBottom: 10 }}>🤱</div><p style={{ fontFamily: FONT.serif, fontSize: 15, color: C.muted, fontWeight: 300 }}>Hecho con amor</p></div></div>}
+          </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section style={{ padding: "80px" }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: C.roseDeep, marginBottom: 12 }}>Lo que dicen las mamás</div>
-          <h2 style={{ fontFamily: "serif", fontSize: 40, color: C.charcoal, fontWeight: 400 }}>Historias que <em style={{ color: C.roseDeep }}>nos llenan el corazón</em> 💌</h2>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {[
-            { name: "María Fernanda G.", role: "Mamá de Valentina, 4 meses", text: "La ropa es increíblemente suave y los colores son exactamente como en las fotos. ¡Definitivamente regreso!", avatar: "🤱", bg: "#FAE8E8" },
-            { name: "Luciana P.", role: "Mamá primeriza de Mateo", text: "Compré el kit de recién nacido y superó todas mis expectativas. El empaque es tan bonito que parecía un regalo de lujo.", avatar: "👩‍👧", bg: "#D4E8F0" },
-            { name: "Camila R.", role: "Mamá de Isabella, 8 meses", text: "La atención fue personalísima. La manta muslina es lo mejor que le he comprado a mi hija. ¡La llevamos a todos lados!", avatar: "💛", bg: "#F0E8D4" },
-          ].map((t, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }}
-              style={{ background: C.white, borderRadius: 24, padding: 32, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", position: "relative" }}>
-              <span style={{ fontFamily: "serif", fontSize: 64, color: C.rosePale, position: "absolute", top: 20, right: 24, lineHeight: 1 }}>"</span>
-              <div style={{ color: "#F5A623", fontSize: 14, marginBottom: 16 }}>★★★★★</div>
-              <p style={{ fontSize: 14, lineHeight: 1.75, color: C.muted, fontStyle: "italic", marginBottom: 24 }}>{t.text}</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <div style={{ width: 46, height: 46, borderRadius: "50%", background: t.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>{t.avatar}</div>
-                <div><div style={{ fontWeight: 700, fontSize: 14, color: C.charcoal }}>{t.name}</div><div style={{ fontSize: 12, color: C.faint }}>{t.role}</div></div>
-              </div>
-            </motion.div>
-          ))}
+      <section style={{ padding: "72px 0" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+          <div style={{ textAlign: "center", marginBottom: 44 }}>
+            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600, fontFamily: FONT.sans }}>Testimonios</p>
+            <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: C.charcoal, margin: 0 }}>Lo que dicen nuestras clientas</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
+            {(config.testimonials || []).map((t, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} viewport={{ once: true }}
+                style={{ background: C.snow, borderRadius: 3, padding: "26px 22px", border: `1px solid ${C.linen2}` }}>
+                <div style={{ color: "#C9A55A", fontSize: 12, marginBottom: 14, letterSpacing: "1px" }}>★★★★★</div>
+                <p style={{ fontSize: 13, lineHeight: 1.8, color: C.muted, fontStyle: "italic", marginBottom: 20, fontFamily: FONT.sans }}>"{t.text}"</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: "50%", background: t.bg || C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.muted, fontFamily: FONT.sans }}>{t.avatar}</div>
+                  <div>
+                    <p style={{ fontWeight: 600, fontSize: 13, color: C.charcoal, margin: "0 0 1px", fontFamily: FONT.sans }}>{t.name}</p>
+                    <p style={{ fontSize: 11, color: C.faint, margin: 0, fontFamily: FONT.sans }}>{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Benefits */}
-      <section style={{ padding: "80px", background: C.charcoal }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24 }}>
-          {[["🚀", "Envíos rápidos", "24-48 horas a todo el Perú"], ["🔒", "Pago 100% seguro", "Múltiples métodos de pago"], ["🌿", "Calidad premium", "Materiales certificados y seguros"], ["💬", "Atención personalizada", "WhatsApp 7 días a la semana"], ["↩️", "Cambios fáciles", "Sin costo adicional en 15 días"]].map(([icon, title, desc]) => (
-            <div key={title} style={{ textAlign: "center", padding: "28px 16px", borderRadius: 20, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: 36, marginBottom: 14 }}>{icon}</div>
-              <div style={{ fontFamily: "serif", fontSize: 16, fontWeight: 600, color: C.white, marginBottom: 8 }}>{title}</div>
-              <div style={{ fontSize: 12, color: "rgba(250,246,240,0.5)", lineHeight: 1.6 }}>{desc}</div>
+      <section style={{ padding: "56px 0", background: C.charcoal }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: `repeat(${(config.benefits || []).length || 4}, 1fr)`, gap: 36 }}>
+          {(config.benefits || []).map((b, i) => (
+            <div key={i} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 28, marginBottom: 12 }}>{b.icon}</div>
+              <p style={{ fontFamily: FONT.serif, fontSize: 15, fontWeight: 400, color: C.linen, marginBottom: 6 }}>{b.title}</p>
+              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.42)", margin: 0, fontFamily: FONT.sans, lineHeight: 1.6 }}>{b.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Newsletter */}
-      <section style={{ padding: "80px", background: `linear-gradient(135deg, ${C.brown}, #6B4A30)`, textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -100, left: -100, width: 400, height: 400, background: "rgba(255,255,255,0.05)", borderRadius: "50%" }} />
-        <motion.span animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} style={{ fontSize: 48, display: "block", marginBottom: 16, position: "relative" }}>💌</motion.span>
-        <h2 style={{ fontFamily: "serif", fontSize: 40, fontWeight: 400, color: "white", marginBottom: 12, position: "relative" }}>¡Únete a la familia {config.storeName}!</h2>
-        <p style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", marginBottom: 36, position: "relative" }}>Recibe novedades, descuentos exclusivos y consejos de crianza 💛</p>
-        <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", position: "relative" }}>
-          <input placeholder="tu@correo.com" style={{ flex: 1, padding: "14px 24px", borderRadius: 100, border: "none", background: "rgba(255,255,255,0.15)", color: "white", fontSize: 14, outline: "none" }} />
-          <button onClick={() => toast("💌 ¡Suscripción exitosa!")} style={{ padding: "14px 24px", borderRadius: 100, background: "white", color: C.brown, border: "none", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>Suscribirse 💛</button>
+      <section style={{ padding: "72px 40px", background: pc, textAlign: "center" }}>
+        <div style={{ maxWidth: 520, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", marginBottom: 28, fontFamily: FONT.sans, lineHeight: 1.7 }}>{config.newsletterText}</p>
+          <div style={{ display: "flex", gap: 8, maxWidth: 400, margin: "0 auto" }}>
+            <input placeholder="tu@correo.com" style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.16)", color: "white", fontSize: 13, outline: "none", fontFamily: FONT.sans }} />
+            <button onClick={() => toast("¡Suscripción exitosa!")} style={{ padding: "12px 20px", borderRadius: 2, background: "white", color: pc, border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, fontFamily: FONT.sans, whiteSpace: "nowrap" }}>Suscribirse</button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={{ background: C.charcoal, padding: "60px 80px 40px", color: C.white }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.5fr", gap: 40, marginBottom: 40 }}>
-          <div>
-            <div style={{ fontFamily: "serif", fontSize: 24, fontWeight: 600, marginBottom: 14 }}>Venetus <span style={{ color: C.rose }}>Kids</span> ✨</div>
-            <p style={{ fontSize: 13, color: "rgba(250,246,240,0.5)", lineHeight: 1.7, marginBottom: 20 }}>Nacimos del amor de madres que saben lo que significa querer lo mejor para sus hijos.</p>
-            <div style={{ display: "flex", gap: 10 }}>
-              {["📸", "📘", "🎵", "📌"].map(icon => (
-                <a key={icon} href="#" style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontSize: 16, color: C.white }}>{icon}</a>
+      <footer style={{ background: C.charcoal, padding: "52px 0 32px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.5fr", gap: 40, marginBottom: 40 }}>
+            <div>
+              <p style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.linen, marginBottom: 12, letterSpacing: "0.5px" }}>{config.storeName}</p>
+              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 18, fontFamily: FONT.sans }}>Productos seguros, suaves y adorables para acompañar a tu bebé en cada etapa.</p>
+            </div>
+            <div>
+              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Tienda</p>
+              {["Recién nacidos", "Conjuntos", "Accesorios", "Zapatos", "Mantas"].map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8, fontFamily: FONT.sans }}>{l}</p>)}
+            </div>
+            <div>
+              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Ayuda</p>
+              {["Cómo comprar", "Envíos", "Cambios", "FAQ"].map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8, fontFamily: FONT.sans }}>{l}</p>)}
+            </div>
+            <div>
+              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Contacto</p>
+              {[["📍", config.address], ["📱", config.whatsapp], ["📧", config.email]].map(([ic, v]) => (
+                <div key={v} style={{ display: "flex", gap: 8, marginBottom: 10 }}><span style={{ fontSize: 12 }}>{ic}</span><span style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", fontFamily: FONT.sans }}>{v}</span></div>
               ))}
             </div>
           </div>
-          <div>
-            <h4 style={{ fontFamily: "serif", fontSize: 16, fontWeight: 600, color: C.white, marginBottom: 16 }}>Tienda</h4>
-            {["Recién nacidos", "Conjuntos", "Accesorios", "Zapatos", "Mantas", "Baby Shower"].map(l => <div key={l} style={{ fontSize: 13, color: "rgba(250,246,240,0.5)", marginBottom: 8 }}>{l}</div>)}
-          </div>
-          <div>
-            <h4 style={{ fontFamily: "serif", fontSize: 16, fontWeight: 600, color: C.white, marginBottom: 16 }}>Ayuda</h4>
-            {["Cómo comprar", "Envíos", "Cambios", "Guía de tallas", "Preguntas frecuentes"].map(l => <div key={l} style={{ fontSize: 13, color: "rgba(250,246,240,0.5)", marginBottom: 8 }}>{l}</div>)}
-          </div>
-          <div>
-            <h4 style={{ fontFamily: "serif", fontSize: 16, fontWeight: 600, color: C.white, marginBottom: 16 }}>Contacto</h4>
-            {[["📍", config.address], ["📱", config.whatsapp], ["📧", config.email]].map(([icon, val]) => <div key={val} style={{ fontSize: 13, color: "rgba(250,246,240,0.5)", marginBottom: 10, display: "flex", gap: 8 }}><span>{icon}</span><span>{val}</span></div>)}
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
-              {["💳 Visa", "💳 MC", "💵 Yape", "💵 Plin", "🏦 BCP"].map(m => <span key={m} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "5px 10px", borderRadius: 8, fontSize: 11, color: "rgba(250,246,240,0.5)" }}>{m}</span>)}
-            </div>
-          </div>
-        </div>
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <p style={{ fontSize: 12, color: "rgba(250,246,240,0.4)", margin: 0 }}>© 2025 {config.storeName} · Lima, Perú · Hecho con 💛</p>
-          <div style={{ display: "flex", gap: 20 }}>
-            {["Privacidad", "Términos", "Cookies"].map(l => <span key={l} style={{ fontSize: 12, color: "rgba(250,246,240,0.4)", cursor: "pointer" }}>{l}</span>)}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <p style={{ fontSize: 11, color: "rgba(245,242,238,0.28)", margin: 0, fontFamily: FONT.sans }}>© 2025 {config.storeName} · Lima, Perú</p>
+            <div style={{ display: "flex", gap: 7 }}>{["Yape", "Visa", "MC", "BCP"].map(m => <span key={m} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)", padding: "3px 9px", borderRadius: 2, fontSize: 10, color: "rgba(245,242,238,0.3)", fontFamily: FONT.sans }}>{m}</span>)}</div>
           </div>
         </div>
       </footer>
 
       {/* WhatsApp */}
-      <motion.a href={`https://wa.me/${config.whatsapp}`} target="_blank" animate={{ boxShadow: ["0 8px 24px rgba(37,211,102,0.4)", "0 8px 40px rgba(37,211,102,0.65)", "0 8px 24px rgba(37,211,102,0.4)"] }} transition={{ duration: 3, repeat: Infinity }}
-        style={{ position: "fixed", bottom: 32, right: 32, width: 58, height: 58, background: "#25D366", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, textDecoration: "none", zIndex: 500 }}>
+      <motion.a href={`https://wa.me/${config.whatsapp}`} target="_blank"
+        animate={{ boxShadow: ["0 4px 16px rgba(37,211,102,0.3)", "0 4px 24px rgba(37,211,102,0.55)", "0 4px 16px rgba(37,211,102,0.3)"] }}
+        transition={{ duration: 3, repeat: Infinity }}
+        style={{ position: "fixed", bottom: 26, right: 26, width: 50, height: 50, background: "#25D366", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, textDecoration: "none", zIndex: 500 }}>
         💬
       </motion.a>
 
-      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config} onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} />
-      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config} products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
+      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config}
+        onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} />
+      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config}
+        products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
+      <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct}
+        onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist}
+        wishlist={wishlist} config={config} />
 
       <style>{`
-        @keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
         * { box-sizing: border-box; }
-        body { font-family: 'DM Sans', sans-serif; }
-        @media (max-width: 900px) {
-          section { padding: 40px 20px !important; }
-          .hero-grid { grid-template-columns: 1fr !important; }
-        }
+        body { margin: 0; }
+        input, select, textarea, button { font-family: inherit; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #D8D0C8; border-radius: 2px; }
       `}</style>
     </div>
   );
+}
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -892,7 +951,7 @@ function AdminDashboard({ products, orders, categories, config }) {
   return (
     <div>
       <div style={{ marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Bienvenida de nuevo 👋</h2>
+        <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Bienvenida de nuevo 👋</h2>
         <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>Aquí está el resumen de tu tienda hoy.</p>
       </div>
 
@@ -907,12 +966,12 @@ function AdminDashboard({ products, orders, categories, config }) {
       <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 24 }}>
         {/* Recent orders */}
         <div style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)" }}>
-          <h3 style={{ fontFamily: "serif", fontSize: 20, color: C.charcoal, margin: "0 0 20px" }}>Pedidos recientes</h3>
+          <h3 style={{ fontFamily: FONT.serif, fontSize: 20, color: C.charcoal, margin: "0 0 20px" }}>Pedidos recientes</h3>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead><tr>{["Pedido", "Cliente", "Total", "Estado"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "8px 12px", textAlign: "left", borderBottom: `1px solid ${C.linen}` }}>{h}</th>)}</tr></thead>
+            <thead><tr>{["Pedido", "Cliente", "Total", "Estado"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "8px 12px", textAlign: "left", borderBottom: `1px solid ${C.beige}` }}>{h}</th>)}</tr></thead>
             <tbody>
               {orders.slice(0, 6).map(o => (
-                <tr key={o.id} style={{ borderBottom: `1px solid ${C.linen}` }}>
+                <tr key={o.id} style={{ borderBottom: `1px solid ${C.beige}` }}>
                   <td style={{ padding: "12px", fontSize: 13, fontWeight: 700, color: C.charcoal }}>{o.orderNumber}</td>
                   <td style={{ padding: "12px", fontSize: 13, color: C.muted }}>{o.customerName}</td>
                   <td style={{ padding: "12px", fontSize: 13, fontWeight: 600, color: C.brown }}>S/. {o.total.toFixed(2)}</td>
@@ -926,9 +985,9 @@ function AdminDashboard({ products, orders, categories, config }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           {/* Top products */}
           <div style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)" }}>
-            <h3 style={{ fontFamily: "serif", fontSize: 18, color: C.charcoal, margin: "0 0 16px" }}>Top productos ⭐</h3>
+            <h3 style={{ fontFamily: FONT.serif, fontSize: 18, color: C.charcoal, margin: "0 0 16px" }}>Top productos ⭐</h3>
             {products.slice(0, 4).map((p, i) => (
-              <div key={p.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: i < 3 ? `1px solid ${C.linen}` : "none" }}>
+              <div key={p.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: i < 3 ? `1px solid ${C.beige}` : "none" }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: C.faint, width: 20 }}>#{i+1}</span>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: p.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{p.emoji}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -967,7 +1026,7 @@ function AdminProducts({ products, setProducts, categories }) {
   const [confirm, setConfirm] = useState(null);
   const [form, setForm] = useState({});
 
-  const openNew = () => { setForm({ name: "", desc: "", price: "", oldPrice: "", stock: "", categoryId: categories[0]?.id || "", badge: "", emoji: "👶", bg: C.rosePale, active: true, featured: false }); setModal("new"); };
+  const openNew = () => { setForm({ name: "", desc: "", price: "", oldPrice: "", stock: "", categoryId: categories[0]?.id || "", badge: "", emoji: "👶", bg: C.roseLight, active: true, featured: false }); setModal("new"); };
   const openEdit = (p) => { setForm({ ...p, price: String(p.price), oldPrice: p.oldPrice ? String(p.oldPrice) : "", stock: String(p.stock) }); setModal(p); };
 
   const save = () => {
@@ -1005,8 +1064,8 @@ function AdminProducts({ products, setProducts, categories }) {
         </div>
       </div>
       <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-        <button onClick={() => setModal(null)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
-        <button onClick={save} style={{ flex: 2, padding: "13px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>
+        <button onClick={() => setModal(null)} style={{ flex: 1, padding: "13px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
+        <button onClick={save} style={{ flex: 2, padding: "13px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>
           <Icon d={Icons.save} size={14} style={{ display: "inline", marginRight: 6 }} />Guardar producto
         </button>
       </div>
@@ -1017,10 +1076,10 @@ function AdminProducts({ products, setProducts, categories }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
         <div>
-          <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Productos</h2>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Productos</h2>
           <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>{products.filter(p => p.active).length} activos · {products.length} total</p>
         </div>
-        <button onClick={openNew} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 14 }}>
+        <button onClick={openNew} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 14 }}>
           <Icon d={Icons.plus} size={16} /> Nuevo producto
         </button>
       </div>
@@ -1030,12 +1089,12 @@ function AdminProducts({ products, setProducts, categories }) {
       </div>
       <div style={{ background: C.white, borderRadius: 20, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead><tr style={{ background: "#F7F3EE" }}>{["Producto", "Categoría", "Precio", "Stock", "Estado", "Etiqueta", "Acciones"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>)}</tr></thead>
+          <thead><tr style={{ background: C.linen }}>{["Producto", "Categoría", "Precio", "Stock", "Estado", "Etiqueta", "Acciones"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>)}</tr></thead>
           <tbody>
             {filtered.map(p => {
               const cat = categories.find(c => c.id === p.categoryId);
               return (
-                <tr key={p.id} style={{ borderTop: `1px solid ${C.linen}`, opacity: p.active ? 1 : 0.5 }}>
+                <tr key={p.id} style={{ borderTop: `1px solid ${C.beige}`, opacity: p.active ? 1 : 0.5 }}>
                   <td style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 12 }}>
                     <div style={{ width: 44, height: 44, borderRadius: 12, background: p.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>{p.emoji}</div>
                     <div><div style={{ fontWeight: 600, fontSize: 14, color: C.charcoal }}>{p.name}</div>{p.featured && <span style={{ fontSize: 10, color: C.sand, fontWeight: 700 }}>⭐ Destacado</span>}</div>
@@ -1057,7 +1116,7 @@ function AdminProducts({ products, setProducts, categories }) {
                   <td style={{ padding: "14px 16px" }}><Badge badge={p.badge} /></td>
                   <td style={{ padding: "14px 16px" }}>
                     <div style={{ display: "flex", gap: 8 }}>
-                      <button onClick={() => openEdit(p)} style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+                      <button onClick={() => openEdit(p)} style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
                         <Icon d={Icons.edit} size={14} />
                       </button>
                       <button onClick={() => setConfirm({ id: p.id, name: p.name })} style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid #FFCDD2`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.danger }}>
@@ -1107,16 +1166,16 @@ function AdminOrders({ orders, setOrders }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
         <div>
-          <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Pedidos</h2>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Pedidos</h2>
           <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>{orders.length} pedidos · {orders.filter(o => o.status === "PENDING").length} pendientes</p>
         </div>
-        <button onClick={exportCSV} style={{ display: "flex", alignItems: "center", gap: 8, padding: "11px 20px", borderRadius: 100, background: C.linen, border: "none", fontWeight: 600, cursor: "pointer", fontSize: 13, color: C.muted }}>
+        <button onClick={exportCSV} style={{ display: "flex", alignItems: "center", gap: 8, padding: "11px 20px", borderRadius: 100, background: C.beige, border: "none", fontWeight: 600, cursor: "pointer", fontSize: 13, color: C.muted }}>
           <Icon d={Icons.download} size={15} /> Exportar CSV
         </button>
       </div>
       <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
         {[["all","Todos"], ["PENDING","Pendientes"], ["CONFIRMED","Confirmados"], ["PREPARING","Preparando"], ["SHIPPED","Enviados"], ["DELIVERED","Entregados"]].map(([v, l]) => (
-          <button key={v} onClick={() => setFilter(v)} style={{ padding: "8px 18px", borderRadius: 100, border: `1.5px solid ${filter === v ? C.brown : C.linen3}`, background: filter === v ? C.brown : "transparent", color: filter === v ? "white" : C.muted, fontSize: 13, fontWeight: 500, cursor: "pointer" }}>{l}</button>
+          <button key={v} onClick={() => setFilter(v)} style={{ padding: "8px 18px", borderRadius: 100, border: `1.5px solid ${filter === v ? C.brown : C.beigeDark}`, background: filter === v ? C.brown : "transparent", color: filter === v ? "white" : C.muted, fontSize: 13, fontWeight: 500, cursor: "pointer" }}>{l}</button>
         ))}
         <div style={{ marginLeft: "auto", position: "relative" }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar pedido..." style={{ ...inputStyle, paddingLeft: 36, width: 220 }} />
@@ -1125,10 +1184,10 @@ function AdminOrders({ orders, setOrders }) {
       </div>
       <div style={{ background: C.white, borderRadius: 20, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead><tr style={{ background: "#F7F3EE" }}>{["Pedido", "Fecha", "Cliente", "Items", "Total", "Estado", "Pago", "Acciones"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>)}</tr></thead>
+          <thead><tr style={{ background: C.linen }}>{["Pedido", "Fecha", "Cliente", "Items", "Total", "Estado", "Pago", "Acciones"].map(h => <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>)}</tr></thead>
           <tbody>
             {filtered.map(o => (
-              <tr key={o.id} style={{ borderTop: `1px solid ${C.linen}` }}>
+              <tr key={o.id} style={{ borderTop: `1px solid ${C.beige}` }}>
                 <td style={{ padding: "14px 16px", fontWeight: 700, fontSize: 14, color: C.charcoal }}>{o.orderNumber}</td>
                 <td style={{ padding: "14px 16px", fontSize: 13, color: C.muted }}>{new Date(o.createdAt).toLocaleDateString("es-PE")}</td>
                 <td style={{ padding: "14px 16px" }}>
@@ -1140,7 +1199,7 @@ function AdminOrders({ orders, setOrders }) {
                 <td style={{ padding: "14px 16px" }}><StatusBadge status={o.status} /></td>
                 <td style={{ padding: "14px 16px" }}><StatusBadge status={o.paymentStatus} /></td>
                 <td style={{ padding: "14px 16px" }}>
-                  <button onClick={() => setDetail(o)} style={{ padding: "7px 14px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontSize: 12, color: C.muted, fontWeight: 600 }}>
+                  <button onClick={() => setDetail(o)} style={{ padding: "7px 14px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 12, color: C.muted, fontWeight: 600 }}>
                     <Icon d={Icons.eye} size={13} style={{ display: "inline", marginRight: 4 }} />Ver
                   </button>
                 </td>
@@ -1156,14 +1215,14 @@ function AdminOrders({ orders, setOrders }) {
         {detail && (
           <div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }}>
-              <div style={{ background: C.linen, borderRadius: 16, padding: 18 }}>
+              <div style={{ background: C.beige, borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Cliente</div>
                 <div style={{ fontWeight: 700, color: C.charcoal, marginBottom: 4 }}>{detail.customerName}</div>
                 <div style={{ fontSize: 13, color: C.muted, marginBottom: 2 }}>📧 {detail.customerEmail}</div>
                 <div style={{ fontSize: 13, color: C.muted, marginBottom: 2 }}>📱 {detail.customerPhone}</div>
                 <div style={{ fontSize: 13, color: C.muted }}>📍 {detail.address}</div>
               </div>
-              <div style={{ background: C.linen, borderRadius: 16, padding: 18 }}>
+              <div style={{ background: C.beige, borderRadius: 16, padding: 18 }}>
                 <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Resumen</div>
                 <div style={{ fontSize: 13, color: C.muted, marginBottom: 4 }}>Subtotal: <strong>S/. {detail.subtotal?.toFixed(2)}</strong></div>
                 {detail.discount > 0 && <div style={{ fontSize: 13, color: C.muted, marginBottom: 4 }}>Descuento: <strong style={{ color: C.success }}>-S/. {detail.discount.toFixed(2)}</strong></div>}
@@ -1176,7 +1235,7 @@ function AdminOrders({ orders, setOrders }) {
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Productos</div>
               {detail.items.map((item, i) => (
-                <div key={i} style={{ display: "flex", gap: 14, padding: "10px 0", borderBottom: i < detail.items.length - 1 ? `1px solid ${C.linen}` : "none" }}>
+                <div key={i} style={{ display: "flex", gap: 14, padding: "10px 0", borderBottom: i < detail.items.length - 1 ? `1px solid ${C.beige}` : "none" }}>
                   <span style={{ fontSize: 28 }}>{item.emoji}</span>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 600, fontSize: 13, color: C.charcoal }}>{item.name}</div>
@@ -1190,7 +1249,7 @@ function AdminOrders({ orders, setOrders }) {
               <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Cambiar estado del pedido</div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {["PENDING","CONFIRMED","PREPARING","SHIPPED","DELIVERED","CANCELLED"].map(s => (
-                  <button key={s} onClick={() => updateStatus(detail.id, s)} style={{ padding: "8px 16px", borderRadius: 100, border: `2px solid ${detail.status === s ? C.roseDeep : C.linen3}`, background: detail.status === s ? C.rosePale : "transparent", color: detail.status === s ? C.roseDeep : C.muted, fontWeight: 600, fontSize: 12, cursor: "pointer" }}>
+                  <button key={s} onClick={() => updateStatus(detail.id, s)} style={{ padding: "8px 16px", borderRadius: 100, border: `2px solid ${detail.status === s ? C.roseDeep : C.beigeDark}`, background: detail.status === s ? C.roseLight : "transparent", color: detail.status === s ? C.roseDeep : C.muted, fontWeight: 600, fontSize: 12, cursor: "pointer" }}>
                     {statusConfig[s]?.label}
                   </button>
                 ))}
@@ -1220,21 +1279,21 @@ function AdminCategories({ categories, setCategories, products }) {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: 0 }}>Categorías</h2>
-        <button onClick={() => { setForm({ name: "", emoji: "🎀", color: "#FAE8E8" }); setModal("new"); }} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 600, cursor: "pointer" }}>
+        <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: 0 }}>Categorías</h2>
+        <button onClick={() => { setForm({ name: "", emoji: "🎀", color: "#FAE8E8" }); setModal("new"); }} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 600, cursor: "pointer" }}>
           <Icon d={Icons.plus} size={16} /> Nueva categoría
         </button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
         {categories.map(cat => (
           <div key={cat.id} style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", display: "flex", gap: 16, alignItems: "center" }}>
-            <div style={{ width: 56, height: 56, borderRadius: 16, background: cat.color || C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>{cat.emoji}</div>
+            <div style={{ width: 56, height: 56, borderRadius: 16, background: cat.color || C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>{cat.emoji}</div>
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 700, fontSize: 16, color: C.charcoal }}>{cat.name}</div>
               <div style={{ fontSize: 13, color: C.faint }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</div>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => { setForm({ ...cat }); setModal(cat); }} style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+              <button onClick={() => { setForm({ ...cat }); setModal(cat); }} style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
                 <Icon d={Icons.edit} size={14} />
               </button>
               <button onClick={() => del(cat.id)} style={{ width: 34, height: 34, borderRadius: 10, border: "1.5px solid #FFCDD2", background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.danger }}>
@@ -1249,8 +1308,8 @@ function AdminCategories({ categories, setCategories, products }) {
         <Field label="Emoji"><input value={form.emoji || ""} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} style={inputStyle} placeholder="👼" /></Field>
         <Field label="Color de fondo"><input type="color" value={form.color || "#FAE8E8"} onChange={e => setForm(f => ({ ...f, color: e.target.value }))} style={{ ...inputStyle, padding: 6, height: 44, cursor: "pointer" }} /></Field>
         <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-          <button onClick={() => setModal(null)} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
-          <button onClick={save} style={{ flex: 2, padding: "12px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
+          <button onClick={() => setModal(null)} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
+          <button onClick={save} style={{ flex: 2, padding: "12px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
         </div>
       </Modal>
     </div>
@@ -1275,17 +1334,17 @@ function AdminCoupons({ coupons, setCoupons }) {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: 0 }}>Cupones de descuento</h2>
-        <button onClick={() => { setForm({ code: "", type: "percent", value: "", minAmount: "", maxUses: "", active: true }); setModal("new"); }} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 600, cursor: "pointer" }}>
+        <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: 0 }}>Cupones de descuento</h2>
+        <button onClick={() => { setForm({ code: "", type: "percent", value: "", minAmount: "", maxUses: "", active: true }); setModal("new"); }} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 600, cursor: "pointer" }}>
           <Icon d={Icons.plus} size={16} /> Nuevo cupón
         </button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
         {coupons.map(c => (
-          <div key={c.id} style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", borderLeft: `4px solid ${c.active ? C.roseDeep : C.linen3}` }}>
+          <div key={c.id} style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", borderLeft: `4px solid ${c.active ? C.roseDeep : C.beigeDark}` }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
               <div>
-                <div style={{ fontFamily: "serif", fontSize: 22, fontWeight: 700, color: C.charcoal, letterSpacing: "1px" }}>{c.code}</div>
+                <div style={{ fontFamily: FONT.serif, fontSize: 22, fontWeight: 700, color: C.charcoal, letterSpacing: "1px" }}>{c.code}</div>
                 <div style={{ fontSize: 13, color: C.faint, marginTop: 2 }}>
                   {c.type === "percent" ? `${c.value}% de descuento` : `S/. ${c.value} de descuento`}
                   {c.minAmount ? ` · Mín. S/. ${c.minAmount}` : ""}
@@ -1300,10 +1359,10 @@ function AdminCoupons({ coupons, setCoupons }) {
               {c.expires && <span>Vence: <strong>{c.expires}</strong></span>}
             </div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => { setForm({ ...c, value: String(c.value), minAmount: c.minAmount ? String(c.minAmount) : "", maxUses: c.maxUses ? String(c.maxUses) : "" }); setModal(c); }} style={{ flex: 1, padding: "9px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.muted }}>
+              <button onClick={() => { setForm({ ...c, value: String(c.value), minAmount: c.minAmount ? String(c.minAmount) : "", maxUses: c.maxUses ? String(c.maxUses) : "" }); setModal(c); }} style={{ flex: 1, padding: "9px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.muted }}>
                 ✏️ Editar
               </button>
-              <button onClick={() => { navigator.clipboard?.writeText(c.code); toast("📋 Código copiado: " + c.code); }} style={{ flex: 1, padding: "9px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.muted }}>
+              <button onClick={() => { navigator.clipboard?.writeText(c.code); toast("📋 Código copiado: " + c.code); }} style={{ flex: 1, padding: "9px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.muted }}>
                 📋 Copiar
               </button>
             </div>
@@ -1322,8 +1381,8 @@ function AdminCoupons({ coupons, setCoupons }) {
           <input type="checkbox" checked={!!form.active} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} style={{ width: 18, height: 18, accentColor: C.roseDeep }} /> Cupón activo
         </label>
         <div style={{ display: "flex", gap: 12 }}>
-          <button onClick={() => setModal(null)} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
-          <button onClick={save} style={{ flex: 2, padding: "12px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
+          <button onClick={() => setModal(null)} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.muted }}>Cancelar</button>
+          <button onClick={save} style={{ flex: 2, padding: "12px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
         </div>
       </Modal>
     </div>
@@ -1343,12 +1402,12 @@ function AdminSettings({ config, setConfig }) {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: 0 }}>Configuración</h2>
-        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>
+        <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: 0 }}>Configuración</h2>
+        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>
           <Icon d={Icons.save} size={15} /> Guardar cambios
         </button>
       </div>
-      <div style={{ display: "flex", gap: 8, marginBottom: 28, borderBottom: `1px solid ${C.linen}`, paddingBottom: 0 }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 28, borderBottom: `1px solid ${C.beige}`, paddingBottom: 0 }}>
         {tabs.map(([id, label]) => (
           <button key={id} onClick={() => setActiveTab(id)} style={{ padding: "10px 20px", borderRadius: "12px 12px 0 0", border: "none", background: activeTab === id ? C.white : "transparent", cursor: "pointer", fontSize: 13, fontWeight: 600, color: activeTab === id ? C.roseDeep : C.muted, borderBottom: activeTab === id ? "2px solid " + C.roseDeep : "2px solid transparent", marginBottom: -1 }}>
             {label}
@@ -1382,7 +1441,7 @@ function AdminSettings({ config, setConfig }) {
             <Field label="Instagram (URL completa)"><input value={form.instagram} onChange={e => setForm(f => ({ ...f, instagram: e.target.value }))} style={inputStyle} placeholder="https://instagram.com/..." /></Field>
             <Field label="TikTok (URL completa)"><input value={form.tiktok} onChange={e => setForm(f => ({ ...f, tiktok: e.target.value }))} style={inputStyle} placeholder="https://tiktok.com/@..." /></Field>
             <Field label="Facebook (URL completa)"><input value={form.facebook} onChange={e => setForm(f => ({ ...f, facebook: e.target.value }))} style={inputStyle} placeholder="https://facebook.com/..." /></Field>
-            <div style={{ gridColumn: "1/-1", background: C.linen, borderRadius: 16, padding: 20 }}>
+            <div style={{ gridColumn: "1/-1", background: C.beige, borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: C.muted, marginBottom: 8 }}>Vista previa del botón de WhatsApp:</div>
               <div style={{ fontSize: 13, color: C.faint }}>El botón flotante de WhatsApp en la tienda usará el número: <strong style={{ color: C.charcoal }}>{form.whatsapp}</strong></div>
             </div>
@@ -1401,7 +1460,7 @@ function AdminSettings({ config, setConfig }) {
                 { key: "mp", label: "🟡 MercadoPago", desc: "Muy popular en Perú y Latinoamérica. Acepta tarjetas, Yape, Plin y más.", docs: "https://www.mercadopago.com.pe/developers", keyField: "mpKey", placeholder: "APP_USR-..." },
                 { key: "paypal", label: "💙 PayPal", desc: "Para clientes internacionales o que prefieren PayPal.", docs: "https://developer.paypal.com", keyField: "paypalId", placeholder: "AXxxxxxxx..." },
               ].map(gw => (
-                <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? C.roseDeep : C.linen3}`, borderRadius: 20, padding: 24, transition: "all 0.2s" }}>
+                <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? C.roseDeep : C.beigeDark}`, borderRadius: 20, padding: 24, transition: "all 0.2s" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                     <div>
                       <div style={{ fontWeight: 700, fontSize: 16, color: C.charcoal }}>{gw.label}</div>
@@ -1410,7 +1469,7 @@ function AdminSettings({ config, setConfig }) {
                     <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
                       <span style={{ fontSize: 13, color: C.muted }}>{form[gw.key + "Enabled"] ? "Activado" : "Desactivado"}</span>
                       <div onClick={() => setForm(f => ({ ...f, [gw.key + "Enabled"]: !f[gw.key + "Enabled"] }))}
-                        style={{ width: 48, height: 26, borderRadius: 100, background: form[gw.key + "Enabled"] ? C.roseDeep : C.linen3, position: "relative", cursor: "pointer", transition: "all 0.3s", flexShrink: 0 }}>
+                        style={{ width: 48, height: 26, borderRadius: 100, background: form[gw.key + "Enabled"] ? C.roseDeep : C.beigeDark, position: "relative", cursor: "pointer", transition: "all 0.3s", flexShrink: 0 }}>
                         <div style={{ width: 20, height: 20, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form[gw.key + "Enabled"] ? 24 : 4, transition: "all 0.3s", boxShadow: "0 2px 6px rgba(0,0,0,0.2)" }} />
                       </div>
                     </label>
@@ -1425,7 +1484,7 @@ function AdminSettings({ config, setConfig }) {
                   )}
                 </div>
               ))}
-              <div style={{ border: `1.5px solid ${C.linen3}`, borderRadius: 20, padding: 24, background: "#F3E5F5" }}>
+              <div style={{ border: `1.5px solid ${C.beigeDark}`, borderRadius: 20, padding: 24, background: "#F3E5F5" }}>
                 <div style={{ fontWeight: 700, fontSize: 16, color: "#7B1FA2", marginBottom: 4 }}>💜 Yape / Plin — Siempre disponible</div>
                 <div style={{ fontSize: 13, color: "#9C27B0" }}>Se muestra automáticamente con el número: <strong>{form.whatsapp}</strong>. Configúralo en la pestaña Contacto y RRSS.</div>
               </div>
@@ -1437,17 +1496,17 @@ function AdminSettings({ config, setConfig }) {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <Field label="Color principal (botones, badges)">
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <input type="color" value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.linen3}`, cursor: "pointer", padding: 4 }} />
+                <input type="color" value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
                 <input value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ ...inputStyle, flex: 1 }} />
               </div>
             </Field>
             <Field label="Color de acento (textos, detalles)">
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <input type="color" value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.linen3}`, cursor: "pointer", padding: 4 }} />
+                <input type="color" value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
                 <input value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ ...inputStyle, flex: 1 }} />
               </div>
             </Field>
-            <div style={{ gridColumn: "1/-1", background: C.linen, borderRadius: 16, padding: 20 }}>
+            <div style={{ gridColumn: "1/-1", background: C.beige, borderRadius: 16, padding: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: C.muted, marginBottom: 12 }}>Vista previa de colores:</div>
               <div style={{ display: "flex", gap: 12 }}>
                 <div style={{ padding: "10px 24px", borderRadius: 100, background: form.primaryColor, color: "white", fontWeight: 700, fontSize: 14 }}>Botón principal</div>
@@ -1517,16 +1576,16 @@ function AdminClients({ orders, setOrders }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
         <div>
-          <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Clientes</h2>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Clientes</h2>
           <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>{clients.length} registrados · {blockedCount > 0 ? `${blockedCount} bloqueados` : "ninguno bloqueado"}</p>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
           {blockedCount > 0 && (
-            <button onClick={() => setShowBlocked(v => !v)} style={{ padding: "10px 20px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: showBlocked ? C.charcoal : "transparent", color: showBlocked ? "white" : C.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+            <button onClick={() => setShowBlocked(v => !v)} style={{ padding: "10px 20px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: showBlocked ? C.charcoal : "transparent", color: showBlocked ? "white" : C.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
               {showBlocked ? "Ocultar bloqueados" : `Ver bloqueados (${blockedCount})`}
             </button>
           )}
-          <div style={{ background: C.linen, padding: "10px 20px", borderRadius: 100, fontSize: 13, color: C.muted, fontWeight: 600 }}>{clients.length} clientes</div>
+          <div style={{ background: C.beige, padding: "10px 20px", borderRadius: 100, fontSize: 13, color: C.muted, fontWeight: 600 }}>{clients.length} clientes</div>
         </div>
       </div>
 
@@ -1545,7 +1604,7 @@ function AdminClients({ orders, setOrders }) {
       <div style={{ background: C.white, borderRadius: 20, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#F7F3EE" }}>
+            <tr style={{ background: C.linen }}>
               {["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Acciones"].map(h => (
                 <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>
               ))}
@@ -1555,14 +1614,14 @@ function AdminClients({ orders, setOrders }) {
             {visibleClients.map((c, i) => {
               const isBlocked = blockedEmails.includes(c.email);
               return (
-                <tr key={c.email} style={{ borderTop: `1px solid ${C.linen}`, background: isBlocked ? "#FFF5F5" : "transparent", opacity: isBlocked ? 0.75 : 1 }}>
+                <tr key={c.email} style={{ borderTop: `1px solid ${C.beige}`, background: isBlocked ? "#FFF5F5" : "transparent", opacity: isBlocked ? 0.75 : 1 }}>
                   <td style={{ padding: "14px 16px" }}>
                     {i < 3 && !isBlocked && <span style={{ fontSize: 18 }}>{["🥇","🥈","🥉"][i]}</span>}
                     {(i >= 3 || isBlocked) && <span style={{ fontSize: 14, color: C.faint, fontWeight: 700 }}>#{i+1}</span>}
                   </td>
                   <td style={{ padding: "14px 16px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: isBlocked ? "#F8D7DA" : C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 14, color: isBlocked ? C.danger : C.roseDeep }}>
+                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: isBlocked ? "#F8D7DA" : C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 14, color: isBlocked ? C.danger : C.roseDeep }}>
                         {isBlocked ? "🚫" : c.name[0].toUpperCase()}
                       </div>
                       <div>
@@ -1574,7 +1633,7 @@ function AdminClients({ orders, setOrders }) {
                   <td style={{ padding: "14px 16px", fontSize: 13, color: C.muted }}>{c.email}</td>
                   <td style={{ padding: "14px 16px", fontSize: 13, color: C.muted }}>{c.phone || "-"}</td>
                   <td style={{ padding: "14px 16px", textAlign: "center" }}>
-                    <span style={{ background: C.rosePale, color: C.roseDeep, padding: "4px 12px", borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{c.orders}</span>
+                    <span style={{ background: C.roseLight, color: C.roseDeep, padding: "4px 12px", borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{c.orders}</span>
                   </td>
                   <td style={{ padding: "14px 16px", fontWeight: 700, color: C.brown }}>S/. {c.spent.toFixed(2)}</td>
                   <td style={{ padding: "14px 16px", fontSize: 13, color: C.faint }}>{new Date(c.lastOrder).toLocaleDateString("es-PE")}</td>
@@ -1642,11 +1701,11 @@ function AdminReviews({ products }) {
 
   return (
     <div>
-      <h2 style={{ fontFamily: "serif", fontSize: 28, color: C.charcoal, margin: "0 0 28px" }}>Reseñas de clientes</h2>
+      <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 28px" }}>Reseñas de clientes</h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {reviews.map(r => (
           <div key={r.id} style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", display: "flex", gap: 20, alignItems: "flex-start", borderLeft: `4px solid ${r.approved ? C.success : C.warning}` }}>
-            <div style={{ width: 44, height: 44, borderRadius: "50%", background: C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: C.roseDeep, fontSize: 16, flexShrink: 0 }}>{r.author[0]}</div>
+            <div style={{ width: 44, height: 44, borderRadius: "50%", background: C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: C.roseDeep, fontSize: 16, flexShrink: 0 }}>{r.author[0]}</div>
             <div style={{ flex: 1 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                 <div>
@@ -1664,7 +1723,7 @@ function AdminReviews({ products }) {
                   {r.approved ? "✅ Aprobada" : "⏳ Pendiente"}
                 </span>
                 <button onClick={() => { setReviews(rv => rv.map(x => x.id === r.id ? { ...x, approved: !x.approved } : x)); toast(r.approved ? "Reseña ocultada" : "✅ Reseña aprobada"); }}
-                  style={{ padding: "4px 14px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.muted }}>
+                  style={{ padding: "4px 14px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.muted }}>
                   {r.approved ? "Ocultar" : "Aprobar"}
                 </button>
                 <button onClick={() => { setReviews(rv => rv.filter(x => x.id !== r.id)); toast("Reseña eliminada"); }}
@@ -1698,11 +1757,11 @@ function AdminLogin({ onLogin }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: `linear-gradient(135deg, ${C.rosePale} 0%, ${C.sagePale} 100%)`, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+    <div style={{ minHeight: "100vh", background: C.linen, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} style={{ background: C.white, borderRadius: 28, padding: 48, width: "100%", maxWidth: 440, boxShadow: "0 32px 80px rgba(139,110,82,0.15)" }}>
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ fontSize: 48, marginBottom: 12 }}>🔐</div>
-          <h1 style={{ fontFamily: "serif", fontSize: 32, color: C.charcoal, margin: "0 0 8px" }}>Panel Admin</h1>
+          <h1 style={{ fontFamily: FONT.serif, fontSize: 32, color: C.charcoal, margin: "0 0 8px" }}>Panel Admin</h1>
           <p style={{ color: C.faint, fontSize: 14, margin: 0 }}>Venetus Kids — Acceso administrativo</p>
         </div>
         <form onSubmit={submit}>
@@ -1710,11 +1769,11 @@ function AdminLogin({ onLogin }) {
           <Field label="Contraseña">
             <input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} style={inputStyle} placeholder="••••••••" />
           </Field>
-          <div style={{ background: C.linen, borderRadius: 12, padding: "10px 16px", marginBottom: 20, fontSize: 12, color: C.muted }}>
+          <div style={{ background: C.beige, borderRadius: 12, padding: "10px 16px", marginBottom: 20, fontSize: 12, color: C.muted }}>
             💡 Demo: usa cualquier email y contraseña <strong>admin123</strong>
           </div>
           <button type="submit" disabled={loading} style={{ width: "100%", padding: "15px", borderRadius: 100, background: loading ? C.muted : `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, fontSize: 15, cursor: loading ? "not-allowed" : "pointer", boxShadow: "0 8px 24px rgba(212,137,138,0.35)" }}>
-            {loading ? "Verificando..." : "Iniciar sesión"}
+            {loading ? "Verificando..." : "🔐 Ingresar al panel"}
           </button>
         </form>
       </motion.div>
@@ -1738,11 +1797,11 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
   const pendingOrders = orders.filter(o => o.status === "PENDING").length;
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#F7F3EE" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: C.linen }}>
       {/* Sidebar */}
       <aside style={{ width: 240, background: C.charcoal, display: "flex", flexDirection: "column", position: "sticky", top: 0, height: "100vh", flexShrink: 0 }}>
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div style={{ fontFamily: "serif", fontSize: 20, fontWeight: 600, color: C.white }}>Venetus <span style={{ color: C.rose }}>Kids</span></div>
+          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: C.cream }}>Venetus <span style={{ color: C.rose }}>Kids</span></div>
           <div style={{ fontSize: 11, color: "rgba(250,246,240,0.4)", marginTop: 2 }}>Panel Administrador</div>
         </div>
         <nav style={{ flex: 1, padding: "12px 12px", overflowY: "auto" }}>
@@ -1839,20 +1898,20 @@ export default function App() {
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: C.white }}>
       <div style={{ textAlign: "center" }}>
         <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1.5, repeat: Infinity }} style={{ fontSize: 64, marginBottom: 20 }}>👶🏻</motion.div>
-        <p style={{ fontFamily: "serif", fontSize: 20, color: C.muted }}>Cargando Venetus Kids...</p>
+        <p style={{ fontFamily: FONT.serif, fontSize: 20, color: C.muted }}>Cargando Venetus Kids...</p>
       </div>
     </div>
   );
 
   return (
-    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", minHeight: "100vh" }}>
+    <div style={{ fontFamily: FONT.sans, minHeight: "100vh" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
         * { box-sizing: border-box; }
         body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
         input:focus, select:focus, textarea:focus { border-color: ${C.roseDeep} !important; box-shadow: 0 0 0 3px ${C.roseDeep}22; }
-        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: ${C.linen}; } ::-webkit-scrollbar-thumb { background: ${C.linen3}; border-radius: 3px; }
+        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: ${C.beige}; } ::-webkit-scrollbar-thumb { background: ${C.beigeDark}; border-radius: 3px; }
       `}</style>
 
       {/* Admin button (floating, store only) */}
@@ -1885,24 +1944,4 @@ export default function App() {
       <Toast />
     </div>
   );
-}const inputStyle={width:"100%",padding:"10px 13px",borderRadius:3,border:`1px solid ${C.linen3}`,background:C.white,color:C.charcoal,fontSize:13,fontFamily:FONT.sans,outline:"none",boxSizing:"border-box",transition:"border-color 0.15s"};
-const selectStyle={...inputStyle,cursor:"pointer"};return(<div style={{background:C.white,fontFamily:FONT.sans}}>
-    {config.promoActive&&<div style={{background:C.charcoal,color:"rgba(245,242,238,0.8)",textAlign:"center",padding:"9px 20px",fontSize:11,fontWeight:400,letterSpacing:"0.3px",fontFamily:FONT.sans}}>{config.promoBanner}</div>}
-    <nav style={{position:"sticky",top:0,zIndex:200,background:"rgba(250,250,248,0.96)",backdropFilter:"blur(14px)",borderBottom:`1px solid ${C.linen2}`}}>
-      <div style={{maxWidth:1280,margin:"0 auto",padding:"0 48px",height:62,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <div style={{fontFamily:FONT.serif,fontSize:20,fontWeight:300,color:C.charcoal,letterSpacing:"1px"}}>{config.storeName}</div>
-        <div style={{display:"flex",alignItems:"center",gap:28}}>
-          {categories.slice(0,4).map(cat=><button key={cat.id} onClick={()=>{setFilterCat(cat.id);productsRef.current?.scrollIntoView({behavior:"smooth"});}} style={{background:"none",border:"none",cursor:"pointer",fontSize:12,fontFamily:FONT.sans,color:filterCat===cat.id?pc:C.muted,fontWeight:filterCat===cat.id?500:400,letterSpacing:"0.2px",borderBottom:`1px solid ${filterCat===cat.id?pc:"transparent"}`,padding:"4px 0",transition:"all 0.15s"}}>{cat.name}</button>)}
-        </div>
-        <div style={{display:"flex",alignItems:"center",gap:14}}>
-          <button onClick={()=>setCartOpen(true)} style={{position:"relative",background:"none",border:"none",cursor:"pointer",color:C.muted,display:"flex",padding:4}}>
-            <Icon d={Icons.cart} size={19} strokeWidth={1.4}/>
-            {cartCount>0&&<span style={{position:"absolute",top:1,right:1,background:pc,color:"white",fontSize:8,fontWeight:700,width:13,height:13,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:FONT.sans}}>{cartCount}</span>}
-          </button>
-        </div>
-      </div>
-    </nav>
-    <div style={{maxWidth:1280,margin:"0 auto"}}>
-    {/* Hero */}
-    <HeroSection config={config} onShop={()=>productsRef.current?.scrollIntoView({behavior:"smooth"})}/>
-    </div>
+}
