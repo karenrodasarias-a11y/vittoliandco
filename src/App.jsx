@@ -72,19 +72,29 @@ const INIT_CONFIG = {
   primaryColor: "#D4898A", accentColor: "#8B6E52",
   stripeKey: "", mpKey: "", paypalId: "",
   stripeEnabled: false, mpEnabled: false, paypalEnabled: false,
+  heroImage: "",
+sectionImages: {
+  about: "",
+  promo: "",
+ banner: ""
+},
+texts: {
+  about: "",
+  testimonials: ""
+}
 };
 
 const INIT_CATEGORIES = [
   { id: "cat1", name: "Recién nacidos", slug: "recien-nacidos", emoji: "👼", color: "#FAE8E8", count: 3 },
-  { id: "cat2", name: "Conjuntos & Outfits", slug: "conjuntos", emoji: "👕", color: "#D4E8F0", count: 2 },
+  { id: "cat2", name: "Conjuntos & Outfits", slug: "conjuntos", image: "" ``, color: "#D4E8F0", count: 2 },
   { id: "cat3", name: "Accesorios", slug: "accesorios", emoji: "🎀", color: "#F0E8D4", count: 2 },
   { id: "cat4", name: "Zapatos para bebé", slug: "zapatos", emoji: "👟", color: "#EDE8F5", count: 1 },
   { id: "cat5", name: "Mantas & Esenciales", slug: "mantas", emoji: "🧸", color: "#E8F5E8", count: 1 },
   { id: "cat6", name: "Regalos Baby Shower", slug: "baby-shower", emoji: "🎁", color: "#F5F0D4", count: 1 },
 ];
 
-const INIT_PRODUCTS = [
-  { id: "p1", name: "Set Bodysuit Algodón", slug: "set-bodysuit", desc: "Pack de 3 bodys ultra suaves de algodón orgánico 100% hipoalergénico. Ideales para los primeros meses.", price: 89.90, oldPrice: null, stock: 50, categoryId: "cat1", badge: "nuevo", emoji: "👶", bg: "#FAE8E8", featured: true, active: true, rating: 5, reviews: 124, createdAt: Date.now() - 86400000 * 5 },
+const INIT_PRODUCTS = [   {     id: "p1",     name: "Set Bodysuit Algodón",     slug: "set-bodysuit",     desc: "Pack de 3 bodys ultra suaves",     price: 89.9,     stock: 50,     categoryId: "cat1",     badge: "nuevo",     images: [],     thumbnail: "",     featured: true,     active: true,     rating: 5,     reviews: 124,     createdAt: Date.now()   } ];   {     id: "p1",     name: "Set Bodysuit Algodón",     slug: "set-bodysuit",     desc: "Pack de 3 bodys ultra suaves",     price: 89.9,     stock: 50,     categoryId: "cat1",     badge: "nuevo",     images: [],     thumbnail: "",     featured: true,     active: true,     rating: 5,     reviews: 124,     createdAt: Date.now()   } ];   {     id: "p1",     name: "Set Bodysuit Algodón",     slug: "set-bodysuit",     desc: "Pack de 3 bodys ultra suaves",     price: 89.9,     stock: 50,     categoryId: "cat1",     badge: "nuevo",     images: [],     thumbnail: "",     featured: true,     active: true,     rating: 5,     reviews: 124,     createdAt: Date.now()   } ];   {     id: "p1",     name: "Set Bodysuit Algodón",     slug: "set-bodysuit",     desc: "Pack de 3 bodys ultra suaves",     price: 89.9,     stock: 50,     categoryId: "cat1",     badge: "nuevo",     images: [],     thumbnail: "",     featured: true,     active: true,     rating: 5,     reviews: 124,     createdAt: Date.now()   } ];
+  { id: "p1", name: "Set Bodysuit Algodón", slug: "set-bodysuit", desc: "Pack de 3 bodys ultra suaves de algodón orgánico 100% hipoalergénico. Ideales para los primeros meses.", price: 89.90, oldPrice: null, stock: 50, categoryId: "cat1", badge: "nuevo", images: [], // array de imágenes thumbnail: "", // imagen principal featured: true, active: true, rating: 5, reviews: 124, createdAt: Date.now() - 86400000 * 5 },
   { id: "p2", name: "Conjunto Floral Niña", slug: "conjunto-floral", desc: "Blusa + shorts florales para niñas de 3 a 24 meses. Tela fresca y cómoda para todo el día.", price: 125.00, oldPrice: 160.00, stock: 30, categoryId: "cat2", badge: "oferta", emoji: "👗", bg: "#F2C4C4", featured: true, active: true, rating: 5, reviews: 87, createdAt: Date.now() - 86400000 * 4 },
   { id: "p3", name: "Gorro de Punto Suave", slug: "gorro-punto", desc: "Gorro tejido a mano de acrílico premium, suave y transpirable. Disponible en múltiples colores.", price: 45.00, oldPrice: null, stock: 80, categoryId: "cat3", badge: "mas_vendido", emoji: "🧢", bg: "#D4E8F0", featured: true, active: true, rating: 4.8, reviews: 56, createdAt: Date.now() - 86400000 * 3 },
   { id: "p4", name: "Zapatos Gateo Cuero", slug: "zapatos-gateo", desc: "Primeros zapatos de cuero natural. Suela antideslizante y cierre fácil. Cuida el desarrollo del pie.", price: 79.90, oldPrice: null, stock: 40, categoryId: "cat4", badge: "mas_vendido", emoji: "👟", bg: "#EDE8F5", featured: true, active: true, rating: 4.9, reviews: 203, createdAt: Date.now() - 86400000 * 2 },
@@ -254,7 +264,8 @@ function Stars({ rating, size = 13 }) {
 // ════════════════════════════════════════════════════════════════════════════
 
 // ─── PRODUCT CARD (store) ──────────────────────────────────────────────────
-function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = [] }) {
+function ProductCard({ product, onAddCart, setSelectedProduct }) {   return (     <div       onClick={() => setSelectedProduct(product)}       style={{         background: "#fff",         borderRadius: 16,         overflow: "hidden",         cursor: "pointer"       }}     >       <div style={{ height: 220, background: "#eee" }}>         {product.thumbnail ? (           <img             src={product.thumbnail}             style={{ width: "100%", height: "100%", objectFit: "cover" }}           />         ) : (           <div style={{ textAlign: "center", paddingTop: 80 }}>Sin imagen</div>         )}       </div>        <div style={{ padding: 16 }}>         <h4>{product.name}</h4>         <p>S/. {product.price}</p>          <button           onClick={(e) => {             e.stopPropagation();             onAddCart(product);           }}         >           Añadir         </button>       </div>     </div>   ); }({ product, categories, onAddCart, onWishlist, wishlist = [] }) {
+  onClick={() => setSelectedProduct(product)}
   const [hover, setHover] = useState(false);
   const cat = categories.find(c => c.id === product.categoryId);
   const inWish = wishlist.includes(product.id);
@@ -673,6 +684,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("featured");
   const productsRef = useRef(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
 
@@ -1056,8 +1068,8 @@ function AdminProducts({ products, setProducts, categories }) {
         <Field label="Stock" required><input type="number" value={form.stock || ""} onChange={e => setForm(f => ({ ...f, stock: e.target.value }))} style={inputStyle} placeholder="0" /></Field>
         <Field label="Categoría"><select value={form.categoryId || ""} onChange={e => setForm(f => ({ ...f, categoryId: e.target.value }))} style={selectStyle}>{categories.map(c => <option key={c.id} value={c.id}>{c.emoji} {c.name}</option>)}</select></Field>
         <Field label="Badge / Etiqueta"><select value={form.badge || ""} onChange={e => setForm(f => ({ ...f, badge: e.target.value }))} style={selectStyle}><option value="">Sin etiqueta</option><option value="nuevo">Nuevo</option><option value="oferta">Oferta</option><option value="mas_vendido">Más vendido</option><option value="favorito">Favorito</option></select></Field>
-        <Field label="Emoji del producto"><input value={form.emoji || ""} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} style={inputStyle} placeholder="👶" /></Field>
-        <Field label="Color de fondo"><input type="color" value={form.bg || "#FAE8E8"} onChange={e => setForm(f => ({ ...f, bg: e.target.value }))} style={{ ...inputStyle, padding: 6, height: 44, cursor: "pointer" }} /></Field>
+        <Field label="Imágenes del producto">   <input     type="file"     multiple     accept="image/*"     onChange={(e) => {       const files = Array.from(e.target.files);        const readers = files.map(         (file) =>           new Promise((res) => {             const reader = new FileReader();             reader.onload = (ev) => res(ev.target.result);             reader.readAsDataURL(file);           })       );        Promise.all(readers).then((imgs) => {         setForm((f) => ({           ...f,           images: [...(f.images || []), ...imgs],           thumbnail: imgs[0]         }));       });     }}   /> </Field><input value={form.emoji || ""} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} style={inputStyle} placeholder="👶" /></Field>
+        <Field label="Color de fondo"><Field label="Color (HEX)">   <input     value={form.bg || ""}     onChange={e => setForm(f => ({ ...f, bg: e.target.value }))}     placeholder="#FAE8E8"     style={inputStyle}   /> </Field> value={form.bg || "#FAE8E8"} onChange={e => setForm(f => ({ ...f, bg: e.target.value }))} style={{ ...inputStyle, padding: 6, height: 44, cursor: "pointer" }} /></Field>
         <div style={{ display: "flex", gap: 20, alignItems: "center", gridColumn: "1/-1" }}>
           <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", fontSize: 14, color: C.brownMid }}>
             <input type="checkbox" checked={!!form.featured} onChange={e => setForm(f => ({ ...f, featured: e.target.checked }))} style={{ width: 18, height: 18, accentColor: C.roseDeep }} /> Producto destacado
@@ -1215,6 +1227,38 @@ function AdminOrders({ orders, setOrders }) {
       </div>
 
       {/* Detail modal */}
+      <Modal
+  open={!!selectedProduct}
+  onClose={() => setSelectedProduct(null)}
+  title={selectedProduct?.name}
+  width={800}
+>
+  {selectedProduct && (
+    <div>
+      {/* GALERÍA */}
+      <div style={{ display: "flex", gap: 10 }}>
+        {selectedProduct.images?.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            style={{ width: 120, borderRadius: 10 }}
+          />
+        ))}
+      </div>
+
+      {/* DESCRIPCIÓN */}
+      <p>{selectedProduct.desc}</p>
+
+      {/* PRECIO */}
+      <h2>S/. {selectedProduct.price}</h2>
+
+      {/* BOTÓN */}
+      <button onClick={() => addToCart(selectedProduct)}>
+        Añadir al carrito
+      </button>
+    </div>
+  )}
+</Modal>
       <Modal open={!!detail} onClose={() => setDetail(null)} title={`Pedido ${detail?.orderNumber}`} width={680}>
         {detail && (
           <div>
@@ -1310,7 +1354,7 @@ function AdminCategories({ categories, setCategories, products }) {
       <Modal open={!!modal} onClose={() => setModal(null)} title={modal === "new" ? "Nueva categoría" : "Editar categoría"} width={480}>
         <Field label="Nombre" required><input value={form.name || ""} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} style={inputStyle} placeholder="Ej: Recién nacidos" /></Field>
         <Field label="Emoji"><input value={form.emoji || ""} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} style={inputStyle} placeholder="👼" /></Field>
-        <Field label="Color de fondo"><input type="color" value={form.color || "#FAE8E8"} onChange={e => setForm(f => ({ ...f, color: e.target.value }))} style={{ ...inputStyle, padding: 6, height: 44, cursor: "pointer" }} /></Field>
+        <Field label="Color de fondo"><Field label="Color (HEX)">   <input     value={form.bg || ""}     onChange={e => setForm(f => ({ ...f, bg: e.target.value }))}     placeholder="#FAE8E8"     style={inputStyle}   /> </Field> value={form.color || "#FAE8E8"} onChange={e => setForm(f => ({ ...f, color: e.target.value }))} style={{ ...inputStyle, padding: 6, height: 44, cursor: "pointer" }} /></Field>
         <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
           <button onClick={() => setModal(null)} style={{ flex: 1, padding: "12px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontWeight: 600, color: C.brownMid }}>Cancelar</button>
           <button onClick={save} style={{ flex: 2, padding: "12px", borderRadius: 100, background: `linear-gradient(135deg, ${C.roseDeep}, ${C.sand})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
@@ -1402,7 +1446,21 @@ function AdminSettings({ config, setConfig }) {
   const save = () => { setConfig({ ...form }); toast("✅ Configuración guardada"); };
 
   const tabs = [["general", "🏪 General"], ["contact", "📱 Contacto y RRSS"], ["payments", "💳 Pasarelas de pago"], ["content", "🎨 Contenido y diseño"]];
+<Field label="Imagen Hero">
+  <input type="file" onChange={handleUpload("heroImage")} />
+</Field>
 
+<Field label="Texto sección historia">
+  <textarea
+    value={config.texts?.about || ""}
+    onChange={e =>
+      setConfig(c => ({
+        ...c,
+        texts: { ...c.texts, about: e.target.value }
+      }))
+    }
+  />
+</Field>
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
@@ -1452,6 +1510,15 @@ function AdminSettings({ config, setConfig }) {
           </div>
         )}
 
+const handleUpload = key => e => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = ev => {
+    setConfig(c => ({ ...c, [key]: ev.target.result }));
+  };
+  reader.readAsDataURL(file);
+};
+
         {activeTab === "payments" && (
           <div>
             <div style={{ background: C.skyLight, borderRadius: 16, padding: 20, marginBottom: 28 }}>
@@ -1500,13 +1567,13 @@ function AdminSettings({ config, setConfig }) {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <Field label="Color principal (botones, badges)">
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <input type="color" value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
+                <Field label="Color (HEX)">   <input     value={form.bg || ""}     onChange={e => setForm(f => ({ ...f, bg: e.target.value }))}     placeholder="#FAE8E8"     style={inputStyle}   /> </Field> value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
                 <input value={form.primaryColor} onChange={e => setForm(f => ({ ...f, primaryColor: e.target.value }))} style={{ ...inputStyle, flex: 1 }} />
               </div>
             </Field>
             <Field label="Color de acento (textos, detalles)">
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <input type="color" value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
+                <Field label="Color (HEX)">   <input     value={form.bg || ""}     onChange={e => setForm(f => ({ ...f, bg: e.target.value }))}     placeholder="#FAE8E8"     style={inputStyle}   /> </Field> value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ width: 50, height: 50, borderRadius: 12, border: `1.5px solid ${C.beigeDark}`, cursor: "pointer", padding: 4 }} />
                 <input value={form.accentColor} onChange={e => setForm(f => ({ ...f, accentColor: e.target.value }))} style={{ ...inputStyle, flex: 1 }} />
               </div>
             </Field>
@@ -1944,6 +2011,31 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Modal
+  open={!!selectedProduct}
+  onClose={() => setSelectedProduct(null)}
+  title={selectedProduct?.name}
+  width={800}
+>
+  {selectedProduct && (
+    <div>
+      {/* Galería */}
+      <div style={{ display: "flex", gap: 10 }}>
+        {selectedProduct.images?.map((img, i) => (
+          <img key={i} src={img} style={{ width: 120 }} />
+        ))}
+      </div>
+
+      <p>{selectedProduct.desc}</p>
+
+      <h3>S/. {selectedProduct.price}</h3>
+
+      <button onClick={() => addToCart(selectedProduct)}>
+        Añadir al carrito
+      </button>
+    </div>
+  )}
+</Modal>
 
       <Toast />
     </div>
