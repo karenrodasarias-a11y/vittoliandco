@@ -1102,8 +1102,6 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
     toast("🎉 ¡Pedido realizado con éxito!");
   };
 
-  const pc = config.primaryColor || C.sage;
-  const ac = config.accentColor || C.sand;
 
   const pc  = config.primaryColor  || "#899180";
   const ac  = config.accentColor   || "#B5A99A";
