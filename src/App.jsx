@@ -63,49 +63,122 @@ const FONT = { serif: '"Cormorant Garamond","Georgia",serif', sans: '"DM Sans",s
 
 // ─── INITIAL DATA ──────────────────────────────────────────────────────────
 const INIT_CONFIG = {
-  // Identidad
-  storeName: "Venetus Kids", tagline: "Pequeños momentos, grandes recuerdos 💛",
-  logoImage: "",
-  // Hero
+  /* ── IDENTIDAD ─────────────────────────────────────── */
+  storeName: "Venetus Kids",
+  tagline: "Pequeños momentos, grandes recuerdos 💛",
+  logoImage: "",           // URL base64 del logo
+  faviconImage: "",
+
+  /* ── BARRA PROMO ────────────────────────────────────── */
+  promoActive: true,
+  promoBanner: "🎀 ENVÍO GRATIS en compras mayores a S/. 150 · Código VENETUS20 — 20% OFF",
+  promoBannerColor: "#3D3830",
+  promoBannerTextColor: "#FAFAF8",
+
+  /* ── NAVBAR ─────────────────────────────────────────── */
+  navBgColor: "rgba(250,250,248,0.96)",
+  navTextColor: "#3D3830",
+  navActiveColor: "#899180",
+
+  /* ── HERO ───────────────────────────────────────────── */
+  heroBadgeText: "Nueva Colección · Primavera 2025",
   heroTitle: "Para los primeros momentos\nde tu bebé",
   heroSubtitle: "Ropa y accesorios cómodos, seguros y adorables para acompañar cada etapa de tu bebé.",
-  heroImage: "", heroBadgeText: "Nueva Colección · Primavera 2025",
-  heroBtn1: "Ver colección", heroBtn2: "Nuestra historia",
-  // Promo
-  promoBanner: "🎀 ENVÍO GRATIS en compras mayores a S/. 150 · Usa el código VENETUS20 para 20% OFF",
-  promoActive: true,
-  // Contacto
-  whatsapp: "51940467097", instagram: "https://instagram.com/venetuskids.pe",
-  tiktok: "https://tiktok.com/@venetuskids", facebook: "https://facebook.com/venetuskids",
-  email: "hola@venetuskids.pe", address: "Lima, Perú",
-  freeShipping: 150, currency: "S/.",
-  // Colores
-  primaryColor: "#899180", accentColor: "#B5A99A",
-  buttonColor: "#899180", buttonTextColor: "#FFFFFF",
-  headingColor: "#3D3830", textColor: "#7A7068",
-  bgColor: "#FAFAF8",
-  // Tipografía
-  fontHeading: "Cormorant Garamond", fontBody: "DM Sans",
-  // Secciones
-  categoriesSectionTitle: "Todo lo que tu bebé necesita",
-  productsSectionTitle: "Productos destacados",
+  heroBtn1: "Ver colección",
+  heroBtn1Color: "#899180",
+  heroBtn1TextColor: "#FFFFFF",
+  heroBtn2: "Nuestra historia",
+  heroBtn2Color: "transparent",
+  heroBtn2BorderColor: "#D8D0C8",
+  heroBtn2TextColor: "#3D3830",
+  heroImage: "",
+  heroStat1Number: "5K+", heroStat1Label: "Familias felices",
+  heroStat2Number: "200+", heroStat2Label: "Productos",
+  heroStat3Number: "4.9", heroStat3Label: "Valoración",
+  heroFloatingText: "+500 reseñas verificadas",
+  heroFloatingSubtext: "Calificación 4.9 / 5",
+  heroBgGradient: "linear-gradient(160deg, #F5EEEC, #F5F2EE, #EDF0EC)",
+
+  /* ── SECCIÓN CATEGORÍAS ─────────────────────────────── */
+  catSectionLabel: "Explorar",
+  catSectionTitle: "Todo lo que tu bebé necesita",
+  catSectionLinkText: "Ver todo →",
+
+  /* ── SECCIÓN PRODUCTOS ──────────────────────────────── */
+  prodSectionLabel: "Colección",
+  prodSectionTitle: "Más queridos",
+
+  /* ── SECCIÓN ABOUT ──────────────────────────────────── */
+  aboutLabel: "Nuestra historia",
   aboutTitle: "Porque cada detalle importa cuando se trata de tu bebé.",
   aboutText: "Somos mamás que entienden la alegría de cada pequeño momento. Por eso creamos Venetus Kids: productos seguros, suaves y adorables para acompañar a tu bebé desde el primer día.",
+  aboutSignature: "Con amor, el equipo Venetus Kids",
   aboutImage: "",
+  aboutBgColor: "#F5F2EE",
+
+  /* ── SECCIÓN TESTIMONIOS ────────────────────────────── */
+  testimonialsLabel: "Testimonios",
+  testimonialsTitle: "Lo que dicen nuestras clientas",
   testimonials: [
     { name: "María F.", role: "Mamá de Valentina, 4 meses", text: "La calidad es increíble. Todo llegó perfectamente presentado y mi bebé ama cada prenda.", avatar: "M", bg: "#F5EEEC" },
     { name: "Luciana P.", role: "Mamá primeriza de Mateo", text: "El kit de baby shower superó todas mis expectativas. Una presentación preciosa y materiales de primera.", avatar: "L", bg: "#EDF0EC" },
     { name: "Camila R.", role: "Mamá de Isabella, 8 meses", text: "La manta muslina es lo mejor que he comprado. Ultra suave y la llevamos a todos lados.", avatar: "C", bg: "#F0EBE6" },
   ],
+
+  /* ── SECCIÓN BENEFICIOS ─────────────────────────────── */
+  benefitsBgColor: "#3D3830",
   benefits: [
     { icon: "🌿", title: "Materiales seguros", desc: "Certificados y testeados dermatológicamente" },
     { icon: "🚀", title: "Envíos rápidos", desc: "24-48 horas a todo el Perú" },
     { icon: "💬", title: "Atención cercana", desc: "WhatsApp 7 días a la semana" },
     { icon: "↩️", title: "Cambios fáciles", desc: "Sin costo adicional en 15 días" },
   ],
+
+  /* ── NEWSLETTER ─────────────────────────────────────── */
+  newsletterBgColor: "#899180",
   newsletterTitle: "Únete a nuestra comunidad",
   newsletterText: "Novedades, descuentos exclusivos y consejos de crianza directo a tu correo.",
-  // Pagos
+  newsletterBtnText: "Suscribirse",
+  newsletterBtnColor: "#FFFFFF",
+  newsletterBtnTextColor: "#899180",
+  newsletterInputPlaceholder: "tu@correo.com",
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footerBgColor: "#3D3830",
+  footerTagline: "Productos seguros, suaves y adorables para acompañar a tu bebé en cada etapa.",
+  footerCol1Title: "Tienda",
+  footerCol1Links: "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas",
+  footerCol2Title: "Ayuda",
+  footerCol2Links: "Cómo comprar|Envíos|Cambios|Guía de tallas|FAQ",
+  footerCopyright: "© 2025 Venetus Kids · Lima, Perú",
+  footerPaymentMethods: "Yape|Visa|Mastercard|BCP",
+
+  /* ── COLORES GLOBALES ────────────────────────────────── */
+  primaryColor: "#899180",
+  accentColor: "#B5A99A",
+  buttonColor: "#899180",
+  buttonTextColor: "#FFFFFF",
+  headingColor: "#3D3830",
+  textColor: "#7A7068",
+  bgColor: "#FAFAF8",
+  cardBgColor: "#FFFFFF",
+  borderColor: "#EDE8E2",
+
+  /* ── TIPOGRAFÍA ─────────────────────────────────────── */
+  fontHeading: "Cormorant Garamond",
+  fontBody: "DM Sans",
+
+  /* ── CONTACTO ───────────────────────────────────────── */
+  whatsapp: "51999999999",
+  email: "hola@venetuskids.pe",
+  address: "Lima, Perú",
+  instagram: "https://instagram.com/venetuskids.pe",
+  tiktok: "https://tiktok.com/@venetuskids",
+  facebook: "https://facebook.com/venetuskids",
+  freeShipping: 150,
+  currency: "S/.",
+
+  /* ── PAGOS ──────────────────────────────────────────── */
   stripeKey: "", mpKey: "", paypalId: "",
   stripeEnabled: false, mpEnabled: false, paypalEnabled: false,
 };
@@ -969,6 +1042,7 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
   );
 }
 
+
 function Storefront({ products, categories, config, coupons, cart, setCart, wishlist, setWishlist, orders, setOrders }) {
   const toast = useToast();
   const [cartOpen, setCartOpen] = useState(false);
@@ -1031,83 +1105,150 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const pc = config.primaryColor || C.sage;
   const ac = config.accentColor || C.sand;
 
-  return (
-    <div style={{ background: C.white, fontFamily: FONT.sans }}>
+  const pc  = config.primaryColor  || "#899180";
+  const ac  = config.accentColor   || "#B5A99A";
+  const bc  = config.buttonColor   || pc;
+  const btc = config.buttonTextColor || "#FFFFFF";
+  const hc  = config.headingColor  || "#3D3830";
+  const tc  = config.textColor     || "#7A7068";
+  const bg  = config.bgColor       || "#FAFAF8";
+  const brd = config.borderColor   || "#EDE8E2";
+  const SERIF = `"${config.fontHeading || "Cormorant Garamond"}", serif`;
+  const SANS  = `"${config.fontBody    || "DM Sans"}", system-ui, sans-serif`;
 
-      {/* Promo bar */}
+  return (
+    <div style={{ background: bg, fontFamily: SANS }}>
+
+      {/* ── PROMO BAR ──────────────────────────────────────────────── */}
       {config.promoActive && (
-        <div style={{ background: C.charcoal, color: "rgba(245,242,238,0.75)", textAlign: "center", padding: "9px 20px", fontSize: 11, letterSpacing: "0.3px", fontFamily: FONT.sans }}>
+        <div style={{ background: config.promoBannerColor || "#3D3830", color: config.promoBannerTextColor || "#FAFAF8", textAlign: "center", padding: "9px 20px", fontSize: 11, letterSpacing: "0.3px" }}>
           {config.promoBanner}
         </div>
       )}
 
-      {/* Nav */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 200, background: "rgba(250,250,248,0.96)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${C.linen2}` }}>
+      {/* ── NAVBAR ────────────────────────────────────────────────── */}
+      <nav style={{ position: "sticky", top: 0, zIndex: 200, background: config.navBgColor || "rgba(250,250,248,0.96)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${brd}` }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.charcoal, letterSpacing: "1px" }}>{config.storeName}</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            {config.logoImage
+              ? <img src={config.logoImage} alt={config.storeName} style={{ height: 36, objectFit: "contain" }} />
+              : <span style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 300, color: config.navTextColor || hc, letterSpacing: "1px" }}>{config.storeName}</span>
+            }
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
             {categories.slice(0, 4).map(cat => (
               <button key={cat.id} onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
-                style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, fontFamily: FONT.sans, color: filterCat === cat.id ? pc : C.muted, fontWeight: filterCat === cat.id ? 500 : 400, borderBottom: `1px solid ${filterCat === cat.id ? pc : "transparent"}`, padding: "4px 0", transition: "all 0.15s" }}>
+                style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, fontFamily: SANS, color: filterCat === cat.id ? (config.navActiveColor || pc) : (config.navTextColor || tc), fontWeight: filterCat === cat.id ? 600 : 400, borderBottom: `1px solid ${filterCat === cat.id ? (config.navActiveColor || pc) : "transparent"}`, padding: "4px 0", transition: "all 0.15s" }}>
                 {cat.name}
               </button>
             ))}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: C.muted, display: "flex", padding: 4 }}>
+            <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
               <Icon d={Icons.cart} size={19} strokeWidth={1.4} />
-              {cartCount > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: pc, color: "white", fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
+              {cartCount > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: bc, color: btc, fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <HeroSection config={config} onShop={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} />
+      {/* ── HERO ──────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "86vh", alignItems: "center", gap: 64 }}>
+        <div>
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+            style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2.5px", margin: "0 0 18px", fontWeight: 600 }}>
+            {config.heroBadgeText}
+          </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            style={{ fontFamily: SERIF, fontSize: "clamp(34px, 3.8vw, 54px)", fontWeight: 300, lineHeight: 1.15, color: hc, margin: "0 0 20px", letterSpacing: "0.3px" }}>
+            {(config.heroTitle || "").split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+            style={{ fontSize: 15, lineHeight: 1.8, color: tc, maxWidth: 420, margin: "0 0 34px" }}>
+            {config.heroSubtitle}
+          </motion.p>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+            style={{ display: "flex", gap: 14, alignItems: "center" }}>
+            <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })}
+              style={{ padding: "13px 28px", borderRadius: 2, background: config.heroBtn1Color || bc, color: config.heroBtn1TextColor || btc, border: "none", fontWeight: 600, fontSize: 13, cursor: "pointer", letterSpacing: "0.4px" }}>
+              {config.heroBtn1 || "Ver colección"}
+            </button>
+            <button onClick={() => document.getElementById("about-vk")?.scrollIntoView({ behavior: "smooth" })}
+              style={{ padding: "13px 20px", borderRadius: 2, background: config.heroBtn2Color || "transparent", color: config.heroBtn2TextColor || hc, border: `1px solid ${config.heroBtn2BorderColor || brd}`, fontWeight: 400, fontSize: 13, cursor: "pointer", letterSpacing: "0.3px" }}>
+              {config.heroBtn2 || "Nuestra historia"}
+            </button>
+          </motion.div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
+            style={{ display: "flex", gap: 36, marginTop: 52, paddingTop: 30, borderTop: `1px solid ${brd}` }}>
+            {[[config.heroStat1Number || "5K+", config.heroStat1Label || "Familias"], [config.heroStat2Number || "200+", config.heroStat2Label || "Productos"], [config.heroStat3Number || "4.9", config.heroStat3Label || "Valoración"]].map(([n, l]) => (
+              <div key={l}>
+                <p style={{ fontFamily: SERIF, fontSize: 24, fontWeight: 300, color: hc, margin: "0 0 3px" }}>{n}</p>
+                <p style={{ fontSize: 11, color: tc, margin: 0, opacity: 0.7 }}>{l}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15, duration: 0.7 }}
+          style={{ height: "74vh", borderRadius: 3, overflow: "hidden", position: "relative" }}>
+          {config.heroImage
+            ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            : <div style={{ width: "100%", height: "100%", background: config.heroBgGradient || "linear-gradient(160deg,#F5EEEC,#F5F2EE,#EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ textAlign: "center" }}><div style={{ fontSize: 86, marginBottom: 12 }}>👶🏻</div><p style={{ fontFamily: SERIF, fontSize: 17, color: tc, fontWeight: 300 }}>{config.storeName}</p></div>
+              </div>
+          }
+          <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ position: "absolute", bottom: 22, left: 22, background: "rgba(255,255,255,0.93)", backdropFilter: "blur(10px)", borderRadius: 3, padding: "11px 14px", boxShadow: "0 4px 18px rgba(0,0,0,0.07)", display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ width: 32, height: 32, borderRadius: "50%", background: pc + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>⭐</div>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 600, color: hc, margin: "0 0 1px" }}>{config.heroFloatingText || "+500 reseñas verificadas"}</p>
+              <p style={{ fontSize: 10, color: tc, margin: 0, opacity: 0.7 }}>{config.heroFloatingSubtext || "Calificación 4.9 / 5"}</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
 
-      {/* Categories */}
-      <section style={{ padding: "72px 0", background: C.linen, borderTop: `1px solid ${C.linen2}`, borderBottom: `1px solid ${C.linen2}` }}>
+      {/* ── CATEGORÍAS ────────────────────────────────────────────── */}
+      <section style={{ padding: "72px 0", background: config.aboutBgColor || "#F5F2EE", borderTop: `1px solid ${brd}`, borderBottom: `1px solid ${brd}` }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 28 }}>
             <div>
-              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: FONT.sans }}>{config.categoriesSectionTitle || "Categorías"}</p>
-              <h2 style={{ fontFamily: FONT.serif, fontSize: 28, fontWeight: 300, color: C.charcoal, margin: 0 }}>Explorar colección</h2>
+              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600 }}>{config.catSectionLabel || "Explorar"}</p>
+              <h2 style={{ fontFamily: SERIF, fontSize: 28, fontWeight: 300, color: hc, margin: 0 }}>{config.catSectionTitle || "Todo lo que tu bebé necesita"}</h2>
             </div>
-            <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontFamily: FONT.sans, fontWeight: 500 }}>Ver todo →</button>
+            <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>{config.catSectionLinkText || "Ver todo →"}</button>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 14 }}>
             {categories.map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
-                onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
-                style={{ cursor: "pointer" }}>
-                <div style={{ aspectRatio: "3/4", borderRadius: 3, overflow: "hidden", background: cat.color || C.linen, marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", transition: "border-color 0.15s" }}>
+                onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }} style={{ cursor: "pointer" }}>
+                <div style={{ aspectRatio: "3/4", borderRadius: 3, overflow: "hidden", background: cat.color || "#F5EEEC", marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", transition: "border-color 0.15s" }}>
                   {cat.image ? <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>{cat.emoji}</div>}
                 </div>
-                <p style={{ fontFamily: FONT.sans, fontSize: 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : C.charcoal, margin: "0 0 2px", textAlign: "center" }}>{cat.name}</p>
-                <p style={{ fontSize: 10, color: C.faint, margin: 0, fontFamily: FONT.sans, textAlign: "center" }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>
+                <p style={{ fontSize: 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : hc, margin: "0 0 2px", textAlign: "center" }}>{cat.name}</p>
+                <p style={{ fontSize: 10, color: tc, margin: 0, textAlign: "center", opacity: 0.7 }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products */}
+      {/* ── PRODUCTOS ─────────────────────────────────────────────── */}
       <section ref={productsRef} style={{ padding: "72px 0" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 36, flexWrap: "wrap", gap: 18 }}>
             <div>
-              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: FONT.sans }}>Colección</p>
-              <h2 style={{ fontFamily: FONT.serif, fontSize: 28, fontWeight: 300, color: C.charcoal, margin: 0 }}>{config.productsSectionTitle || "Más queridos"}</h2>
+              <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600 }}>{config.prodSectionLabel || "Colección"}</p>
+              <h2 style={{ fontFamily: SERIF, fontSize: 28, fontWeight: 300, color: hc, margin: 0 }}>{config.prodSectionTitle || "Más queridos"}</h2>
             </div>
             <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                 {[{ id: "all", name: "Todo" }, ...categories].map(cat => (
-                  <button key={cat.id} onClick={() => setFilterCat(cat.id)} style={{ padding: "6px 14px", borderRadius: 2, border: `1px solid ${filterCat === cat.id ? pc : C.linen3}`, background: filterCat === cat.id ? pc : "transparent", color: filterCat === cat.id ? "white" : C.muted, fontSize: 11, fontWeight: 500, cursor: "pointer", fontFamily: FONT.sans, transition: "all 0.15s" }}>
+                  <button key={cat.id} onClick={() => setFilterCat(cat.id)} style={{ padding: "6px 14px", borderRadius: 2, border: `1px solid ${filterCat === cat.id ? pc : brd}`, background: filterCat === cat.id ? pc : "transparent", color: filterCat === cat.id ? btc : tc, fontSize: 11, fontWeight: 500, cursor: "pointer", transition: "all 0.15s" }}>
                     {cat.name}
                   </button>
                 ))}
               </div>
-              <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: "7px 11px", borderRadius: 2, border: `1px solid ${C.linen3}`, background: C.white, color: C.charcoal, fontSize: 11, fontFamily: FONT.sans, cursor: "pointer", outline: "none" }}>
+              <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: "7px 11px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, cursor: "pointer", outline: "none" }}>
                 <option value="featured">Destacados</option>
                 <option value="newest">Nuevos</option>
                 <option value="price_asc">Precio ↑</option>
@@ -1124,47 +1265,48 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
               ))}
             </AnimatePresence>
           </div>
-          {filtered.length === 0 && (
-            <div style={{ textAlign: "center", padding: "60px 0" }}>
-              <p style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.faint }}>No encontramos productos con esa búsqueda</p>
-            </div>
-          )}
+          {filtered.length === 0 && <div style={{ textAlign: "center", padding: "60px 0" }}><p style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 300, color: tc }}>No encontramos productos con esa búsqueda</p></div>}
         </div>
       </section>
 
-      {/* About */}
-      <section style={{ padding: "72px 0", background: C.linen, borderTop: `1px solid ${C.linen2}` }}>
+      {/* ── ABOUT ─────────────────────────────────────────────────── */}
+      <section id="about-vk" style={{ padding: "72px 0", background: config.aboutBgColor || "#F5F2EE", borderTop: `1px solid ${brd}` }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <div>
-            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600, fontFamily: FONT.sans }}>Nuestra historia</p>
-            <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: C.charcoal, lineHeight: 1.35, marginBottom: 18 }}>"{config.aboutTitle}"</h2>
-            <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.85, marginBottom: 28, fontFamily: FONT.sans }}>{config.aboutText}</p>
-            <p style={{ fontFamily: FONT.serif, fontSize: 16, fontStyle: "italic", color: pc, margin: 0 }}>— Con amor, el equipo {config.storeName}</p>
+            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600 }}>{config.aboutLabel || "Nuestra historia"}</p>
+            <h2 style={{ fontFamily: SERIF, fontSize: 30, fontWeight: 300, color: hc, lineHeight: 1.35, marginBottom: 18 }}>"{config.aboutTitle}"</h2>
+            <p style={{ fontSize: 14, color: tc, lineHeight: 1.85, marginBottom: 28 }}>{config.aboutText}</p>
+            <p style={{ fontFamily: SERIF, fontSize: 16, fontStyle: "italic", color: pc, margin: 0 }}>— {config.aboutSignature || "Con amor, el equipo Venetus Kids"}</p>
           </div>
           <div style={{ borderRadius: 3, overflow: "hidden" }}>
-            {config.aboutImage ? <img src={config.aboutImage} alt="Nosotros" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover" }} /> : <div style={{ aspectRatio: "4/3", background: `linear-gradient(135deg, ${C.sagePale}, ${C.rosePale})`, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3 }}><div style={{ textAlign: "center" }}><div style={{ fontSize: 56, marginBottom: 10 }}>🤱</div><p style={{ fontFamily: FONT.serif, fontSize: 15, color: C.muted, fontWeight: 300 }}>Hecho con amor</p></div></div>}
+            {config.aboutImage
+              ? <img src={config.aboutImage} alt="About" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover" }} />
+              : <div style={{ aspectRatio: "4/3", background: `linear-gradient(135deg, ${pc}20, ${ac}30)`, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3 }}>
+                  <div style={{ textAlign: "center" }}><div style={{ fontSize: 56, marginBottom: 10 }}>🤱</div><p style={{ fontFamily: SERIF, fontSize: 15, color: tc, fontWeight: 300 }}>Hecho con amor</p></div>
+                </div>
+            }
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ── TESTIMONIOS ───────────────────────────────────────────── */}
       <section style={{ padding: "72px 0" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
-            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600, fontFamily: FONT.sans }}>Testimonios</p>
-            <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: C.charcoal, margin: 0 }}>Lo que dicen nuestras clientas</h2>
+            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600 }}>{config.testimonialsLabel || "Testimonios"}</p>
+            <h2 style={{ fontFamily: SERIF, fontSize: 30, fontWeight: 300, color: hc, margin: 0 }}>{config.testimonialsTitle || "Lo que dicen nuestras clientas"}</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
             {(config.testimonials || []).map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} viewport={{ once: true }}
-                style={{ background: C.snow, borderRadius: 3, padding: "26px 22px", border: `1px solid ${C.linen2}` }}>
+                style={{ background: config.cardBgColor || "white", borderRadius: 3, padding: "26px 22px", border: `1px solid ${brd}` }}>
                 <div style={{ color: "#C9A55A", fontSize: 12, marginBottom: 14, letterSpacing: "1px" }}>★★★★★</div>
-                <p style={{ fontSize: 13, lineHeight: 1.8, color: C.muted, fontStyle: "italic", marginBottom: 20, fontFamily: FONT.sans }}>"{t.text}"</p>
+                <p style={{ fontSize: 13, lineHeight: 1.8, color: tc, fontStyle: "italic", marginBottom: 20 }}>"{t.text}"</p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 34, height: 34, borderRadius: "50%", background: t.bg || C.rosePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.muted, fontFamily: FONT.sans }}>{t.avatar}</div>
+                  <div style={{ width: 34, height: 34, borderRadius: "50%", background: t.bg || pc + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: hc }}>{t.avatar}</div>
                   <div>
-                    <p style={{ fontWeight: 600, fontSize: 13, color: C.charcoal, margin: "0 0 1px", fontFamily: FONT.sans }}>{t.name}</p>
-                    <p style={{ fontSize: 11, color: C.faint, margin: 0, fontFamily: FONT.sans }}>{t.role}</p>
+                    <p style={{ fontWeight: 600, fontSize: 13, color: hc, margin: "0 0 1px" }}>{t.name}</p>
+                    <p style={{ fontSize: 11, color: tc, margin: 0, opacity: 0.7 }}>{t.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -1173,62 +1315,65 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         </div>
       </section>
 
-      {/* Benefits */}
-      <section style={{ padding: "56px 0", background: C.charcoal }}>
+      {/* ── BENEFICIOS ────────────────────────────────────────────── */}
+      <section style={{ padding: "56px 0", background: config.benefitsBgColor || "#3D3830" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: `repeat(${(config.benefits || []).length || 4}, 1fr)`, gap: 36 }}>
           {(config.benefits || []).map((b, i) => (
             <div key={i} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 28, marginBottom: 12 }}>{b.icon}</div>
-              <p style={{ fontFamily: FONT.serif, fontSize: 15, fontWeight: 400, color: C.linen, marginBottom: 6 }}>{b.title}</p>
-              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.42)", margin: 0, fontFamily: FONT.sans, lineHeight: 1.6 }}>{b.desc}</p>
+              <p style={{ fontFamily: SERIF, fontSize: 15, fontWeight: 400, color: "#F5F2EE", marginBottom: 6 }}>{b.title}</p>
+              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", margin: 0, lineHeight: 1.6 }}>{b.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section style={{ padding: "72px 40px", background: pc, textAlign: "center" }}>
+      {/* ── NEWSLETTER ────────────────────────────────────────────── */}
+      <section style={{ padding: "72px 40px", background: config.newsletterBgColor || pc, textAlign: "center" }}>
         <div style={{ maxWidth: 520, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: FONT.serif, fontSize: 30, fontWeight: 300, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
-          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", marginBottom: 28, fontFamily: FONT.sans, lineHeight: 1.7 }}>{config.newsletterText}</p>
+          <h2 style={{ fontFamily: SERIF, fontSize: 30, fontWeight: 300, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", marginBottom: 28, lineHeight: 1.7 }}>{config.newsletterText}</p>
           <div style={{ display: "flex", gap: 8, maxWidth: 400, margin: "0 auto" }}>
-            <input placeholder="tu@correo.com" style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.16)", color: "white", fontSize: 13, outline: "none", fontFamily: FONT.sans }} />
-            <button onClick={() => toast("¡Suscripción exitosa!")} style={{ padding: "12px 20px", borderRadius: 2, background: "white", color: pc, border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, fontFamily: FONT.sans, whiteSpace: "nowrap" }}>Suscribirse</button>
+            <input placeholder={config.newsletterInputPlaceholder || "tu@correo.com"} style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.18)", color: "white", fontSize: 13, outline: "none" }} />
+            <button onClick={() => toast("¡Suscripción exitosa!")} style={{ padding: "12px 20px", borderRadius: 2, background: config.newsletterBtnColor || "white", color: config.newsletterBtnTextColor || pc, border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, whiteSpace: "nowrap" }}>{config.newsletterBtnText || "Suscribirse"}</button>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ background: C.charcoal, padding: "52px 0 32px" }}>
+      {/* ── FOOTER ────────────────────────────────────────────────── */}
+      <footer style={{ background: config.footerBgColor || "#3D3830", padding: "52px 0 32px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.5fr", gap: 40, marginBottom: 40 }}>
             <div>
-              <p style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 300, color: C.linen, marginBottom: 12, letterSpacing: "0.5px" }}>{config.storeName}</p>
-              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 18, fontFamily: FONT.sans }}>Productos seguros, suaves y adorables para acompañar a tu bebé en cada etapa.</p>
+              {config.logoImage
+                ? <img src={config.logoImage} alt={config.storeName} style={{ height: 36, objectFit: "contain", marginBottom: 12 }} />
+                : <p style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 300, color: "#F5F2EE", marginBottom: 12, letterSpacing: "0.5px" }}>{config.storeName}</p>
+              }
+              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 18 }}>{config.footerTagline || config.tagline}</p>
             </div>
             <div>
-              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Tienda</p>
-              {["Recién nacidos", "Conjuntos", "Accesorios", "Zapatos", "Mantas"].map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8, fontFamily: FONT.sans }}>{l}</p>)}
+              <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>{config.footerCol1Title || "Tienda"}</p>
+              {(config.footerCol1Links || "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas").split("|").map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8 }}>{l}</p>)}
             </div>
             <div>
-              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Ayuda</p>
-              {["Cómo comprar", "Envíos", "Cambios", "FAQ"].map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8, fontFamily: FONT.sans }}>{l}</p>)}
+              <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>{config.footerCol2Title || "Ayuda"}</p>
+              {(config.footerCol2Links || "Cómo comprar|Envíos|Cambios|FAQ").split("|").map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 8 }}>{l}</p>)}
             </div>
             <div>
-              <p style={{ fontFamily: FONT.sans, fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Contacto</p>
-              {[["📍", config.address], ["📱", config.whatsapp], ["📧", config.email]].map(([ic, v]) => (
-                <div key={v} style={{ display: "flex", gap: 8, marginBottom: 10 }}><span style={{ fontSize: 12 }}>{ic}</span><span style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", fontFamily: FONT.sans }}>{v}</span></div>
-              ))}
+              <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 14 }}>Contacto</p>
+              {[[" 📍", config.address], ["📱", config.whatsapp], ["📧", config.email]].map(([ic, v]) => <div key={v} style={{ display: "flex", gap: 8, marginBottom: 10 }}><span style={{ fontSize: 12 }}>{ic}</span><span style={{ fontSize: 12, color: "rgba(245,242,238,0.45)" }}>{v}</span></div>)}
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <p style={{ fontSize: 11, color: "rgba(245,242,238,0.28)", margin: 0, fontFamily: FONT.sans }}>© 2025 {config.storeName} · Lima, Perú</p>
-            <div style={{ display: "flex", gap: 7 }}>{["Yape", "Visa", "MC", "BCP"].map(m => <span key={m} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)", padding: "3px 9px", borderRadius: 2, fontSize: 10, color: "rgba(245,242,238,0.3)", fontFamily: FONT.sans }}>{m}</span>)}</div>
+            <p style={{ fontSize: 11, color: "rgba(245,242,238,0.28)", margin: 0 }}>{config.footerCopyright || `© 2025 ${config.storeName} · Lima, Perú`}</p>
+            <div style={{ display: "flex", gap: 7 }}>
+              {(config.footerPaymentMethods || "Yape|Visa|MC|BCP").split("|").map(m => <span key={m} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)", padding: "3px 9px", borderRadius: 2, fontSize: 10, color: "rgba(245,242,238,0.3)" }}>{m}</span>)}
+            </div>
           </div>
         </div>
       </footer>
 
-      {/* WhatsApp */}
+      {/* ── WHATSAPP FLOATING ──────────────────────────────────────── */}
       <motion.a href={`https://wa.me/${config.whatsapp}`} target="_blank"
         animate={{ boxShadow: ["0 4px 16px rgba(37,211,102,0.3)", "0 4px 24px rgba(37,211,102,0.55)", "0 4px 16px rgba(37,211,102,0.3)"] }}
         transition={{ duration: 3, repeat: Infinity }}
@@ -1236,31 +1381,20 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         💬
       </motion.a>
 
-      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config}
-        onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} />
-      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config}
-        products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
-      <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct}
-        onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist}
-        wishlist={wishlist} config={config} />
+      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config} onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} />
+      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config} products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
+      <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
-        * { box-sizing: border-box; }
-        body { margin: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@300;400;600&display=swap');
+        * { box-sizing: border-box; } body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #D8D0C8; border-radius: 2px; }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #D8D0C8; border-radius: 2px; }
       `}</style>
     </div>
   );
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// ADMIN PANEL
-// ════════════════════════════════════════════════════════════════════════════
-
-// ─── ADMIN DASHBOARD ────────────────────────────────────────────────────────
 function AdminDashboard({ products, orders, categories, config }) {
   const paid = orders.filter(o => o.paymentStatus === "PAID");
   const revenue = paid.reduce((s, o) => s + o.total, 0);
@@ -1798,99 +1932,149 @@ function AdminPageEditor({ config, setConfig }) {
   const toast = useToast();
   const [form, setForm] = useState({ ...config });
   const [tab, setTab] = useState("hero");
-
-  const save = () => { setConfig({ ...form }); toast("✓ Página actualizada — los cambios ya son visibles en la tienda"); };
-
-  const tabs = [
-    ["hero", "🏠 Hero"],
-    ["sections", "📝 Secciones"],
-    ["testimonials", "💬 Testimonios"],
-    ["benefits", "⭐ Beneficios"],
-    ["images", "🖼️ Imágenes"],
-    ["contact", "📞 Contacto"],
-  ];
+  const save = () => { setConfig({ ...form }); toast("✅ Cambios guardados — visibles en la tienda ahora mismo"); };
 
   const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" };
+  const tf = (k) => <input value={form[k] || ""} onChange={e => setForm(f => ({ ...f, [k]: e.target.value }))} style={iS} />;
+  const ta = (k, rows = 3) => <textarea value={form[k] || ""} onChange={e => setForm(f => ({ ...f, [k]: e.target.value }))} style={{ ...iS, resize: "vertical", minHeight: rows * 28 }} />;
+  const updT = (i, k, v) => setForm(f => ({ ...f, testimonials: f.testimonials.map((t, j) => j === i ? { ...t, [k]: v } : t) }));
+  const updB = (i, k, v) => setForm(f => ({ ...f, benefits: f.benefits.map((b, j) => j === i ? { ...b, [k]: v } : b) }));
 
-  const updTestimonial = (i, k, v) => setForm(f => ({ ...f, testimonials: f.testimonials.map((t, j) => j === i ? { ...t, [k]: v } : t) }));
-  const updBenefit = (i, k, v) => setForm(f => ({ ...f, benefits: f.benefits.map((b, j) => j === i ? { ...b, [k]: v } : b) }));
+  const TABS = [
+    ["hero", "🏠 Hero"], ["promo", "📢 Promo"], ["sections", "📝 Textos"],
+    ["testimonials", "💬 Testimonios"], ["benefits", "⭐ Beneficios"],
+    ["footer", "🔗 Footer"], ["images", "🖼️ Imágenes"], ["contact", "📞 Contacto"],
+  ];
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
         <div>
           <h2 style={{ fontFamily: "serif", fontSize: 26, color: "#3D3830", margin: "0 0 3px" }}>Editor de Página</h2>
-          <p style={{ color: "#A89888", fontSize: 12, margin: 0 }}>Todos los cambios se reflejan automáticamente en la tienda.</p>
+          <p style={{ color: "#A89888", fontSize: 12, margin: 0 }}>Todo lo que editas aquí se refleja en la tienda al instante al guardar.</p>
         </div>
-        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "10px 22px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
+        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "11px 24px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
           <Icon d={Icons.save} size={14} /> Guardar cambios
         </button>
       </div>
 
-      {/* Tabs */}
-      <div style={{ display: "flex", gap: 4, marginBottom: 22, borderBottom: "1px solid #EDE8E2", flexWrap: "wrap" }}>
-        {tabs.map(([id, label]) => (
-          <button key={id} onClick={() => setTab(id)} style={{ padding: "9px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 12, fontWeight: tab === id ? 700 : 400, color: tab === id ? "#899180" : "#7A7068", borderBottom: tab === id ? "2px solid #899180" : "2px solid transparent", marginBottom: -1 }}>
+      <div style={{ display: "flex", gap: 0, marginBottom: 22, borderBottom: "1px solid #EDE8E2", flexWrap: "wrap" }}>
+        {TABS.map(([id, label]) => (
+          <button key={id} onClick={() => setTab(id)} style={{ padding: "9px 14px", border: "none", background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: tab === id ? 700 : 400, color: tab === id ? "#899180" : "#7A7068", borderBottom: tab === id ? "2px solid #899180" : "2px solid transparent", marginBottom: -1, whiteSpace: "nowrap" }}>
             {label}
           </button>
         ))}
       </div>
 
-      <div style={{ background: "white", borderRadius: 12, padding: 24, border: "1px solid #EDE8E2" }}>
+      <div style={{ background: "white", borderRadius: 12, padding: 26, border: "1px solid #EDE8E2" }}>
 
+        {/* ── HERO ── */}
         {tab === "hero" && (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            <div style={{ gridColumn: "1/-1" }}>
-              <Field label="Texto del badge superior"><input value={form.heroBadgeText || ""} onChange={e => setForm(f => ({ ...f, heroBadgeText: e.target.value }))} style={iS} /></Field>
+            <div style={{ gridColumn: "1/-1", background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#6B7264" }}>
+              💡 Edita todos los textos del bloque principal de tu página de inicio.
             </div>
+            <div style={{ gridColumn: "1/-1" }}><Field label="Badge / etiqueta superior del hero">{tf("heroBadgeText")}</Field></div>
             <div style={{ gridColumn: "1/-1" }}>
-              <Field label="Título principal del hero (usa Enter para nueva línea)">
-                <textarea value={form.heroTitle || ""} onChange={e => setForm(f => ({ ...f, heroTitle: e.target.value }))} style={{ ...iS, minHeight: 70, resize: "vertical" }} />
-              </Field>
+              <Field label="Título principal (Enter = salto de línea)">{ta("heroTitle", 3)}</Field>
             </div>
-            <div style={{ gridColumn: "1/-1" }}>
-              <Field label="Subtítulo del hero">
-                <textarea value={form.heroSubtitle || ""} onChange={e => setForm(f => ({ ...f, heroSubtitle: e.target.value }))} style={{ ...iS, minHeight: 55, resize: "vertical" }} />
-              </Field>
+            <div style={{ gridColumn: "1/-1" }}><Field label="Subtítulo">{ta("heroSubtitle", 2)}</Field></div>
+            <Field label="Texto botón principal">{tf("heroBtn1")}</Field>
+            <Field label="Texto botón secundario">{tf("heroBtn2")}</Field>
+            <div style={{ gridColumn: "1/-1" }}><hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "6px 0 14px" }} /></div>
+            <Field label="Estadística 1 — Número">{tf("heroStat1Number")}</Field>
+            <Field label="Estadística 1 — Etiqueta">{tf("heroStat1Label")}</Field>
+            <Field label="Estadística 2 — Número">{tf("heroStat2Number")}</Field>
+            <Field label="Estadística 2 — Etiqueta">{tf("heroStat2Label")}</Field>
+            <Field label="Estadística 3 — Número">{tf("heroStat3Number")}</Field>
+            <Field label="Estadística 3 — Etiqueta">{tf("heroStat3Label")}</Field>
+            <div style={{ gridColumn: "1/-1" }}><hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "6px 0 14px" }} /></div>
+            <Field label="Texto badge flotante (sobre imagen)">{tf("heroFloatingText")}</Field>
+            <Field label="Subtexto badge flotante">{tf("heroFloatingSubtext")}</Field>
+          </div>
+        )}
+
+        {/* ── PROMO ── */}
+        {tab === "promo" && (
+          <div>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#6B7264", marginBottom: 18 }}>
+              💡 La barra de promoción aparece en la parte superior del sitio.
             </div>
-            <Field label="Texto botón principal"><input value={form.heroBtn1 || ""} onChange={e => setForm(f => ({ ...f, heroBtn1: e.target.value }))} style={iS} placeholder="Ver colección" /></Field>
-            <Field label="Texto botón secundario"><input value={form.heroBtn2 || ""} onChange={e => setForm(f => ({ ...f, heroBtn2: e.target.value }))} style={iS} placeholder="Nuestra historia" /></Field>
-            <div style={{ gridColumn: "1/-1" }}>
-              <Field label="Banner promocional"><input value={form.promoBanner || ""} onChange={e => setForm(f => ({ ...f, promoBanner: e.target.value }))} style={iS} /></Field>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <div onClick={() => setForm(f => ({ ...f, promoActive: !f.promoActive }))} style={{ width: 44, height: 24, borderRadius: 100, background: form.promoActive ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", flexShrink: 0 }}>
+                <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form.promoActive ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
+              </div>
+              <span style={{ fontSize: 13, color: "#7A7068" }}>{form.promoActive ? "Barra activa y visible" : "Barra oculta"}</span>
             </div>
-            <div style={{ gridColumn: "1/-1" }}>
-              <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", fontSize: 13, color: "#7A7068" }}>
-                <input type="checkbox" checked={!!form.promoActive} onChange={e => setForm(f => ({ ...f, promoActive: e.target.checked }))} style={{ accentColor: "#899180" }} /> Mostrar banner de promoción
-              </label>
+            <Field label="Texto de la barra promocional">{ta("promoBanner", 2)}</Field>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+              <ColorInput label="Color de fondo de la barra" value={form.promoBannerColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, promoBannerColor: v }))} />
+              <ColorInput label="Color del texto de la barra" value={form.promoBannerTextColor || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, promoBannerTextColor: v }))} />
+            </div>
+            <div style={{ background: form.promoBannerColor || "#3D3830", color: form.promoBannerTextColor || "#FAFAF8", textAlign: "center", padding: "9px 20px", fontSize: 11, borderRadius: 8, marginTop: 8 }}>
+              Vista previa: {form.promoBanner || "(sin texto)"}
             </div>
           </div>
         )}
 
+        {/* ── SECCIONES / TEXTOS ── */}
         {tab === "sections" && (
           <div>
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Sección Categorías</p>
-            <Field label="Título de la sección de categorías"><input value={form.categoriesSectionTitle || ""} onChange={e => setForm(f => ({ ...f, categoriesSectionTitle: e.target.value }))} style={iS} /></Field>
-            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "18px 0" }} />
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Sección Productos</p>
-            <Field label="Título de la sección de productos"><input value={form.productsSectionTitle || ""} onChange={e => setForm(f => ({ ...f, productsSectionTitle: e.target.value }))} style={iS} /></Field>
-            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "18px 0" }} />
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Nuestra Historia</p>
-            <Field label="Título / cita principal"><textarea value={form.aboutTitle || ""} onChange={e => setForm(f => ({ ...f, aboutTitle: e.target.value }))} style={{ ...iS, minHeight: 55, resize: "vertical" }} /></Field>
-            <Field label="Texto descriptivo"><textarea value={form.aboutText || ""} onChange={e => setForm(f => ({ ...f, aboutText: e.target.value }))} style={{ ...iS, minHeight: 90, resize: "vertical" }} /></Field>
-            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "18px 0" }} />
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Newsletter</p>
-            <Field label="Título del newsletter"><input value={form.newsletterTitle || ""} onChange={e => setForm(f => ({ ...f, newsletterTitle: e.target.value }))} style={iS} /></Field>
-            <Field label="Texto del newsletter"><input value={form.newsletterText || ""} onChange={e => setForm(f => ({ ...f, newsletterText: e.target.value }))} style={iS} /></Field>
+            <div style={{ marginBottom: 22 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>🏷️ Sección Categorías</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+                <Field label="Etiqueta superior">{tf("catSectionLabel")}</Field>
+                <Field label="Título principal">{tf("catSectionTitle")}</Field>
+                <Field label="Texto del enlace">{tf("catSectionLinkText")}</Field>
+              </div>
+            </div>
+            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "0 0 22px" }} />
+            <div style={{ marginBottom: 22 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>🛍️ Sección Productos</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <Field label="Etiqueta superior">{tf("prodSectionLabel")}</Field>
+                <Field label="Título principal">{tf("prodSectionTitle")}</Field>
+              </div>
+            </div>
+            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "0 0 22px" }} />
+            <div style={{ marginBottom: 22 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>💛 Nuestra Historia</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <Field label="Etiqueta superior">{tf("aboutLabel")}</Field>
+                <Field label="Firma / Cierre">{tf("aboutSignature")}</Field>
+              </div>
+              <Field label="Título / cita principal">{ta("aboutTitle", 2)}</Field>
+              <Field label="Texto descriptivo">{ta("aboutText", 4)}</Field>
+            </div>
+            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "0 0 22px" }} />
+            <div style={{ marginBottom: 22 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>💬 Testimonios — Encabezados</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <Field label="Etiqueta superior">{tf("testimonialsLabel")}</Field>
+                <Field label="Título de la sección">{tf("testimonialsTitle")}</Field>
+              </div>
+            </div>
+            <hr style={{ border: "none", borderTop: "1px solid #EDE8E2", margin: "0 0 22px" }} />
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>💌 Newsletter</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <Field label="Título">{tf("newsletterTitle")}</Field>
+                <Field label="Subtítulo">{tf("newsletterText")}</Field>
+                <Field label="Texto del botón">{tf("newsletterBtnText")}</Field>
+                <Field label="Placeholder del input">{tf("newsletterInputPlaceholder")}</Field>
+              </div>
+            </div>
           </div>
         )}
 
+        {/* ── TESTIMONIOS ── */}
         {tab === "testimonials" && (
           <div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <p style={{ fontSize: 13, color: "#7A7068", margin: 0 }}>{(form.testimonials || []).length} testimonios configurados</p>
-              <button onClick={() => setForm(f => ({ ...f, testimonials: [...(f.testimonials || []), { name: "Nueva clienta", role: "Mamá feliz", text: "Excelente calidad...", avatar: "N", bg: "#F5EEEC" }] }))}
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+              <p style={{ fontSize: 13, color: "#7A7068", margin: 0 }}>{(form.testimonials || []).length} testimonios</p>
+              <button onClick={() => setForm(f => ({ ...f, testimonials: [...(f.testimonials || []), { name: "Nueva clienta", role: "Mamá feliz", text: "Excelente calidad y atención...", avatar: "N", bg: "#F5EEEC" }] }))}
                 style={{ display: "flex", alignItems: "center", gap: 5, padding: "8px 16px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 12 }}>
-                <Icon d={Icons.plus} size={13} /> Agregar
+                <Icon d={Icons.plus} size={13} /> Agregar testimonio
               </button>
             </div>
             {(form.testimonials || []).map((t, i) => (
@@ -1900,71 +2084,99 @@ function AdminPageEditor({ config, setConfig }) {
                   <button onClick={() => setForm(f => ({ ...f, testimonials: f.testimonials.filter((_, j) => j !== i) }))} style={{ background: "none", border: "none", cursor: "pointer", color: "#C07070", display: "flex" }}><Icon d={Icons.x} size={14} /></button>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                  <Field label="Nombre"><input value={t.name} onChange={e => updTestimonial(i, "name", e.target.value)} style={iS} /></Field>
-                  <Field label="Rol/Descripción"><input value={t.role} onChange={e => updTestimonial(i, "role", e.target.value)} style={iS} /></Field>
-                  <Field label="Inicial del avatar"><input value={t.avatar} onChange={e => updTestimonial(i, "avatar", e.target.value)} style={iS} placeholder="M" maxLength={2} /></Field>
-                  <ColorInput label="Color de fondo" value={t.bg || "#F5EEEC"} onChange={v => updTestimonial(i, "bg", v)} />
-                  <div style={{ gridColumn: "1/-1" }}>
-                    <Field label="Texto del testimonio">
-                      <textarea value={t.text} onChange={e => updTestimonial(i, "text", e.target.value)} style={{ ...iS, resize: "vertical", minHeight: 60 }} />
-                    </Field>
-                  </div>
+                  <Field label="Nombre"><input value={t.name} onChange={e => updT(i, "name", e.target.value)} style={{ ...iS }} /></Field>
+                  <Field label="Rol / Descripción"><input value={t.role} onChange={e => updT(i, "role", e.target.value)} style={{ ...iS }} /></Field>
+                  <Field label="Inicial del avatar (1-2 chars)"><input value={t.avatar} onChange={e => updT(i, "avatar", e.target.value)} style={{ ...iS }} maxLength={2} /></Field>
+                  <ColorInput label="Color de fondo" value={t.bg || "#F5EEEC"} onChange={v => updT(i, "bg", v)} />
+                  <div style={{ gridColumn: "1/-1" }}><Field label="Texto del testimonio"><textarea value={t.text} onChange={e => updT(i, "text", e.target.value)} style={{ ...iS, resize: "vertical", minHeight: 60 }} /></Field></div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
+        {/* ── BENEFICIOS ── */}
         {tab === "benefits" && (
           <div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <p style={{ fontSize: 13, color: "#7A7068", margin: 0 }}>{(form.benefits || []).length} beneficios configurados</p>
-              <button onClick={() => setForm(f => ({ ...f, benefits: [...(f.benefits || []), { icon: "✨", title: "Nuevo beneficio", desc: "Descripción" }] }))}
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+              <p style={{ fontSize: 13, color: "#7A7068", margin: 0 }}>{(form.benefits || []).length} beneficios</p>
+              <button onClick={() => setForm(f => ({ ...f, benefits: [...(f.benefits || []), { icon: "✨", title: "Nuevo beneficio", desc: "Descripción breve" }] }))}
                 style={{ display: "flex", alignItems: "center", gap: 5, padding: "8px 16px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 12 }}>
                 <Icon d={Icons.plus} size={13} /> Agregar
               </button>
             </div>
+            <Field label="Color de fondo de la sección">
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <ColorInput label="" value={form.benefitsBgColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, benefitsBgColor: v }))} />
+              </div>
+            </Field>
             {(form.benefits || []).map((b, i) => (
               <div key={i} style={{ display: "grid", gridTemplateColumns: "60px 1fr 2fr auto", gap: 10, alignItems: "center", background: "#FAFAF8", borderRadius: 10, padding: "12px 16px", marginBottom: 10, border: "1px solid #EDE8E2" }}>
-                <Field label="Emoji"><input value={b.icon} onChange={e => updBenefit(i, "icon", e.target.value)} style={{ ...iS, fontSize: 20, textAlign: "center" }} /></Field>
-                <Field label="Título"><input value={b.title} onChange={e => updBenefit(i, "title", e.target.value)} style={iS} /></Field>
-                <Field label="Descripción"><input value={b.desc} onChange={e => updBenefit(i, "desc", e.target.value)} style={iS} /></Field>
+                <Field label="Emoji"><input value={b.icon} onChange={e => updB(i, "icon", e.target.value)} style={{ ...iS, fontSize: 20, textAlign: "center" }} /></Field>
+                <Field label="Título"><input value={b.title} onChange={e => updB(i, "title", e.target.value)} style={iS} /></Field>
+                <Field label="Descripción"><input value={b.desc} onChange={e => updB(i, "desc", e.target.value)} style={iS} /></Field>
                 <button onClick={() => setForm(f => ({ ...f, benefits: f.benefits.filter((_, j) => j !== i) }))} style={{ width: 30, height: 30, borderRadius: 8, background: "none", border: "1.5px solid #FFCDD2", cursor: "pointer", color: "#C07070", display: "flex", alignItems: "center", justifyContent: "center", marginTop: 4 }}><Icon d={Icons.trash} size={13} /></button>
               </div>
             ))}
           </div>
         )}
 
-        {tab === "images" && (
+        {/* ── FOOTER ── */}
+        {tab === "footer" && (
           <div>
-            <div style={{ background: "#EDF0EC", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "#6B7264" }}>
-              💡 Sube imágenes reales para personalizar el aspecto visual de tu tienda. JPG o PNG, máx. 3MB.
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#6B7264", marginBottom: 18 }}>
+              💡 Las columnas del footer, los métodos de pago y el copyright son totalmente editables.
             </div>
-            <div style={{ borderBottom: "1px solid #EDE8E2", paddingBottom: 20, marginBottom: 20 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Logo de la tienda</p>
-              <SingleImageUploader image={form.logoImage || ""} onChange={img => setForm(f => ({ ...f, logoImage: img }))} label="Logo principal" placeholder="Sube tu logo (recomendado: fondo transparente PNG)" />
-            </div>
-            <div style={{ borderBottom: "1px solid #EDE8E2", paddingBottom: 20, marginBottom: 20 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Hero — Imagen de fondo</p>
-              <SingleImageUploader image={form.heroImage || ""} onChange={img => setForm(f => ({ ...f, heroImage: img }))} label="Imagen del hero" placeholder="Foto de bebé o producto para el fondo del hero" />
-            </div>
-            <div>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Sección "Nuestra Historia" — Imagen</p>
-              <SingleImageUploader image={form.aboutImage || ""} onChange={img => setForm(f => ({ ...f, aboutImage: img }))} label="Imagen de la historia" placeholder="Foto del equipo o proceso de producción" />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div style={{ gridColumn: "1/-1" }}><Field label="Tagline / descripción bajo el logo">{ta("footerTagline", 2)}</Field></div>
+              <Field label="Título columna 1 (Tienda)">{tf("footerCol1Title")}</Field>
+              <Field label="Título columna 2 (Ayuda)">{tf("footerCol2Title")}</Field>
+              <Field label="Links columna 1 (separados por |)"><textarea value={form.footerCol1Links || ""} onChange={e => setForm(f => ({ ...f, footerCol1Links: e.target.value }))} style={{ ...iS, resize: "vertical", minHeight: 55 }} placeholder="Recién nacidos|Conjuntos|Accesorios" /></Field>
+              <Field label="Links columna 2 (separados por |)"><textarea value={form.footerCol2Links || ""} onChange={e => setForm(f => ({ ...f, footerCol2Links: e.target.value }))} style={{ ...iS, resize: "vertical", minHeight: 55 }} placeholder="Cómo comprar|Envíos|Cambios|FAQ" /></Field>
+              <Field label="Texto de copyright">{tf("footerCopyright")}</Field>
+              <Field label="Métodos de pago (separados por |)"><input value={form.footerPaymentMethods || ""} onChange={e => setForm(f => ({ ...f, footerPaymentMethods: e.target.value }))} style={iS} placeholder="Yape|Visa|Mastercard|BCP" /></Field>
+              <ColorInput label="Color de fondo del footer" value={form.footerBgColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, footerBgColor: v }))} />
             </div>
           </div>
         )}
 
+        {/* ── IMÁGENES ── */}
+        {tab === "images" && (
+          <div>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#6B7264", marginBottom: 20 }}>
+              💡 Sube imágenes reales para personalizar visualmente tu tienda. JPG o PNG, máx. 3MB cada una.
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+              <SingleImageUploader image={form.logoImage || ""} onChange={img => setForm(f => ({ ...f, logoImage: img }))} label="🏷️ Logo de la tienda" placeholder="PNG con fondo transparente · Máx. 3MB" />
+              <SingleImageUploader image={form.heroImage || ""} onChange={img => setForm(f => ({ ...f, heroImage: img }))} label="🏠 Imagen del Hero (lado derecho)" placeholder="Foto de bebé o producto · Se recomienda vertical" />
+              <SingleImageUploader image={form.aboutImage || ""} onChange={img => setForm(f => ({ ...f, aboutImage: img }))} label="💛 Imagen sección Nuestra Historia" placeholder="Foto del equipo o proceso" />
+              <div>
+                <Field label="Gradiente de fondo del hero (cuando no hay imagen)">
+                  <input value={form.heroBgGradient || ""} onChange={e => setForm(f => ({ ...f, heroBgGradient: e.target.value }))} style={iS} placeholder="linear-gradient(160deg, #F5EEEC, #F5F2EE, #EDF0EC)" />
+                </Field>
+                <div style={{ height: 80, borderRadius: 8, background: form.heroBgGradient || "linear-gradient(160deg, #F5EEEC, #F5F2EE, #EDF0EC)", marginTop: 8, border: "1px solid #EDE8E2" }} />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── CONTACTO ── */}
         {tab === "contact" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-            <Field label="Nombre de la tienda"><input value={form.storeName || ""} onChange={e => setForm(f => ({ ...f, storeName: e.target.value }))} style={iS} /></Field>
-            <Field label="WhatsApp (con código de país)"><input value={form.whatsapp || ""} onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))} style={iS} placeholder="51999999999" /></Field>
-            <Field label="Correo electrónico"><input value={form.email || ""} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} style={iS} /></Field>
-            <Field label="Dirección"><input value={form.address || ""} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} style={iS} /></Field>
-            <Field label="Instagram"><input value={form.instagram || ""} onChange={e => setForm(f => ({ ...f, instagram: e.target.value }))} style={iS} /></Field>
-            <Field label="TikTok"><input value={form.tiktok || ""} onChange={e => setForm(f => ({ ...f, tiktok: e.target.value }))} style={iS} /></Field>
-            <Field label="Facebook"><input value={form.facebook || ""} onChange={e => setForm(f => ({ ...f, facebook: e.target.value }))} style={iS} /></Field>
-            <Field label="Monto envío gratis (S/.)"><input type="number" value={form.freeShipping || ""} onChange={e => setForm(f => ({ ...f, freeShipping: parseFloat(e.target.value) }))} style={iS} /></Field>
+          <div>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#6B7264", marginBottom: 18 }}>
+              💡 Esta información aparece en el footer, el botón de WhatsApp y los correos automáticos.
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+              <Field label="Nombre de la tienda"><input value={form.storeName || ""} onChange={e => setForm(f => ({ ...f, storeName: e.target.value }))} style={iS} /></Field>
+              <Field label="Tagline / Eslogan"><input value={form.tagline || ""} onChange={e => setForm(f => ({ ...f, tagline: e.target.value }))} style={iS} /></Field>
+              <Field label="WhatsApp (con código de país)"><input value={form.whatsapp || ""} onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))} style={iS} placeholder="51999999999" /></Field>
+              <Field label="Correo electrónico"><input value={form.email || ""} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} style={iS} /></Field>
+              <Field label="Dirección"><input value={form.address || ""} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} style={iS} /></Field>
+              <Field label="Monto para envío gratis (S/.)"><input type="number" value={form.freeShipping || ""} onChange={e => setForm(f => ({ ...f, freeShipping: parseFloat(e.target.value) }))} style={iS} /></Field>
+              <Field label="Instagram (URL completa)"><input value={form.instagram || ""} onChange={e => setForm(f => ({ ...f, instagram: e.target.value }))} style={iS} /></Field>
+              <Field label="TikTok (URL completa)"><input value={form.tiktok || ""} onChange={e => setForm(f => ({ ...f, tiktok: e.target.value }))} style={iS} /></Field>
+              <Field label="Facebook (URL completa)"><input value={form.facebook || ""} onChange={e => setForm(f => ({ ...f, facebook: e.target.value }))} style={iS} /></Field>
+            </div>
           </div>
         )}
 
@@ -1976,94 +2188,131 @@ function AdminPageEditor({ config, setConfig }) {
 function AdminVisualEditor({ config, setConfig }) {
   const toast = useToast();
   const [form, setForm] = useState({ ...config });
-  const save = () => { setConfig({ ...form }); toast("✓ Diseño actualizado — los cambios se ven en la tienda ahora mismo"); };
+  const save = () => { setConfig({ ...form }); toast("✅ Diseño actualizado — visible en la tienda ahora mismo"); };
+
+  const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" };
+
+  const PREVIEW_SERIF = `"${form.fontHeading || "Cormorant Garamond"}", serif`;
+  const PREVIEW_SANS  = `"${form.fontBody    || "DM Sans"}", system-ui, sans-serif`;
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
         <div>
-          <h2 style={{ fontFamily: "serif", fontSize: 26, color: "#3D3830", margin: "0 0 3px" }}>Personalización Visual</h2>
-          <p style={{ color: "#A89888", fontSize: 12, margin: 0 }}>Cambia colores y fuentes. Los cambios se aplican en toda la tienda.</p>
+          <h2 style={{ fontFamily: "serif", fontSize: 26, color: "#3D3830", margin: "0 0 3px" }}>Diseño Visual</h2>
+          <p style={{ color: "#A89888", fontSize: 12, margin: 0 }}>Cambia colores, fuentes y estilos de toda la tienda sin tocar código.</p>
         </div>
-        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "10px 22px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
+        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "11px 24px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
           <Icon d={Icons.save} size={14} /> Guardar diseño
         </button>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-        <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🎨 Colores del sitio</p>
-          <ColorInput label="Color primario (navbar, botones, badges)" value={form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, primaryColor: v, buttonColor: v }))} />
-          <ColorInput label="Color de acento (detalles, newsletter)" value={form.accentColor || "#B5A99A"} onChange={v => setForm(f => ({ ...f, accentColor: v }))} />
-          <ColorInput label="Color de botones" value={form.buttonColor || form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, buttonColor: v }))} />
-          <ColorInput label="Color de texto de botones" value={form.buttonTextColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, buttonTextColor: v }))} />
-          <ColorInput label="Color de encabezados" value={form.headingColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, headingColor: v }))} />
-          <ColorInput label="Color de texto general" value={form.textColor || "#7A7068"} onChange={v => setForm(f => ({ ...f, textColor: v }))} />
-          <ColorInput label="Color de fondo del sitio" value={form.bgColor || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, bgColor: v }))} />
-        </div>
 
+        {/* LEFT: Colors */}
         <div>
           <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔤 Tipografía</p>
-            <div style={{ marginBottom: 14 }}>
-              <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para títulos</label>
-              <select value={form.fontHeading || "Cormorant Garamond"} onChange={e => setForm(f => ({ ...f, fontHeading: e.target.value }))} style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none" }}>
-                <option value="Cormorant Garamond">Cormorant Garamond (elegante)</option>
-                <option value="Playfair Display">Playfair Display (clásica)</option>
-                <option value="Georgia">Georgia (serif clásica)</option>
-                <option value="DM Sans">DM Sans (moderna)</option>
-              </select>
-            </div>
-            <div>
-              <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para texto</label>
-              <select value={form.fontBody || "DM Sans"} onChange={e => setForm(f => ({ ...f, fontBody: e.target.value }))} style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none" }}>
-                <option value="DM Sans">DM Sans (moderna y limpia)</option>
-                <option value="Inter">Inter (profesional)</option>
-                <option value="Lato">Lato (amigable)</option>
-                <option value="Open Sans">Open Sans (legible)</option>
-              </select>
-            </div>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🎨 Colores principales</p>
+            <ColorInput label="Color primario (navbar, badges, acentos)" value={form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, primaryColor: v }))} />
+            <ColorInput label="Color de acento (detalles, gradientes)" value={form.accentColor || "#B5A99A"} onChange={v => setForm(f => ({ ...f, accentColor: v }))} />
+          </div>
+
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔘 Botones</p>
+            <ColorInput label="Color de fondo de botones" value={form.buttonColor || form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, buttonColor: v }))} />
+            <ColorInput label="Color del texto en botones" value={form.buttonTextColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, buttonTextColor: v }))} />
+            <ColorInput label="Color botón hero (principal)" value={form.heroBtn1Color || form.buttonColor || "#899180"} onChange={v => setForm(f => ({ ...f, heroBtn1Color: v }))} />
+            <ColorInput label="Color texto botón hero" value={form.heroBtn1TextColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, heroBtn1TextColor: v }))} />
+            <ColorInput label="Borde botón secundario hero" value={form.heroBtn2BorderColor || "#D8D0C8"} onChange={v => setForm(f => ({ ...f, heroBtn2BorderColor: v }))} />
+            <ColorInput label="Color texto botón secundario hero" value={form.heroBtn2TextColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, heroBtn2TextColor: v }))} />
           </div>
 
           <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>👁️ Vista previa</p>
-            <div style={{ background: form.bgColor || "#FAFAF8", borderRadius: 10, padding: 18, border: "1px solid #EDE8E2" }}>
-              <div style={{ background: form.primaryColor || "#899180", padding: "10px 18px", borderRadius: 8, marginBottom: 12, textAlign: "center" }}>
-                <span style={{ color: form.buttonTextColor || "white", fontWeight: 600, fontSize: 13 }}>Botón principal</span>
-              </div>
-              <h3 style={{ fontFamily: `"${form.fontHeading || "Cormorant Garamond"}", serif`, color: form.headingColor || "#3D3830", margin: "0 0 8px", fontSize: 22, fontWeight: 400 }}>Título de ejemplo</h3>
-              <p style={{ fontFamily: `"${form.fontBody || "DM Sans"}", sans-serif`, color: form.textColor || "#7A7068", fontSize: 13, lineHeight: 1.6, margin: 0 }}>Este es un texto de ejemplo para ver cómo se verá el contenido en tu tienda con la configuración actual.</p>
-              <span style={{ display: "inline-block", marginTop: 10, background: (form.primaryColor || "#899180") + "22", color: form.primaryColor || "#899180", padding: "3px 10px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>Badge de muestra</span>
-            </div>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>📝 Tipografía y fondos</p>
+            <ColorInput label="Color de encabezados / títulos" value={form.headingColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, headingColor: v }))} />
+            <ColorInput label="Color de texto general" value={form.textColor || "#7A7068"} onChange={v => setForm(f => ({ ...f, textColor: v }))} />
+            <ColorInput label="Color de fondo del sitio" value={form.bgColor || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, bgColor: v }))} />
+            <ColorInput label="Color de fondo de tarjetas" value={form.cardBgColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, cardBgColor: v }))} />
+            <ColorInput label="Color de bordes / líneas divisoras" value={form.borderColor || "#EDE8E2"} onChange={v => setForm(f => ({ ...f, borderColor: v }))} />
+            <ColorInput label="Color de fondo navbar" value={form.navBgColor?.replace("rgba(250,250,248,0.96)", "#FAFAF8") || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, navBgColor: v }))} />
+            <ColorInput label="Color de texto navbar" value={form.navTextColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, navTextColor: v }))} />
+            <ColorInput label="Color activo navbar" value={form.navActiveColor || "#899180"} onChange={v => setForm(f => ({ ...f, navActiveColor: v }))} />
           </div>
         </div>
-      </div>
 
-      <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginTop: 20 }}>
-        <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>💳 Pasarelas de pago</p>
-        <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "10px 14px", marginBottom: 16, fontSize: 12, color: "#6B7264" }}>Yape y transferencia siempre disponibles. Activa otras pasarelas con tu clave API.</div>
-        {[
-          { key: "stripe", label: "💳 Stripe — Tarjetas internacionales", kf: "stripeKey", ph: "sk_live_..." },
-          { key: "mp", label: "🟡 MercadoPago", kf: "mpKey", ph: "APP_USR-..." },
-          { key: "paypal", label: "💙 PayPal", kf: "paypalId", ph: "AXxxxxxxx..." },
-        ].map(gw => (
-          <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? "#899180" : "#EDE8E2"}`, borderRadius: 10, padding: 16, marginBottom: 10 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: form[gw.key + "Enabled"] ? 12 : 0 }}>
-              <span style={{ fontWeight: 600, fontSize: 13, color: "#3D3830" }}>{gw.label}</span>
-              <div onClick={() => setForm(f => ({ ...f, [gw.key + "Enabled"]: !f[gw.key + "Enabled"] }))} style={{ width: 44, height: 24, borderRadius: 100, background: form[gw.key + "Enabled"] ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", transition: "all 0.2s", flexShrink: 0 }}>
-                <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form[gw.key + "Enabled"] ? 22 : 4, transition: "all 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
+        {/* RIGHT: Typography + Preview + Payments */}
+        <div>
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔤 Tipografía</p>
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para títulos y headings</label>
+              <select value={form.fontHeading || "Cormorant Garamond"} onChange={e => setForm(f => ({ ...f, fontHeading: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
+                <option value="Cormorant Garamond">Cormorant Garamond — elegante y delicada</option>
+                <option value="Playfair Display">Playfair Display — clásica y refinada</option>
+                <option value="Georgia">Georgia — serif tradicional</option>
+                <option value="DM Sans">DM Sans — moderna y limpia</option>
+                <option value="Inter">Inter — profesional y neutral</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para texto y párrafos</label>
+              <select value={form.fontBody || "DM Sans"} onChange={e => setForm(f => ({ ...f, fontBody: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
+                <option value="DM Sans">DM Sans — moderna y legible</option>
+                <option value="Inter">Inter — profesional y limpia</option>
+                <option value="Lato">Lato — amigable y suave</option>
+                <option value="Open Sans">Open Sans — muy legible</option>
+                <option value="Nunito">Nunito — redondeada y cálida</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Live Preview */}
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>👁️ Vista previa en tiempo real</p>
+            <div style={{ background: form.bgColor || "#FAFAF8", borderRadius: 10, padding: 20, border: "1px solid #EDE8E2" }}>
+              <div style={{ background: form.promoBannerColor || "#3D3830", color: form.promoBannerTextColor || "#FAFAF8", textAlign: "center", padding: "6px 12px", borderRadius: 6, marginBottom: 12, fontSize: 11 }}>Barra de promoción</div>
+              <p style={{ fontSize: 10, color: form.primaryColor || "#899180", textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: PREVIEW_SANS }}>Etiqueta de sección</p>
+              <h3 style={{ fontFamily: PREVIEW_SERIF, fontSize: 24, fontWeight: 300, color: form.headingColor || "#3D3830", margin: "0 0 8px" }}>Título de ejemplo</h3>
+              <p style={{ fontFamily: PREVIEW_SANS, color: form.textColor || "#7A7068", fontSize: 13, lineHeight: 1.6, margin: "0 0 14px" }}>Este es un texto de ejemplo para ver cómo quedará el contenido de tu tienda con la configuración visual actual.</p>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <button style={{ padding: "9px 20px", borderRadius: 2, background: form.buttonColor || form.primaryColor || "#899180", color: form.buttonTextColor || "white", border: "none", fontSize: 12, fontWeight: 600, fontFamily: PREVIEW_SANS }}>Botón principal</button>
+                <button style={{ padding: "9px 18px", borderRadius: 2, background: "transparent", color: form.heroBtn2TextColor || form.headingColor || "#3D3830", border: `1px solid ${form.heroBtn2BorderColor || "#D8D0C8"}`, fontSize: 12, fontFamily: PREVIEW_SANS }}>Botón secundario</button>
+              </div>
+              <div style={{ marginTop: 12, display: "flex", gap: 6, alignItems: "center" }}>
+                <span style={{ background: (form.primaryColor || "#899180") + "20", color: form.primaryColor || "#899180", padding: "3px 9px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>Badge</span>
+                <span style={{ color: form.textColor || "#7A7068", fontSize: 11, fontFamily: PREVIEW_SANS, opacity: 0.7 }}>Texto secundario</span>
               </div>
             </div>
-            {form[gw.key + "Enabled"] && (
-              <Field label="Clave API">
-                <input type="password" value={form[gw.kf] || ""} onChange={e => setForm(f => ({ ...f, [gw.kf]: e.target.value }))} style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" }} placeholder={gw.ph} />
-              </Field>
-            )}
           </div>
-        ))}
-        <div style={{ background: "linear-gradient(135deg, #F5EEF8, #EDE0F8)", borderRadius: 10, padding: 16, border: "1.5px solid #CE93D8" }}>
-          <p style={{ fontWeight: 700, fontSize: 13, color: "#7B1FA2", margin: "0 0 4px" }}>💜 Yape — Siempre activo</p>
-          <p style={{ fontSize: 12, color: "#9C27B0", margin: 0 }}>Al pagar con Yape se abre WhatsApp con el número: <strong>{form.whatsapp}</strong></p>
+
+          {/* Payments */}
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>💳 Métodos de pago</p>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "9px 13px", marginBottom: 14, fontSize: 12, color: "#6B7264" }}>Yape y transferencia bancaria siempre disponibles. Activa pasarelas adicionales aquí.</div>
+            {[
+              { key: "stripe", label: "💳 Stripe — Tarjetas de crédito/débito", kf: "stripeKey", ph: "sk_live_..." },
+              { key: "mp", label: "🟡 MercadoPago — Perú y Latinoamérica", kf: "mpKey", ph: "APP_USR-..." },
+              { key: "paypal", label: "💙 PayPal — Internacional", kf: "paypalId", ph: "AXxxxxxxx..." },
+            ].map(gw => (
+              <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? "#899180" : "#EDE8E2"}`, borderRadius: 10, padding: 14, marginBottom: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: form[gw.key + "Enabled"] ? 12 : 0 }}>
+                  <span style={{ fontWeight: 600, fontSize: 13, color: "#3D3830" }}>{gw.label}</span>
+                  <div onClick={() => setForm(f => ({ ...f, [gw.key + "Enabled"]: !f[gw.key + "Enabled"] }))} style={{ width: 44, height: 24, borderRadius: 100, background: form[gw.key + "Enabled"] ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", flexShrink: 0 }}>
+                    <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form[gw.key + "Enabled"] ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
+                  </div>
+                </div>
+                {form[gw.key + "Enabled"] && (
+                  <Field label="Clave API">
+                    <input type="password" value={form[gw.kf] || ""} onChange={e => setForm(f => ({ ...f, [gw.kf]: e.target.value }))} style={{ ...iS }} placeholder={gw.ph} />
+                  </Field>
+                )}
+              </div>
+            ))}
+            <div style={{ background: "linear-gradient(135deg, #F5EEF8, #EDE0F8)", borderRadius: 10, padding: 14, border: "1.5px solid #CE93D8" }}>
+              <p style={{ fontWeight: 700, fontSize: 13, color: "#7B1FA2", margin: "0 0 3px" }}>💜 Yape — Siempre activo</p>
+              <p style={{ fontSize: 12, color: "#9C27B0", margin: 0 }}>Al pagar con Yape el cliente va a WhatsApp con el número: <strong>{form.whatsapp}</strong></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2329,15 +2578,17 @@ function AdminLogin({ onLogin }) {
 function AdminPanel({ products, setProducts, categories, setCategories, orders, setOrders, coupons, setCoupons, config, setConfig, onExitAdmin }) {
   const [section, setSection] = useState("dashboard");
   const navItems = [
-    ["dashboard", Icons.grid, "Dashboard"],
-    ["products", Icons.package, "Productos"],
-    ["orders", Icons.cart, "Pedidos"],
-    ["categories", Icons.tag, "Categorías"],
-    ["coupons", Icons.ticket, "Cupones"],
-    ["reviews", Icons.star, "Reseñas"],
-    ["clients", Icons.users, "Clientes"],
-    ["settings", Icons.settings, "Configuración"],
-  ];
+    { id: "dashboard",  icon: Icons.grid,     label: "Dashboard" },
+    { id: "products",   icon: Icons.package,  label: "Productos" },
+    { id: "orders",     icon: Icons.cart,     label: "Pedidos" },
+    { id: "categories", icon: Icons.tag,      label: "Categorías" },
+    { id: "coupons",    icon: Icons.ticket,   label: "Cupones" },
+    { id: "reviews",    icon: Icons.star,     label: "Reseñas" },
+    { id: "clients",    icon: Icons.users,    label: "Clientes" },
+    { id: "pageeditor", icon: Icons.save,     label: "📝 Editor de Página", badge: "CMS" },
+    { id: "visual",     icon: Icons.sun,      label: "🎨 Diseño Visual",    badge: "CMS" },
+    { id: "settings",   icon: Icons.settings, label: "⚙️ Config. Técnica" },
+  ]
   const pendingOrders = orders.filter(o => o.status === "PENDING").length;
 
   return (
@@ -2424,7 +2675,12 @@ export default function App() {
       if (c) setCategoriesRaw(c);
       if (o) setOrdersRaw(o);
       if (cp) setCouponsRaw(cp);
-      if (cf) setConfigRaw({ ...INIT_CONFIG, ...cf });
+      if (cf) setConfigRaw({
+          ...INIT_CONFIG,
+          ...cf,
+          testimonials: cf.testimonials?.length ? cf.testimonials : INIT_CONFIG.testimonials,
+          benefits: cf.benefits?.length ? cf.benefits : INIT_CONFIG.benefits,
+        });
       if (cart) setCartRaw(cart);
       if (wl) setWishlistRaw(wl);
       setLoaded(true);
