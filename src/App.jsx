@@ -2286,7 +2286,7 @@ function AdminVisualEditor({ config, setConfig }) {
           {/* Payments */}
           <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>💳 Métodos de pago</p>
-            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "9px 13px", marginBottom: 14, fontSize: 12, color: "#6B7264" }}>Yape siempre disponible. Activa pasarelas adicionales aquí.</div>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "9px 13px", marginBottom: 14, fontSize: 12, color: "#6B7264" }}>Yape y transferencia bancaria siempre disponibles. Activa pasarelas adicionales aquí.</div>
             {[
               { key: "stripe", label: "💳 Stripe — Tarjetas de crédito/débito", kf: "stripeKey", ph: "sk_live_..." },
               { key: "mp", label: "🟡 MercadoPago — Perú y Latinoamérica", kf: "mpKey", ph: "APP_USR-..." },
