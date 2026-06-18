@@ -2489,8 +2489,7 @@ function AdminClients({ orders, setOrders }) {
         blockedEmails.includes(c.email) ? "Bloqueado" : "Activo",
       ]),
     ];
-    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("
-");
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
     const BOM = "﻿"; // UTF-8 BOM for Excel
     const blob = new Blob([BOM + csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
