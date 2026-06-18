@@ -49,17 +49,50 @@ const Icons = {
 
 // ─── DESIGN TOKENS ─────────────────────────────────────────────────────────
 const C = {
-  white: "#FFFFFF", cream: "#FAFAF8", snow: "#FAFAF8",
-  linen: "#F5F2EE", linen2: "#EDE8E2", linen3: "#D8D0C8",
-  beige: "#F3EFE9", beigeDark: "#E5DDD4",
-  sage: "#899180", sageDark: "#6B7264", sageLight: "#C4C9BE", sagePale: "#EDF0EC",
-  rose: "#D4B8B5", rosePale: "#F5EEEC", roseLight: "#F5EEEC", roseDeep: "#9E7470",
-  sky: "#B8C8C0", skyLight: "#EDF3F0", sand: "#B8A898", sandLight: "#E8E0D8",
-  brown: "#7A6A5C", brownMid: "#5C5048", brownDark: "#2E2820", taupe: "#B5A99A",
-  charcoal: "#3D3830", muted: "#7A7068", faint: "#A89888",
-  success: "#6A9E78", warning: "#C8A860", danger: "#C07070",
+  // ── Vittoli & Co. — Paleta oficial ──────────────────────────────────────
+  white:    "#FFFFFF",
+  lino:     "#F4EDE2",   // fondo principal
+  arena:    "#E3D5C2",   // fondo secundario / bordes suaves
+  arenaDark:"#C8B89A",   // bordes definidos
+  noche:    "#2B3A4A",   // encabezados, navbar, footer
+  nocheMid: "#3D5166",   // variante media del azul noche
+  terracota:"#BC6B40",   // primario — CTA, badges activos
+  terracotaLight:"#F2D9C9", // terracota suave
+  salvia:   "#A8B89E",   // secundario — nav, etiquetas
+  salviaDark:"#7A9680",  // salvia oscuro
+  salviaPale:"#E8EEE5",  // salvia muy claro — fondos
+  dorado:   "#C9A66B",   // acento premium
+  doradoPale:"#F0E4CC",  // dorado suave
+  // ── Sistema ─────────────────────────────────────────────────────────────
+  charcoal: "#2B3A4A",   // alias de noche para compatibilidad
+  muted:    "#6B7E6E",   // texto secundario (salvia oscuro)
+  faint:    "#9CA89A",   // texto muy suave
+  success:  "#6A9E78",
+  warning:  "#C9A66B",   // usa dorado como warning
+  danger:   "#C07060",
+  // ── Aliases para compatibilidad ──────────────────────────────────────────
+  cream:    "#F4EDE2",
+  snow:     "#FAF7F2",
+  beige:    "#E3D5C2",
+  beigeDark:"#C8B89A",
+  linen:    "#F4EDE2",
+  linen2:   "#EDE0CE",
+  linen3:   "#C8B89A",
+  sage:     "#A8B89E",
+  sageDark: "#7A9680",
+  sageLight:"#C4D0BC",
+  sagePale: "#E8EEE5",
+  rose:     "#D4A898",
+  rosePale: "#F2D9C9",
+  roseLight:"#F2D9C9",
+  roseDeep: "#BC6B40",
+  sand:     "#C9A66B",
+  sandLight:"#F0E4CC",
+  taupe:    "#A8B89E",
+  brownMid: "#6B7E6E",
+  brownDark:"#2B3A4A",
 };
-const FONT = { serif: '"Cormorant Garamond","Georgia",serif', sans: '"DM Sans",system-ui,sans-serif' };
+const FONT = { serif: '"Cormorant Garamond","Georgia",serif', sans: '"Nunito Sans","DM Sans",system-ui,sans-serif' };
 
 // ── RESPONSIVE HOOK ──────────────────────────────────────────────────────────
 function useIsMobile(breakpoint = 768) {
@@ -92,24 +125,24 @@ const INIT_CONFIG = {
   /* ── BARRA PROMO ────────────────────────────────────── */
   promoActive: true,
   promoBanner: "🎀 ENVÍO GRATIS en compras mayores a S/. 150 · Código VENETUS20 — 20% OFF",
-  promoBannerColor: "#3D3830",
+  promoBannerColor: "#2B3A4A",
   promoBannerTextColor: "#FAFAF8",
 
   /* ── NAVBAR ─────────────────────────────────────────── */
-  navBgColor: "rgba(250,250,248,0.96)",
-  navTextColor: "#3D3830",
-  navActiveColor: "#899180",
+  navBgColor: "rgba(244,237,226,0.96)",
+  navTextColor: "#2B3A4A",
+  navActiveColor: "#BC6B40",
 
   /* ── HERO ───────────────────────────────────────────── */
   heroBadgeText: "Nueva Colección · Primavera 2025",
   heroTitle: "Para los primeros momentos\nde tu bebé",
   heroSubtitle: "Ropa y accesorios cómodos, seguros y adorables para acompañar cada etapa de tu bebé.",
   heroBtn1: "Ver colección",
-  heroBtn1Color: "#899180",
+  heroBtn1Color: "#BC6B40",
   heroBtn1TextColor: "#FFFFFF",
   heroBtn2: "Nuestra historia",
   heroBtn2Color: "transparent",
-  heroBtn2BorderColor: "#D8D0C8",
+  heroBtn2BorderColor: "#C8B89A",
   heroBtn2TextColor: "#3D3830",
   heroImage: "",
   heroStat1Number: "5K+", heroStat1Label: "Familias felices",
@@ -134,7 +167,7 @@ const INIT_CONFIG = {
   aboutText: "Somos mamás que entienden la alegría de cada pequeño momento. Por eso creamos Venetus Kids: productos seguros, suaves y adorables para acompañar a tu bebé desde el primer día.",
   aboutSignature: "Con amor, el equipo Venetus Kids",
   aboutImage: "",
-  aboutBgColor: "#F5F2EE",
+  aboutBgColor: "#EDE0CE",
 
   /* ── SECCIÓN TESTIMONIOS ────────────────────────────── */
   testimonialsLabel: "Testimonios",
@@ -146,7 +179,7 @@ const INIT_CONFIG = {
   ],
 
   /* ── SECCIÓN BENEFICIOS ─────────────────────────────── */
-  benefitsBgColor: "#3D3830",
+  benefitsBgColor: "#2B3A4A",
   benefits: [
     { icon: "🌿", title: "Materiales seguros", desc: "Certificados y testeados dermatológicamente" },
     { icon: "🚀", title: "Envíos rápidos", desc: "24-48 horas a todo el Perú" },
@@ -155,7 +188,7 @@ const INIT_CONFIG = {
   ],
 
   /* ── NEWSLETTER ─────────────────────────────────────── */
-  newsletterBgColor: "#899180",
+  newsletterBgColor: "#BC6B40",
   newsletterTitle: "Únete a nuestra comunidad",
   newsletterText: "Novedades, descuentos exclusivos y consejos de crianza directo a tu correo.",
   newsletterBtnText: "Suscribirse",
@@ -164,7 +197,7 @@ const INIT_CONFIG = {
   newsletterInputPlaceholder: "tu@correo.com",
 
   /* ── FOOTER ─────────────────────────────────────────── */
-  footerBgColor: "#3D3830",
+  footerBgColor: "#2B3A4A",
   footerTagline: "Productos seguros, suaves y adorables para acompañar a tu bebé en cada etapa.",
   footerCol1Title: "Tienda",
   footerCol1Links: "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas",
@@ -174,19 +207,19 @@ const INIT_CONFIG = {
   footerPaymentMethods: "Yape|Visa|Mastercard|BCP",
 
   /* ── COLORES GLOBALES ────────────────────────────────── */
-  primaryColor: "#899180",
-  accentColor: "#B5A99A",
-  buttonColor: "#899180",
+  primaryColor: "#BC6B40",
+  accentColor: "#C9A66B",
+  buttonColor: "#BC6B40",
   buttonTextColor: "#FFFFFF",
-  headingColor: "#3D3830",
-  textColor: "#7A7068",
-  bgColor: "#FAFAF8",
+  headingColor: "#2B3A4A",
+  textColor: "#6B7E6E",
+  bgColor: "#F4EDE2",
   cardBgColor: "#FFFFFF",
-  borderColor: "#EDE8E2",
+  borderColor: "#E3D5C2",
 
   /* ── TIPOGRAFÍA ─────────────────────────────────────── */
   fontHeading: "Cormorant Garamond",
-  fontBody: "DM Sans",
+  fontBody: "Nunito Sans",
 
   /* ── CONTACTO ───────────────────────────────────────── */
   whatsapp: "51999999999",
@@ -1430,7 +1463,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} isMobile={isMobile} />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@300;400&display=swap');
         * { box-sizing: border-box; } body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: ${C.linen3}; border-radius: 2px; }
@@ -2302,6 +2335,7 @@ function AdminVisualEditor({ config, setConfig }) {
             <div>
               <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para texto y párrafos</label>
               <select value={form.fontBody || "DM Sans"} onChange={e => setForm(f => ({ ...f, fontBody: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
+                <option value="Nunito Sans">Nunito Sans — amigable y legible ✓ Vittoli</option>
                 <option value="DM Sans">DM Sans — moderna y legible</option>
                 <option value="Inter">Inter — profesional y limpia</option>
                 <option value="Lato">Lato — amigable y suave</option>
@@ -2313,7 +2347,7 @@ function AdminVisualEditor({ config, setConfig }) {
 
           {/* Live Preview */}
           <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>👁️ Vista previa en tiempo real</p>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#BC6B40", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>👁️ Vista previa — Paleta Vittoli & Co.</p>
             <div style={{ background: form.bgColor || "#FAFAF8", borderRadius: 10, padding: 20, border: "1px solid #EDE8E2" }}>
               <div style={{ background: form.promoBannerColor || "#3D3830", color: form.promoBannerTextColor || "#FAFAF8", textAlign: "center", padding: "6px 12px", borderRadius: 6, marginBottom: 12, fontSize: 11 }}>Barra de promoción</div>
               <p style={{ fontSize: 10, color: form.primaryColor || "#899180", textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: PREVIEW_SANS }}>Etiqueta de sección</p>
@@ -2396,10 +2430,10 @@ function AdminSettings({ config, setConfig }) {
 function AdminClients({ orders, setOrders }) {
   const toast = useToast();
   const [blockedEmails, setBlockedEmails] = useState([]);
-  const [confirm, setConfirm] = useState(null); // { type: "delete"|"block"|"unblock", email, name }
+  const [confirm, setConfirm] = useState(null);
   const [showBlocked, setShowBlocked] = useState(false);
+  const [search, setSearch] = useState("");
 
-  // Load blocked list from storage on mount
   useEffect(() => {
     storage.get("vk_blocked_clients").then(v => { if (v) setBlockedEmails(v); });
   }, []);
@@ -2408,13 +2442,13 @@ function AdminClients({ orders, setOrders }) {
     setBlockedEmails(list);
     await storage.set("vk_blocked_clients", list);
   };
-
   const handleBlock = (email) => {
-    const next = blockedEmails.includes(email) ? blockedEmails.filter(e => e !== email) : [...blockedEmails, email];
+    const next = blockedEmails.includes(email)
+      ? blockedEmails.filter(e => e !== email)
+      : [...blockedEmails, email];
     saveBlocked(next);
     toast(blockedEmails.includes(email) ? "✅ Cliente desbloqueado" : "🚫 Cliente bloqueado");
   };
-
   const handleDelete = (email) => {
     setOrders(o => o.filter(x => x.customerEmail !== email));
     saveBlocked(blockedEmails.filter(e => e !== email));
@@ -2424,7 +2458,10 @@ function AdminClients({ orders, setOrders }) {
   const clients = useMemo(() => {
     const map = {};
     orders.forEach(o => {
-      if (!map[o.customerEmail]) map[o.customerEmail] = { email: o.customerEmail, name: o.customerName, phone: o.customerPhone, orders: 0, spent: 0, lastOrder: 0 };
+      if (!map[o.customerEmail]) map[o.customerEmail] = {
+        email: o.customerEmail, name: o.customerName,
+        phone: o.customerPhone || "", orders: 0, spent: 0, lastOrder: 0,
+      };
       map[o.customerEmail].orders++;
       map[o.customerEmail].spent += o.total;
       if (o.createdAt > map[o.customerEmail].lastOrder) map[o.customerEmail].lastOrder = o.createdAt;
@@ -2432,44 +2469,121 @@ function AdminClients({ orders, setOrders }) {
     return Object.values(map).sort((a, b) => b.spent - a.spent);
   }, [orders]);
 
-  const visibleClients = showBlocked ? clients : clients.filter(c => !blockedEmails.includes(c.email));
+  const visibleClients = (showBlocked ? clients : clients.filter(c => !blockedEmails.includes(c.email)))
+    .filter(c => !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.email.toLowerCase().includes(search.toLowerCase()));
+
   const blockedCount = blockedEmails.length;
+
+  // ── CSV DOWNLOAD ──────────────────────────────────────────────────────────
+  const downloadCSV = () => {
+    const rows = [
+      ["#", "Nombre", "Email", "Teléfono", "Pedidos", "Total gastado (S/.)", "Último pedido", "Estado"],
+      ...clients.map((c, i) => [
+        i + 1,
+        c.name,
+        c.email,
+        c.phone || "-",
+        c.orders,
+        c.spent.toFixed(2),
+        new Date(c.lastOrder).toLocaleDateString("es-PE"),
+        blockedEmails.includes(c.email) ? "Bloqueado" : "Activo",
+      ]),
+    ];
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("
+");
+    const BOM = "﻿"; // UTF-8 BOM for Excel
+    const blob = new Blob([BOM + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `clientes_venetus_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(`📥 ${clients.length} clientes exportados`);
+  };
+
+  // ── JSON DOWNLOAD ─────────────────────────────────────────────────────────
+  const downloadJSON = () => {
+    const data = clients.map((c, i) => ({
+      numero: i + 1,
+      nombre: c.name,
+      email: c.email,
+      telefono: c.phone || null,
+      pedidos: c.orders,
+      total_gastado: parseFloat(c.spent.toFixed(2)),
+      ultimo_pedido: new Date(c.lastOrder).toLocaleDateString("es-PE"),
+      estado: blockedEmails.includes(c.email) ? "bloqueado" : "activo",
+    }));
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `clientes_venetus_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(`📥 Exportado como JSON`);
+  };
+
+  const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" };
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22, flexWrap: "wrap", gap: 14 }}>
         <div>
-          <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Clientes</h2>
-          <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>{clients.length} registrados · {blockedCount > 0 ? `${blockedCount} bloqueados` : "ninguno bloqueado"}</p>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 26, color: C.charcoal, margin: "0 0 4px", fontWeight: 400 }}>Clientes</h2>
+          <p style={{ color: C.muted, fontSize: 13, margin: 0 }}>{clients.length} registrados · {blockedCount > 0 ? `${blockedCount} bloqueados` : "ninguno bloqueado"}</p>
         </div>
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {blockedCount > 0 && (
-            <button onClick={() => setShowBlocked(v => !v)} style={{ padding: "10px 20px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: showBlocked ? C.charcoal : "transparent", color: showBlocked ? "white" : C.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-              {showBlocked ? "Ocultar bloqueados" : `Ver bloqueados (${blockedCount})`}
+            <button onClick={() => setShowBlocked(v => !v)} style={{ padding: "9px 18px", borderRadius: 100, border: `1.5px solid ${C.linen3}`, background: showBlocked ? C.charcoal : "transparent", color: showBlocked ? "white" : C.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+              {showBlocked ? "Ocultar bloqueados" : `Bloqueados (${blockedCount})`}
             </button>
           )}
-          <div style={{ background: C.beige, padding: "10px 20px", borderRadius: 100, fontSize: 13, color: C.muted, fontWeight: 600 }}>{clients.length} clientes</div>
+          {/* Download buttons */}
+          <div style={{ display: "flex", gap: 6 }}>
+            <button onClick={downloadCSV} style={{ display: "flex", alignItems: "center", gap: 6, padding: "9px 16px", borderRadius: 100, border: `1.5px solid ${C.sage}`, background: "transparent", color: C.sage, fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = C.sage; e.currentTarget.style.color = "white"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.sage; }}>
+              <Icon d={Icons.download} size={14} /> CSV
+            </button>
+            <button onClick={downloadJSON} style={{ display: "flex", alignItems: "center", gap: 6, padding: "9px 16px", borderRadius: 100, border: `1.5px solid ${C.sage}`, background: "transparent", color: C.sage, fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = C.sage; e.currentTarget.style.color = "white"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.sage; }}>
+              <Icon d={Icons.download} size={14} /> JSON
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Legend */}
-      <div style={{ display: "flex", gap: 16, marginBottom: 20, fontSize: 12, color: C.muted }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 3, background: "#F8D7DA" }} />
-          <span>Bloqueado — no puede comprar en la tienda</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <Icon d={Icons.trash} size={12} style={{ color: C.danger }} />
-          <span>Eliminar — borra todo el historial de pedidos</span>
-        </div>
+      {/* Search */}
+      <div style={{ position: "relative", marginBottom: 18 }}>
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar por nombre o email..." style={{ ...iS, paddingLeft: 36 }} />
+        <Icon d={Icons.search} size={14} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: C.faint }} />
       </div>
 
-      <div style={{ background: C.white, borderRadius: 20, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", overflow: "hidden" }}>
+      {/* Stats bar */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 20 }}>
+        {[
+          ["Total clientes", clients.length, C.sage],
+          ["Pedidos totales", orders.length, C.charcoal],
+          ["Ingresos (clientes)", `S/. ${clients.reduce((s, c) => s + c.spent, 0).toFixed(0)}`, "#6A9E78"],
+          ["Ticket promedio", clients.length > 0 ? `S/. ${(clients.reduce((s, c) => s + c.spent, 0) / clients.length).toFixed(0)}` : "—", C.roseDeep],
+        ].map(([label, value, color]) => (
+          <div key={label} style={{ background: "white", borderRadius: 10, padding: "14px 16px", border: `1px solid ${C.linen2}`, textAlign: "center" }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color, fontFamily: FONT.serif }}>{value}</div>
+            <div style={{ fontSize: 11, color: C.muted, marginTop: 3 }}>{label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Table */}
+      <div style={{ background: "white", borderRadius: 12, border: `1px solid ${C.linen2}`, overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ background: C.linen }}>
-              {["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Acciones"].map(h => (
-                <th key={h} style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "14px 16px", textAlign: "left" }}>{h}</th>
+              {["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Estado", "Acciones"].map(h => (
+                <th key={h} style={{ fontSize: 10, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "12px 14px", textAlign: "left" }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -2477,44 +2591,44 @@ function AdminClients({ orders, setOrders }) {
             {visibleClients.map((c, i) => {
               const isBlocked = blockedEmails.includes(c.email);
               return (
-                <tr key={c.email} style={{ borderTop: `1px solid ${C.beige}`, background: isBlocked ? "#FFF5F5" : "transparent", opacity: isBlocked ? 0.75 : 1 }}>
-                  <td style={{ padding: "14px 16px" }}>
-                    {i < 3 && !isBlocked && <span style={{ fontSize: 18 }}>{["🥇","🥈","🥉"][i]}</span>}
-                    {(i >= 3 || isBlocked) && <span style={{ fontSize: 14, color: C.faint, fontWeight: 700 }}>#{i+1}</span>}
+                <tr key={c.email} style={{ borderTop: `1px solid ${C.linen2}`, background: isBlocked ? "#FBF5F5" : "white", opacity: isBlocked ? 0.75 : 1 }}>
+                  <td style={{ padding: "12px 14px", fontSize: 12, color: C.faint }}>
+                    {i < 3 && !isBlocked ? ["🥇","🥈","🥉"][i] : `#${i+1}`}
                   </td>
-                  <td style={{ padding: "14px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: isBlocked ? "#F8D7DA" : C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 14, color: isBlocked ? C.danger : C.roseDeep }}>
-                        {isBlocked ? "🚫" : c.name[0].toUpperCase()}
+                  <td style={{ padding: "12px 14px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+                      <div style={{ width: 34, height: 34, borderRadius: "50%", background: isBlocked ? "#FBE8E8" : C.sagePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: isBlocked ? C.danger : C.sage, flexShrink: 0 }}>
+                        {isBlocked ? "✕" : c.name[0]?.toUpperCase()}
                       </div>
                       <div>
-                        <span style={{ fontWeight: 600, fontSize: 14, color: C.charcoal }}>{c.name}</span>
-                        {isBlocked && <div style={{ fontSize: 10, color: C.danger, fontWeight: 700 }}>BLOQUEADO</div>}
+                        <p style={{ fontWeight: 600, fontSize: 13, color: C.charcoal, margin: "0 0 1px" }}>{c.name}</p>
+                        {isBlocked && <p style={{ fontSize: 9, color: C.danger, margin: 0, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px" }}>Bloqueado</p>}
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: "14px 16px", fontSize: 13, color: C.muted }}>{c.email}</td>
-                  <td style={{ padding: "14px 16px", fontSize: 13, color: C.muted }}>{c.phone || "-"}</td>
-                  <td style={{ padding: "14px 16px", textAlign: "center" }}>
-                    <span style={{ background: C.roseLight, color: C.roseDeep, padding: "4px 12px", borderRadius: 100, fontSize: 13, fontWeight: 700 }}>{c.orders}</span>
+                  <td style={{ padding: "12px 14px", fontSize: 12, color: C.muted }}>{c.email}</td>
+                  <td style={{ padding: "12px 14px", fontSize: 12, color: C.muted }}>{c.phone || "—"}</td>
+                  <td style={{ padding: "12px 14px", textAlign: "center" }}>
+                    <span style={{ background: C.sagePale, color: C.sageDark, padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{c.orders}</span>
                   </td>
-                  <td style={{ padding: "14px 16px", fontWeight: 700, color: C.brown }}>S/. {c.spent.toFixed(2)}</td>
-                  <td style={{ padding: "14px 16px", fontSize: 13, color: C.faint }}>{new Date(c.lastOrder).toLocaleDateString("es-PE")}</td>
-                  <td style={{ padding: "14px 16px" }}>
-                    <div style={{ display: "flex", gap: 8 }}>
-                      {/* Block / Unblock */}
-                      <button
-                        onClick={() => setConfirm({ type: isBlocked ? "unblock" : "block", email: c.email, name: c.name })}
-                        title={isBlocked ? "Desbloquear cliente" : "Bloquear cliente"}
-                        style={{ width: 34, height: 34, borderRadius: 10, border: `1.5px solid ${isBlocked ? C.success : "#FFB0B0"}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: isBlocked ? C.success : C.warning, fontSize: 14 }}>
-                        {isBlocked ? "✅" : "🚫"}
+                  <td style={{ padding: "12px 14px", fontSize: 13, fontWeight: 600, color: C.charcoal }}>S/. {c.spent.toFixed(2)}</td>
+                  <td style={{ padding: "12px 14px", fontSize: 12, color: C.muted }}>{new Date(c.lastOrder).toLocaleDateString("es-PE")}</td>
+                  <td style={{ padding: "12px 14px" }}>
+                    <span style={{ background: isBlocked ? "#FBE8E8" : "#EDF0EC", color: isBlocked ? C.danger : C.sageDark, padding: "3px 10px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>
+                      {isBlocked ? "Bloqueado" : "Activo"}
+                    </span>
+                  </td>
+                  <td style={{ padding: "12px 14px" }}>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <button onClick={() => setConfirm({ type: isBlocked ? "unblock" : "block", email: c.email, name: c.name })}
+                        title={isBlocked ? "Desbloquear" : "Bloquear"}
+                        style={{ width: 30, height: 30, borderRadius: 8, border: `1.5px solid ${isBlocked ? "#6A9E78" : C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13 }}>
+                        {isBlocked ? "✓" : "⊘"}
                       </button>
-                      {/* Delete */}
-                      <button
-                        onClick={() => setConfirm({ type: "delete", email: c.email, name: c.name })}
-                        title="Eliminar historial del cliente"
-                        style={{ width: 34, height: 34, borderRadius: 10, border: "1.5px solid #FFCDD2", background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.danger }}>
-                        <Icon d={Icons.trash} size={14} />
+                      <button onClick={() => setConfirm({ type: "delete", email: c.email, name: c.name })}
+                        title="Eliminar historial"
+                        style={{ width: 30, height: 30, borderRadius: 8, border: `1.5px solid ${C.linen3}`, background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.danger }}>
+                        <Icon d={Icons.trash} size={13} />
                       </button>
                     </div>
                   </td>
@@ -2524,23 +2638,21 @@ function AdminClients({ orders, setOrders }) {
           </tbody>
         </table>
         {visibleClients.length === 0 && (
-          <div style={{ padding: "40px", textAlign: "center", color: C.faint }}>No hay clientes para mostrar</div>
+          <div style={{ padding: "40px", textAlign: "center", color: C.faint }}>
+            <p style={{ fontFamily: FONT.serif, fontSize: 18, fontWeight: 300 }}>{search ? "No hay clientes con esa búsqueda" : "Aún no hay clientes registrados"}</p>
+          </div>
         )}
       </div>
 
+      {/* Confirm dialog */}
       <ConfirmDialog
         open={!!confirm}
         onClose={() => setConfirm(null)}
-        title={
-          confirm?.type === "delete" ? "🗑️ Eliminar historial" :
-          confirm?.type === "block" ? "🚫 Bloquear cliente" : "✅ Desbloquear cliente"
-        }
+        title={confirm?.type === "delete" ? "Eliminar historial" : confirm?.type === "block" ? "Bloquear cliente" : "Desbloquear cliente"}
         message={
-          confirm?.type === "delete"
-            ? `¿Segura que quieres eliminar TODOS los pedidos de "${confirm?.name}"? Esta acción no se puede deshacer.`
-            : confirm?.type === "block"
-            ? `¿Bloquear a "${confirm?.name}"? Su historial se conserva pero quedará marcado.`
-            : `¿Desbloquear a "${confirm?.name}"? Podrá volver a comprar con normalidad.`
+          confirm?.type === "delete" ? `¿Eliminar TODOS los pedidos de "${confirm?.name}"? Esta acción no se puede deshacer.`
+          : confirm?.type === "block" ? `¿Bloquear a "${confirm?.name}"? No podrá ver sus pedidos.`
+          : `¿Desbloquear a "${confirm?.name}"?`
         }
         danger={confirm?.type === "delete"}
         onConfirm={() => {
@@ -2552,7 +2664,6 @@ function AdminClients({ orders, setOrders }) {
   );
 }
 
-// ─── ADMIN REVIEWS ────────────────────────────────────────────────────────────
 function AdminReviews({ products }) {
   const sampleReviews = [
     { id: "r1", productId: "p1", productName: "Set Bodysuit Algodón", author: "María García", rating: 5, text: "Increíblemente suave, mi bebé lo ama.", date: Date.now() - 86400000 * 3, approved: true },
@@ -2666,7 +2777,7 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
       {/* Sidebar */}
       <aside style={{ width: 240, background: C.charcoal, display: "flex", flexDirection: "column", position: "sticky", top: 0, height: "100vh", flexShrink: 0 }}>
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: C.cream }}>Venetus <span style={{ color: C.rose }}>Kids</span></div>
+          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: "#F4EDE2", letterSpacing: "1px" }}>Venetus <span style={{ color: "#C9A66B" }}>Kids</span></div>
           <div style={{ fontSize: 11, color: "rgba(250,246,240,0.4)", marginTop: 2 }}>Panel Administrador</div>
         </div>
         <nav style={{ flex: 1, padding: "12px 12px", overflowY: "auto" }}>
