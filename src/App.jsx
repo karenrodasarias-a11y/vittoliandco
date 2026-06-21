@@ -92,7 +92,33 @@ const C = {
   brownMid: "#6B7E6E",
   brownDark:"#2B3A4A",
 };
-const FONT = { serif: '"Cormorant Garamond","Georgia",serif', sans: '"Nunito Sans","DM Sans",system-ui,sans-serif' };
+const FONT = { serif: '"Playfair Display","Georgia",serif', sans: '"Nunito Sans","DM Sans",system-ui,sans-serif' };
+
+// ─── BRAND MARKS (Vittoli & Co.) ────────────────────────────────────────────
+// Wordmark: serif Didone con ampersand caligráfico en itálica.
+const Wordmark = ({ text = "VITTOLI & CO.", size = 20, color = "#2B3A4A", spacing = "0.12em", weight = 600 }) => {
+  const parts = String(text).toUpperCase().split(/(&)/);
+  return (
+    <span style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: size, fontWeight: weight, color, letterSpacing: spacing, lineHeight: 1, whiteSpace: "nowrap" }}>
+      {parts.map((p, i) => p === "&"
+        ? <span key={i} style={{ fontStyle: "italic", fontWeight: weight - 100, letterSpacing: "0.02em", padding: "0 0.04em" }}>&amp;</span>
+        : <span key={i}>{p}</span>)}
+    </span>
+  );
+};
+// BunnyMark: conejito line-art minimalista (símbolo secundario de marca).
+const BunnyMark = ({ size = 80, color = "#2B3A4A", strokeWidth = 1.6 }) => (
+  <svg width={size} height={size * 1.18} viewBox="0 0 64 76" fill="none"
+    stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"
+    style={{ display: "block" }} aria-hidden="true">
+    <path d="M27 40 C 21 32 19 16 23 7 C 25 2 30 5 30 15 C 30 27 29 34 28 40" />
+    <path d="M37 40 C 43 32 45 16 41 7 C 39 2 34 5 34 15 C 34 27 35 34 36 40" />
+    <path d="M21 45 C 21 58 26 66 32 66 C 38 66 43 58 43 45 C 43 39 38 36 32 36 C 26 36 21 39 21 45 Z" />
+    <circle cx="28" cy="47" r="1.3" fill={color} stroke="none" />
+    <circle cx="36" cy="47" r="1.3" fill={color} stroke="none" />
+    <path d="M32 50 L 32 52 M30.5 53.2 C 31 53.9 33 53.9 33.5 53.2" />
+  </svg>
+);
 
 // ── RESPONSIVE HOOK ──────────────────────────────────────────────────────────
 function useIsMobile(breakpoint = 768) {
@@ -117,14 +143,14 @@ function useIsTablet(breakpoint = 1024) {
 // ─── INITIAL DATA ──────────────────────────────────────────────────────────
 const INIT_CONFIG = {
   /* ── IDENTIDAD ─────────────────────────────────────── */
-  storeName: "Venetus Kids",
-  tagline: "Pequeños momentos, grandes recuerdos 💛",
+  storeName: "Vittoli & Co.",
+  tagline: "Esenciales de algodón para los primeros años",
   logoImage: "",           // URL base64 del logo
   faviconImage: "",
 
   /* ── BARRA PROMO ────────────────────────────────────── */
   promoActive: true,
-  promoBanner: "🎀 ENVÍO GRATIS en compras mayores a S/. 150 · Código VENETUS20 — 20% OFF",
+  promoBanner: "Envío gratis desde S/ 150   ·   20% OFF con el código VITTOLI20",
   promoBannerColor: "#2B3A4A",
   promoBannerTextColor: "#FAFAF8",
 
@@ -134,9 +160,9 @@ const INIT_CONFIG = {
   navActiveColor: "#BC6B40",
 
   /* ── HERO ───────────────────────────────────────────── */
-  heroBadgeText: "Nueva Colección · Primavera 2025",
-  heroTitle: "Para los primeros momentos\nde tu bebé",
-  heroSubtitle: "Ropa y accesorios cómodos, seguros y adorables para acompañar cada etapa de tu bebé.",
+  heroBadgeText: "Esenciales en algodón · Nueva colección",
+  heroTitle: "Para los primeros\nmomentos que importan",
+  heroSubtitle: "Ropa y accesorios de algodón, suaves y seguros, pensados para acompañar a tu pequeño en cada etapa.",
   heroBtn1: "Ver colección",
   heroBtn1Color: "#BC6B40",
   heroBtn1TextColor: "#FFFFFF",
@@ -164,8 +190,8 @@ const INIT_CONFIG = {
   /* ── SECCIÓN ABOUT ──────────────────────────────────── */
   aboutLabel: "Nuestra historia",
   aboutTitle: "Porque cada detalle importa cuando se trata de tu bebé.",
-  aboutText: "Somos mamás que entienden la alegría de cada pequeño momento. Por eso creamos Venetus Kids: productos seguros, suaves y adorables para acompañar a tu bebé desde el primer día.",
-  aboutSignature: "Con amor, el equipo Venetus Kids",
+  aboutText: "Creemos que los primeros años merecen lo mejor. Por eso elegimos algodón suave, materiales seguros y detalles cuidados en cada prenda de Vittoli & Co., para acompañar a tu pequeño desde el primer día.",
+  aboutSignature: "Con cariño, el equipo de Vittoli & Co.",
   aboutImage: "",
   aboutBgColor: "#EDE0CE",
 
@@ -181,15 +207,15 @@ const INIT_CONFIG = {
   /* ── SECCIÓN BENEFICIOS ─────────────────────────────── */
   benefitsBgColor: "#2B3A4A",
   benefits: [
-    { icon: "🌿", title: "Materiales seguros", desc: "Certificados y testeados dermatológicamente" },
-    { icon: "🚀", title: "Envíos rápidos", desc: "24-48 horas a todo el Perú" },
-    { icon: "💬", title: "Atención cercana", desc: "WhatsApp 7 días a la semana" },
-    { icon: "↩️", title: "Cambios fáciles", desc: "Sin costo adicional en 15 días" },
+    { icon: "check", title: "Algodón seguro", desc: "100% algodón, testeado dermatológicamente" },
+    { icon: "package", title: "Envíos rápidos", desc: "24-48 horas a todo el Perú" },
+    { icon: "wa", title: "Atención cercana", desc: "Por WhatsApp, los 7 días" },
+    { icon: "refresh", title: "Cambios fáciles", desc: "Sin costo adicional, hasta 15 días" },
   ],
 
   /* ── NEWSLETTER ─────────────────────────────────────── */
   newsletterBgColor: "#BC6B40",
-  newsletterTitle: "Únete a nuestra comunidad",
+  newsletterTitle: "Únete a la familia Vittoli",
   newsletterText: "Novedades, descuentos exclusivos y consejos de crianza directo a tu correo.",
   newsletterBtnText: "Suscribirse",
   newsletterBtnColor: "#FFFFFF",
@@ -198,12 +224,12 @@ const INIT_CONFIG = {
 
   /* ── FOOTER ─────────────────────────────────────────── */
   footerBgColor: "#2B3A4A",
-  footerTagline: "Productos seguros, suaves y adorables para acompañar a tu bebé en cada etapa.",
+  footerTagline: "Esenciales de algodón, suaves y seguros, para acompañar a tu pequeño en cada etapa.",
   footerCol1Title: "Tienda",
   footerCol1Links: "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas",
   footerCol2Title: "Ayuda",
   footerCol2Links: "Cómo comprar|Envíos|Cambios|Guía de tallas|FAQ",
-  footerCopyright: "© 2025 Venetus Kids · Lima, Perú",
+  footerCopyright: "© 2026 Vittoli & Co. · Lima, Perú",
   footerPaymentMethods: "Yape|Visa|Mastercard|BCP",
 
   /* ── COLORES GLOBALES ────────────────────────────────── */
@@ -218,16 +244,16 @@ const INIT_CONFIG = {
   borderColor: "#E3D5C2",
 
   /* ── TIPOGRAFÍA ─────────────────────────────────────── */
-  fontHeading: "Cormorant Garamond",
+  fontHeading: "Playfair Display",
   fontBody: "Nunito Sans",
 
   /* ── CONTACTO ───────────────────────────────────────── */
   whatsapp: "51999999999",
-  email: "hola@venetuskids.pe",
+  email: "hola@vittoli.pe",
   address: "Lima, Perú",
-  instagram: "https://instagram.com/venetuskids.pe",
-  tiktok: "https://tiktok.com/@venetuskids",
-  facebook: "https://facebook.com/venetuskids",
+  instagram: "https://instagram.com/vittoli.co",
+  tiktok: "https://tiktok.com/@vittoli.co",
+  facebook: "https://facebook.com/vittoli.co",
   freeShipping: 150,
   currency: "S/.",
 
@@ -299,16 +325,16 @@ const INIT_PRODUCTS = [
 ];
 
 const INIT_COUPONS = [
-  { id: "coupon1", code: "VENETUS20", type: "percent", value: 20, minAmount: 100, maxUses: 200, used: 14, active: true, expires: null },
+  { id: "coupon1", code: "VITTOLI20", type: "percent", value: 20, minAmount: 100, maxUses: 200, used: 14, active: true, expires: null },
   { id: "coupon2", code: "MAMA10", type: "fixed", value: 10, minAmount: 80, maxUses: 50, used: 3, active: true, expires: null },
 ];
 
 const INIT_ORDERS = [
-  { id: "ord1", orderNumber: "VK-001", customerName: "María García", customerEmail: "maria@example.com", customerPhone: "998765432", address: "Av. Arequipa 1234, Miraflores", items: [{ productId: "p1", name: "Set Bodysuit Algodón", price: 89.90, qty: 1, emoji: "👶" }, { productId: "p3", name: "Gorro de Punto Suave", price: 45.00, qty: 2, emoji: "🧢" }], subtotal: 179.90, discount: 0, shipping: 0, total: 179.90, status: "DELIVERED", paymentStatus: "PAID", paymentMethod: "Yape", coupon: null, createdAt: Date.now() - 86400000 * 7 },
-  { id: "ord2", orderNumber: "VK-002", customerName: "Luciana Pérez", customerEmail: "lucy@example.com", customerPhone: "987654321", address: "Jr. Lima 567, San Isidro", items: [{ productId: "p6", name: "Kit Baby Shower Lujo", price: 199.00, qty: 1, emoji: "🎁" }], subtotal: 199.00, discount: 39.80, shipping: 0, total: 159.20, status: "SHIPPED", paymentStatus: "PAID", paymentMethod: "Stripe", coupon: "VENETUS20", createdAt: Date.now() - 86400000 * 2 },
-  { id: "ord3", orderNumber: "VK-003", customerName: "Camila Rodriguez", customerEmail: "cami@example.com", customerPhone: "976543210", address: "Calle Las Flores 890, Surco", items: [{ productId: "p2", name: "Conjunto Floral Niña", price: 125.00, qty: 1, emoji: "👗" }, { productId: "p8", name: "Vincha Lazos Artesanal", price: 28.00, qty: 2, emoji: "🎀" }], subtotal: 181.00, discount: 0, shipping: 0, total: 181.00, status: "CONFIRMED", paymentStatus: "PAID", paymentMethod: "MercadoPago", coupon: null, createdAt: Date.now() - 86400000 },
-  { id: "ord4", orderNumber: "VK-004", customerName: "Andrea Torres", customerEmail: "andrea@example.com", customerPhone: "965432109", address: "Av. Brasil 234, Breña", items: [{ productId: "p5", name: "Manta Muslina Premium", price: 69.90, qty: 1, emoji: "🧸" }], subtotal: 69.90, discount: 0, shipping: 15, total: 84.90, status: "PENDING", paymentStatus: "PENDING", paymentMethod: null, coupon: null, createdAt: Date.now() - 3600000 * 3 },
-  { id: "ord5", orderNumber: "VK-005", customerName: "Sofia Vega", customerEmail: "sofia@example.com", customerPhone: "954321098", address: "Jr. Arequipa 789, Barranco", items: [{ productId: "p4", name: "Zapatos Gateo Cuero", price: 79.90, qty: 1, emoji: "👟" }, { productId: "p7", name: "Pelele Estampado Oso", price: 55.00, qty: 1, emoji: "🐻" }], subtotal: 134.90, discount: 0, shipping: 0, total: 134.90, status: "PREPARING", paymentStatus: "PAID", paymentMethod: "PayPal", coupon: null, createdAt: Date.now() - 3600000 },
+  { id: "ord1", orderNumber: "VC-001", customerName: "María García", customerEmail: "maria@example.com", customerPhone: "998765432", address: "Av. Arequipa 1234, Miraflores", items: [{ productId: "p1", name: "Set Bodysuit Algodón", price: 89.90, qty: 1, emoji: "👶" }, { productId: "p3", name: "Gorro de Punto Suave", price: 45.00, qty: 2, emoji: "🧢" }], subtotal: 179.90, discount: 0, shipping: 0, total: 179.90, status: "DELIVERED", paymentStatus: "PAID", paymentMethod: "Yape", coupon: null, createdAt: Date.now() - 86400000 * 7 },
+  { id: "ord2", orderNumber: "VC-002", customerName: "Luciana Pérez", customerEmail: "lucy@example.com", customerPhone: "987654321", address: "Jr. Lima 567, San Isidro", items: [{ productId: "p6", name: "Kit Baby Shower Lujo", price: 199.00, qty: 1, emoji: "🎁" }], subtotal: 199.00, discount: 39.80, shipping: 0, total: 159.20, status: "SHIPPED", paymentStatus: "PAID", paymentMethod: "Stripe", coupon: "VITTOLI20", createdAt: Date.now() - 86400000 * 2 },
+  { id: "ord3", orderNumber: "VC-003", customerName: "Camila Rodriguez", customerEmail: "cami@example.com", customerPhone: "976543210", address: "Calle Las Flores 890, Surco", items: [{ productId: "p2", name: "Conjunto Floral Niña", price: 125.00, qty: 1, emoji: "👗" }, { productId: "p8", name: "Vincha Lazos Artesanal", price: 28.00, qty: 2, emoji: "🎀" }], subtotal: 181.00, discount: 0, shipping: 0, total: 181.00, status: "CONFIRMED", paymentStatus: "PAID", paymentMethod: "MercadoPago", coupon: null, createdAt: Date.now() - 86400000 },
+  { id: "ord4", orderNumber: "VC-004", customerName: "Andrea Torres", customerEmail: "andrea@example.com", customerPhone: "965432109", address: "Av. Brasil 234, Breña", items: [{ productId: "p5", name: "Manta Muslina Premium", price: 69.90, qty: 1, emoji: "🧸" }], subtotal: 69.90, discount: 0, shipping: 15, total: 84.90, status: "PENDING", paymentStatus: "PENDING", paymentMethod: null, coupon: null, createdAt: Date.now() - 3600000 * 3 },
+  { id: "ord5", orderNumber: "VC-005", customerName: "Sofia Vega", customerEmail: "sofia@example.com", customerPhone: "954321098", address: "Jr. Arequipa 789, Barranco", items: [{ productId: "p4", name: "Zapatos Gateo Cuero", price: 79.90, qty: 1, emoji: "👟" }, { productId: "p7", name: "Pelele Estampado Oso", price: 55.00, qty: 1, emoji: "🐻" }], subtotal: 134.90, discount: 0, shipping: 0, total: 134.90, status: "PREPARING", paymentStatus: "PAID", paymentMethod: "PayPal", coupon: null, createdAt: Date.now() - 3600000 },
 ];
 
 // ─── STORAGE HELPERS ───────────────────────────────────────────────────────
@@ -362,6 +388,58 @@ function Modal({ open, onClose, title, children, width = 600 }) {
         </motion.div>
       </motion.div>
     </AnimatePresence>
+  );
+}
+
+// ─── GUÍA DE TALLAS ────────────────────────────────────────────────────────
+function SizeGuideModal({ open, onClose }) {
+  const babies = [
+    ["0–3 m", "Recién nacido", "50–60", "3–6"],
+    ["3–6 m", "3 a 6 meses", "60–67", "6–8"],
+    ["6–9 m", "6 a 9 meses", "67–72", "8–9"],
+    ["9–12 m", "9 a 12 meses", "72–76", "9–11"],
+    ["12–18 m", "1 a 1½ años", "76–82", "11–12"],
+    ["18–24 m", "1½ a 2 años", "82–88", "12–13"],
+  ];
+  const kids = [
+    ["2 (2T)", "2 años", "88–94"], ["3 (3T)", "3 años", "94–102"],
+    ["4", "4 años", "102–108"], ["5", "5 años", "108–114"],
+    ["6", "6 años", "114–120"], ["7", "7 años", "120–127"],
+    ["8", "8 años", "127–133"], ["9", "9 años", "133–140"], ["10", "10 años", "140–146"],
+  ];
+  const th = { textAlign: "left", padding: "9px 12px", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: C.muted, background: C.salviaPale, borderBottom: `1px solid ${C.arena}` };
+  const td = (first) => ({ padding: "9px 12px", fontSize: 13, color: C.noche, fontWeight: first ? 700 : 400, borderBottom: `1px solid ${C.lino}` });
+  const caption = { fontFamily: FONT.serif, fontSize: 17, fontWeight: 600, color: C.noche, margin: "0 0 10px" };
+  const wrap = { overflowX: "auto", marginBottom: 24, border: `1px solid ${C.arena}`, borderRadius: 10 };
+  return (
+    <Modal open={open} onClose={onClose} title="Guía de tallas" width={640}>
+      <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.7, margin: "0 0 22px" }}>
+        Nuestras tallas se basan en la edad, estatura y peso aproximados. Cada pequeño crece a su ritmo: <b style={{ color: C.noche }}>si está entre dos tallas, elige la mayor</b> y le durará más tiempo.
+      </p>
+      <p style={caption}>Bebés · 0 a 24 meses</p>
+      <div style={wrap}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 400 }}>
+          <thead><tr><th style={th}>Talla</th><th style={th}>Edad</th><th style={th}>Estatura (cm)</th><th style={th}>Peso (kg)</th></tr></thead>
+          <tbody>{babies.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j} style={td(j === 0)}>{c}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+      <p style={caption}>Niños · 2 a 10 años</p>
+      <div style={wrap}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 340 }}>
+          <thead><tr><th style={th}>Talla</th><th style={th}>Edad</th><th style={th}>Estatura (cm)</th></tr></thead>
+          <tbody>{kids.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j} style={td(j === 0)}>{c}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-start", background: C.salviaPale, borderRadius: 10, padding: "14px 16px" }}>
+        <div style={{ flexShrink: 0, color: C.terracota, marginTop: 1 }}><Icon d={Icons.alert} size={18} strokeWidth={1.7} /></div>
+        <div>
+          <p style={{ fontFamily: FONT.serif, fontSize: 14, fontWeight: 600, color: C.noche, margin: "0 0 5px" }}>Cómo medir</p>
+          <p style={{ fontSize: 12, color: C.muted, lineHeight: 1.7, margin: 0 }}>
+            Mide a tu pequeño descalzo: de pie contra la pared, o acostado para bebés, desde la coronilla hasta los talones. Para el peso, usa una balanza sin ropa pesada. ¿Dudas con una talla? Escríbenos por WhatsApp y te ayudamos.
+          </p>
+        </div>
+      </div>
+    </Modal>
   );
 }
 
@@ -620,7 +698,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
       </div>
       <div style={{ padding: "13px 14px 14px" }}>
         {cat && <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "1.2px", margin: "0 0 4px", fontWeight: 600 }}>{cat.name}</p>}
-        <p style={{ fontFamily: `"${config?.fontHeading || "Cormorant Garamond"}", serif`, fontSize: 16, fontWeight: 400, color: config?.headingColor || "#3D3830", marginBottom: 6, lineHeight: 1.3 }}>{product.name}</p>
+        <p style={{ fontFamily: `"${config?.fontHeading || "Playfair Display"}", serif`, fontSize: 16, fontWeight: 400, color: config?.headingColor || "#3D3830", marginBottom: 6, lineHeight: 1.3 }}>{product.name}</p>
         <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
           <Stars rating={product.rating} size={12} />
           <span style={{ fontSize: 10, color: "#A89888" }}>({product.reviews})</span>
@@ -754,7 +832,7 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
         // Build WhatsApp message with order details
         const itemsList = cart.map(i => `  • ${i.name} x${i.qty} = S/. ${(i.price * i.qty).toFixed(2)}`).join("\n");
         const msg = [
-          `🛍️ *Nuevo pedido - Venetus Kids*`,
+          `🛍️ *Nuevo pedido - Vittoli & Co.*`,
           ``,
           `👤 *Cliente:* ${form.name}`,
           `📧 ${form.email}`,
@@ -968,7 +1046,7 @@ function HeroSection({ config, onShop }) {
           ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           : <div style={{ width: "100%", height: "100%", background: "linear-gradient(160deg, #F5EEEC, #F5F2EE, #EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 86, marginBottom: 12 }}>👶🏻</div>
+                <BunnyMark size={92} color={C.noche} />
                 <p style={{ fontFamily: FONT.serif, fontSize: 17, color: C.muted, fontWeight: 300, letterSpacing: "0.5px" }}>{config.storeName}</p>
               </div>
             </div>
@@ -1041,7 +1119,7 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
               <div style={{ flex: 1, paddingRight: 8 }}>
                 <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "1.5px", margin: "0 0 5px", fontWeight: 600 }}>{cat?.name}</p>
-                <h2 style={{ fontFamily: `"${config?.fontHeading || "Cormorant Garamond"}", serif`, fontSize: 22, fontWeight: 400, color: "#3D3830", margin: 0, lineHeight: 1.2 }}>{product.name}</h2>
+                <h2 style={{ fontFamily: `"${config?.fontHeading || "Playfair Display"}", serif`, fontSize: 22, fontWeight: 400, color: "#3D3830", margin: 0, lineHeight: 1.2 }}>{product.name}</h2>
               </div>
               <div style={{ display: "flex", gap: 6 }}>
                 <button onClick={() => onWishlist(product.id)} style={{ width: 36, height: 36, borderRadius: "50%", background: inWish ? "#F5EEEC" : "#F5F2EE", border: `1.5px solid ${inWish ? "#9E7470" : "#D8D0C8"}`, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: inWish ? "#9E7470" : "#7A7068" }}>
@@ -1059,7 +1137,7 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
             </div>
 
             <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 14, paddingBottom: 14, borderBottom: "1px solid #EDE8E2" }}>
-              <span style={{ fontFamily: `"${config?.fontHeading || "Cormorant Garamond"}", serif`, fontSize: 28, fontWeight: 600, color: "#3D3830" }}>{config?.currency || "S/."} {product.price.toFixed(2)}</span>
+              <span style={{ fontFamily: `"${config?.fontHeading || "Playfair Display"}", serif`, fontSize: 28, fontWeight: 600, color: "#3D3830" }}>{config?.currency || "S/."} {product.price.toFixed(2)}</span>
               {product.oldPrice && <span style={{ fontSize: 14, color: "#A89888", textDecoration: "line-through" }}>S/. {product.oldPrice.toFixed(2)}</span>}
               {product.oldPrice && <span style={{ fontSize: 10, fontWeight: 700, color: "#6A9E78", background: "#6A9E7818", padding: "2px 7px", borderRadius: 10 }}>-{Math.round((1 - product.price / product.oldPrice) * 100)}%</span>}
             </div>
@@ -1115,6 +1193,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const [sort, setSort] = useState("featured");
   const productsRef = useRef(null);
   const [detailProduct, setDetailProduct] = useState(null);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
 
@@ -1143,7 +1222,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const handleCheckoutComplete = (orderData) => {
     const newOrder = {
       id: "ord" + Date.now(),
-      orderNumber: "VK-" + String(orders.length + 1).padStart(3, "0"),
+      orderNumber: "VC-" + String(orders.length + 1).padStart(3, "0"),
       customerName: orderData.name,
       customerEmail: orderData.email,
       customerPhone: orderData.phone,
@@ -1177,7 +1256,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const tc  = config.textColor      || "#7A7068";
   const bg  = config.bgColor        || "#FAFAF8";
   const brd = config.borderColor    || "#EDE8E2";
-  const SERIF = `"${config.fontHeading || "Cormorant Garamond"}", serif`;
+  const SERIF = `"${config.fontHeading || "Playfair Display"}", serif`;
   const SANS  = `"${config.fontBody    || "DM Sans"}", system-ui, sans-serif`;
 
   const pad = isMobile ? "0 20px" : isTablet ? "0 32px" : "0 48px";
@@ -1198,7 +1277,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {config.logoImage
               ? <img src={config.logoImage} alt={config.storeName} style={{ height: isMobile ? 28 : 36, objectFit: "contain" }} />
-              : <span style={{ fontFamily: SERIF, fontSize: isMobile ? 17 : 20, fontWeight: 300, color: config.navTextColor || hc, letterSpacing: "1px" }}>{config.storeName}</span>
+              : <Wordmark text={config.storeName} size={isMobile ? 16 : 19} color={config.navTextColor || hc} />
             }
           </div>
           {!isMobile && (
@@ -1231,7 +1310,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
             {config.heroBadgeText}
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            style={{ fontFamily: SERIF, fontSize: isMobile ? "clamp(30px,8vw,40px)" : "clamp(34px, 3.8vw, 54px)", fontWeight: 300, lineHeight: 1.15, color: hc, margin: "0 0 16px", letterSpacing: "0.3px" }}>
+            style={{ fontFamily: SERIF, fontSize: isMobile ? "clamp(30px,8vw,40px)" : "clamp(34px, 3.8vw, 54px)", fontWeight: 500, lineHeight: 1.15, color: hc, margin: "0 0 16px", letterSpacing: "0.3px" }}>
             {(config.heroTitle || "").split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
@@ -1266,7 +1345,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           {config.heroImage
             ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             : <div style={{ width: "100%", height: "100%", background: config.heroBgGradient || "linear-gradient(160deg,#F5EEEC,#F5F2EE,#EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center" }}><div style={{ fontSize: isMobile ? 60 : 86, marginBottom: 12 }}>👶🏻</div><p style={{ fontFamily: SERIF, fontSize: isMobile ? 14 : 17, color: tc, fontWeight: 300 }}>{config.storeName}</p></div>
+                <div style={{ textAlign: "center" }}><BunnyMark size={isMobile ? 70 : 96} color={C.noche} /><div style={{ marginTop: 16 }}><Wordmark text={config.storeName} size={isMobile ? 15 : 18} color={C.muted} /></div></div>
               </div>
           }
           {!isMobile && (
@@ -1281,6 +1360,28 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           )}
         </motion.div>
       </div>
+
+      {/* ── FRANJA DE CONFIANZA ── */}
+      <section style={{ background: "#FFFFFF", borderTop: `1px solid ${brd}`, borderBottom: `1px solid ${brd}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "20px" : "22px 48px", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? "18px 12px" : 24 }}>
+          {[
+            { icon: "check", t: "100% algodón", s: "Suave con su piel" },
+            { icon: "heart", t: "Hipoalergénico", s: "Testeado dermatológicamente" },
+            { icon: "package", t: "Envíos a todo el Perú", s: "24–48 h en Lima" },
+            { icon: "wa", t: "Atención cercana", s: "Por WhatsApp, los 7 días" },
+          ].map((it, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 13, justifyContent: isMobile ? "flex-start" : "center" }}>
+              <div style={{ width: isMobile ? 34 : 40, height: isMobile ? 34 : 40, flexShrink: 0, borderRadius: "50%", border: `1px solid ${brd}`, display: "flex", alignItems: "center", justifyContent: "center", color: pc }}>
+                <Icon d={Icons[it.icon]} size={isMobile ? 16 : 18} strokeWidth={1.6} />
+              </div>
+              <div>
+                <p style={{ margin: 0, fontSize: isMobile ? 12 : 13, fontWeight: 700, color: hc, lineHeight: 1.2 }}>{it.t}</p>
+                <p style={{ margin: "2px 0 0", fontSize: isMobile ? 10 : 11, color: tc, opacity: 0.75, lineHeight: 1.2 }}>{it.s}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* ── CATEGORÍAS ── */}
       <section style={{ padding: isMobile ? "48px 0" : "72px 0", background: config.aboutBgColor || "#F5F2EE", borderTop: `1px solid ${brd}`, borderBottom: `1px solid ${brd}` }}>
@@ -1329,6 +1430,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
                 <option value="price_asc">Precio ↑</option>
                 <option value="price_desc">Precio ↓</option>
               </select>
+              <button onClick={() => setSizeGuideOpen(true)} style={{ display: "flex", alignItems: "center", gap: 6, padding: isMobile ? "7px 11px" : "7px 13px", borderRadius: 2, border: `1px solid ${brd}`, background: "transparent", color: hc, fontSize: 11, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
+                <Icon d={Icons.tag} size={13} strokeWidth={1.6} /> Guía de tallas
+              </button>
             </div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : isTablet ? "repeat(3, 1fr)" : "repeat(4, 1fr)", gap: isMobile ? "20px 12px" : "32px 20px" }}>
@@ -1351,13 +1455,13 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
             <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600 }}>{config.aboutLabel || "Nuestra historia"}</p>
             <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 300, color: hc, lineHeight: 1.35, marginBottom: 16 }}>"{config.aboutTitle}"</h2>
             <p style={{ fontSize: isMobile ? 13 : 14, color: tc, lineHeight: 1.85, marginBottom: 24 }}>{config.aboutText}</p>
-            <p style={{ fontFamily: SERIF, fontSize: 15, fontStyle: "italic", color: pc, margin: 0 }}>— {config.aboutSignature || "Con amor, el equipo Venetus Kids"}</p>
+            <p style={{ fontFamily: SERIF, fontSize: 15, fontStyle: "italic", color: pc, margin: 0 }}>— {config.aboutSignature || "Con cariño, el equipo de Vittoli & Co."}</p>
           </div>
           <div style={{ borderRadius: 3, overflow: "hidden" }}>
             {config.aboutImage
               ? <img src={config.aboutImage} alt="About" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover" }} />
               : <div style={{ aspectRatio: "4/3", background: `linear-gradient(135deg, ${pc}20, ${ac}30)`, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3 }}>
-                  <div style={{ textAlign: "center" }}><div style={{ fontSize: isMobile ? 44 : 56, marginBottom: 10 }}>🤱</div><p style={{ fontFamily: SERIF, fontSize: 15, color: tc, fontWeight: 300 }}>Hecho con amor</p></div>
+                  <div style={{ textAlign: "center" }}><BunnyMark size={isMobile ? 56 : 72} color={C.noche} /><p style={{ fontFamily: SERIF, fontSize: 15, color: tc, fontWeight: 400, marginTop: 12 }}>Hecho con cariño</p></div>
                 </div>
             }
           </div>
@@ -1395,7 +1499,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}`, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : `repeat(${(config.benefits || []).length || 4}, 1fr)`, gap: isMobile ? 20 : 36 }}>
           {(config.benefits || []).map((b, i) => (
             <div key={i} style={{ textAlign: "center", padding: isMobile ? "12px 8px" : 0 }}>
-              <div style={{ fontSize: isMobile ? 24 : 28, marginBottom: isMobile ? 8 : 12 }}>{b.icon}</div>
+              {Icons[b.icon]
+                ? <div style={{ width: isMobile ? 42 : 48, height: isMobile ? 42 : 48, margin: isMobile ? "0 auto 10px" : "0 auto 14px", borderRadius: "50%", border: "1px solid rgba(245,242,238,0.22)", display: "flex", alignItems: "center", justifyContent: "center", color: "#F5F2EE" }}><Icon d={Icons[b.icon]} size={isMobile ? 18 : 20} strokeWidth={1.5} /></div>
+                : <div style={{ fontSize: isMobile ? 24 : 28, marginBottom: isMobile ? 8 : 12 }}>{b.icon}</div>}
               <p style={{ fontFamily: SERIF, fontSize: isMobile ? 13 : 15, fontWeight: 400, color: "#F5F2EE", marginBottom: isMobile ? 4 : 6 }}>{b.title}</p>
               <p style={{ fontSize: isMobile ? 11 : 12, color: "rgba(245,242,238,0.45)", margin: 0, lineHeight: 1.5 }}>{b.desc}</p>
             </div>
@@ -1422,7 +1528,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
             <div style={{ gridColumn: isMobile ? "1/-1" : "auto" }}>
               {config.logoImage
                 ? <img src={config.logoImage} alt={config.storeName} style={{ height: 32, objectFit: "contain", marginBottom: 10 }} />
-                : <p style={{ fontFamily: SERIF, fontSize: isMobile ? 17 : 20, fontWeight: 300, color: "#F5F2EE", marginBottom: 10, letterSpacing: "0.5px" }}>{config.storeName}</p>
+                : <div style={{ marginBottom: 10 }}><Wordmark text={config.storeName} size={isMobile ? 17 : 20} color="#F5F2EE" /></div>
               }
               <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 14 }}>{config.footerTagline || config.tagline}</p>
             </div>
@@ -1432,7 +1538,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
             </div>
             <div>
               <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 12 }}>{config.footerCol2Title || "Ayuda"}</p>
-              {(config.footerCol2Links || "Cómo comprar|Envíos|Cambios|FAQ").split("|").map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7 }}>{l}</p>)}
+              {(config.footerCol2Links || "Cómo comprar|Envíos|Cambios|FAQ").split("|").map(l => l.trim().toLowerCase() === "guía de tallas"
+                ? <p key={l} onClick={() => setSizeGuideOpen(true)} style={{ fontSize: 12, color: "rgba(245,242,238,0.6)", marginBottom: 7, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>{l}</p>
+                : <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7 }}>{l}</p>)}
             </div>
             {!isMobile && (
               <div>
@@ -1454,16 +1562,19 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       <motion.a href={`https://wa.me/${config.whatsapp}`} target="_blank"
         animate={{ boxShadow: ["0 4px 16px rgba(37,211,102,0.3)", "0 4px 24px rgba(37,211,102,0.55)", "0 4px 16px rgba(37,211,102,0.3)"] }}
         transition={{ duration: 3, repeat: Infinity }}
-        style={{ position: "fixed", bottom: isMobile ? 20 : 26, right: isMobile ? 16 : 26, width: isMobile ? 46 : 50, height: isMobile ? 46 : 50, background: "#25D366", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 20 : 22, textDecoration: "none", zIndex: 500 }}>
-        💬
+        style={{ position: "fixed", bottom: isMobile ? 20 : 26, right: isMobile ? 16 : 26, width: isMobile ? 46 : 50, height: isMobile ? 46 : 50, background: "#25D366", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", zIndex: 500 }}>
+        <Icon d={Icons.wa} size={isMobile ? 22 : 24} strokeWidth={2} />
       </motion.a>
 
       <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config} onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} isMobile={isMobile} />
       <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config} products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
       <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} isMobile={isMobile} />
+      <SizeGuideModal open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        ::selection { background: rgba(188,107,64,0.18); color: #2B3A4A; }
         * { box-sizing: border-box; } body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: ${C.linen3}; border-radius: 2px; }
@@ -2270,7 +2381,7 @@ function AdminVisualEditor({ config, setConfig }) {
 
   const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" };
 
-  const PREVIEW_SERIF = `"${form.fontHeading || "Cormorant Garamond"}", serif`;
+  const PREVIEW_SERIF = `"${form.fontHeading || "Playfair Display"}", serif`;
   const PREVIEW_SANS  = `"${form.fontBody    || "DM Sans"}", system-ui, sans-serif`;
 
   return (
@@ -2324,9 +2435,9 @@ function AdminVisualEditor({ config, setConfig }) {
             <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔤 Tipografía</p>
             <div style={{ marginBottom: 16 }}>
               <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para títulos y headings</label>
-              <select value={form.fontHeading || "Cormorant Garamond"} onChange={e => setForm(f => ({ ...f, fontHeading: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
+              <select value={form.fontHeading || "Playfair Display"} onChange={e => setForm(f => ({ ...f, fontHeading: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
+                <option value="Playfair Display">Playfair Display — clásica y refinada ✓ Vittoli</option>
                 <option value="Cormorant Garamond">Cormorant Garamond — elegante y delicada</option>
-                <option value="Playfair Display">Playfair Display — clásica y refinada</option>
                 <option value="Georgia">Georgia — serif tradicional</option>
                 <option value="DM Sans">DM Sans — moderna y limpia</option>
                 <option value="Inter">Inter — profesional y neutral</option>
@@ -2735,10 +2846,10 @@ function AdminLogin({ onLogin }) {
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ fontSize: 48, marginBottom: 12 }}>🔐</div>
           <h1 style={{ fontFamily: FONT.serif, fontSize: 32, color: C.charcoal, margin: "0 0 8px" }}>Panel Admin</h1>
-          <p style={{ color: C.faint, fontSize: 14, margin: 0 }}>Venetus Kids — Acceso administrativo</p>
+          <p style={{ color: C.faint, fontSize: 14, margin: 0 }}>Vittoli & Co. — Acceso administrativo</p>
         </div>
         <form onSubmit={submit}>
-          <Field label="Correo electrónico"><input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} style={inputStyle} placeholder="admin@venetuskids.pe" /></Field>
+          <Field label="Correo electrónico"><input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} style={inputStyle} placeholder="admin@vittoli.pe" /></Field>
           <Field label="Contraseña">
             <input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} style={inputStyle} placeholder="••••••••" />
           </Field>
@@ -2776,7 +2887,7 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
       {/* Sidebar */}
       <aside style={{ width: 240, background: C.charcoal, display: "flex", flexDirection: "column", position: "sticky", top: 0, height: "100vh", flexShrink: 0 }}>
         <div style={{ padding: "28px 20px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: "#F4EDE2", letterSpacing: "1px" }}>Venetus <span style={{ color: "#C9A66B" }}>Kids</span></div>
+          <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: "#F4EDE2", letterSpacing: "0.1em" }}>VITTOLI <span style={{ color: "#C9A66B", fontStyle: "italic", fontWeight: 500 }}>&amp;</span> CO.</div>
           <div style={{ fontSize: 11, color: "rgba(250,246,240,0.4)", marginTop: 2 }}>Panel Administrador</div>
         </div>
         <nav style={{ flex: 1, padding: "12px 12px", overflowY: "auto" }}>
@@ -2879,8 +2990,8 @@ export default function App() {
   if (!loaded) return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: C.white }}>
       <div style={{ textAlign: "center" }}>
-        <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1.5, repeat: Infinity }} style={{ fontSize: 64, marginBottom: 20 }}>👶🏻</motion.div>
-        <p style={{ fontFamily: FONT.serif, fontSize: 20, color: C.muted }}>Cargando Venetus Kids...</p>
+        <motion.div animate={{ opacity: [0.45, 1, 0.45] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} style={{ marginBottom: 16, display: "flex", justifyContent: "center" }}><BunnyMark size={54} color={C.noche} /></motion.div>
+        <Wordmark size={22} color={C.noche} />
       </div>
     </div>
   );
@@ -2888,7 +2999,9 @@ export default function App() {
   return (
     <div style={{ fontFamily: FONT.sans, minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        ::selection { background: rgba(188,107,64,0.18); color: #2B3A4A; }
         * { box-sizing: border-box; }
         body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
