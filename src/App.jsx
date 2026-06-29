@@ -261,6 +261,16 @@ const INIT_CONFIG = {
   tiktok: "https://tiktok.com/@vittoli.co",
   facebook: "https://facebook.com/vittoli.co",
   freeShipping: 150,
+  // Captura de correos / pop-up de bienvenida
+  popupActive: true,
+  popupTitle: "10% en tu primera compra",
+  popupText: "Suscríbete y recibe 10% de descuento en tu primera compra, además de novedades y lanzamientos.",
+  popupDelay: 6000,
+  welcomeCode: "BIENVENIDA10",
+  // Instagram
+  instagramHandle: "@vittoliandco.oficial",
+  instagramTitle: "Síguenos en Instagram",
+  instagramPosts: [],
   currency: "S/.",
 
   /* ── PAGOS ──────────────────────────────────────────── */
@@ -333,6 +343,7 @@ const INIT_PRODUCTS = [
 const INIT_COUPONS = [
   { id: "coupon1", code: "VITTOLI20", type: "percent", value: 20, minAmount: 100, maxUses: 200, used: 14, active: true, expires: null },
   { id: "coupon2", code: "MAMA10", type: "fixed", value: 10, minAmount: 80, maxUses: 50, used: 3, active: true, expires: null },
+  { id: "coupon3", code: "BIENVENIDA10", type: "percent", value: 10, minAmount: 0, maxUses: 99999, used: 0, active: true, expires: null },
 ];
 
 const INIT_ORDERS = [
@@ -352,6 +363,16 @@ const storage = {
     try { await window.storage.set(key, JSON.stringify(val)); return true; } catch { return false; }
   },
 };
+
+// ─── LEADS / SUSCRIPTORES ──────────────────────────────────────────────────
+async function saveLead(email, source) {
+  if (!email || !email.includes("@")) return false;
+  const list = (await storage.get("vk_leads")) || [];
+  if (list.some(l => (l.email || "").toLowerCase() === email.toLowerCase())) return true;
+  list.unshift({ email: email.trim(), source, date: Date.now() });
+  await storage.set("vk_leads", list);
+  return true;
+}
 
 // ─── TOAST ─────────────────────────────────────────────────────────────────
 const ToastCtx = (() => { let fn = () => {}; return { show: (m, t) => fn(m, t), register: (f) => { fn = f; } }; })();
@@ -808,7 +829,7 @@ function CartSidebar({ open, onClose, cart, setCart, config, onCheckout, isMobil
 function CheckoutModal({ open, onClose, cart, config, products, coupons, onComplete }) {
   const toast = useToast();
   const [step, setStep] = useState(0); // 0: summary, 1: contact, 2: payment, 3: done
-  const [form, setForm] = useState({ name: "", email: "", phone: "", address: "", coupon: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", address: "", coupon: "", gift: false, giftNote: "" });
   const [couponResult, setCouponResult] = useState(null);
   const [payMethod, setPayMethod] = useState("yape");
   const [processing, setProcessing] = useState(false);
@@ -844,6 +865,7 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
           `📧 ${form.email}`,
           form.phone ? `📱 ${form.phone}` : null,
           `📍 ${form.address}`,
+          form.gift ? `🎁 *Para regalo*${form.giftNote ? ` — Nota: "${form.giftNote}"` : ""}` : null,
           ``,
           `*Productos:*`,
           itemsList,
@@ -918,6 +940,13 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
               <button onClick={validateCoupon} style={{ padding: "11px 18px", borderRadius: 12, background: C.brown, color: "white", border: "none", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", fontSize: 13 }}>Aplicar</button>
             </div>
             {couponResult && <div style={{ fontSize: 13, color: C.success, fontWeight: 600 }}>✅ Cupón {couponResult.code}: -S/. {couponResult.discount.toFixed(2)}</div>}
+          </div>
+          <div style={{ background: C.beige, borderRadius: 16, padding: 16, marginBottom: 16 }}>
+            <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", fontSize: 14, fontWeight: 600, color: C.charcoal }}>
+              <input type="checkbox" checked={form.gift} onChange={e => setForm(f => ({ ...f, gift: e.target.checked }))} style={{ width: 17, height: 17, accentColor: C.roseDeep }} />
+              🎁 Envolver para regalo
+            </label>
+            {form.gift && <textarea value={form.giftNote} onChange={e => setForm(f => ({ ...f, giftNote: e.target.value }))} placeholder="Nota dedicatoria (opcional)..." style={{ ...inputStyle, marginTop: 12, resize: "vertical", minHeight: 60 }} />}
           </div>
           <div style={{ borderTop: `1px solid ${C.beige}`, paddingTop: 16 }}>
             {[["Subtotal", `S/. ${subtotal.toFixed(2)}`], discount > 0 && ["Descuento", `-S/. ${discount.toFixed(2)}`], ["Envío", shipping === 0 ? "¡GRATIS!" : `S/. ${shipping.toFixed(2)}`]].filter(Boolean).map(([k, v]) => (
@@ -1190,6 +1219,107 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
 
 
 
+// ─── POP-UP DE BIENVENIDA (captura de correo) ──────────────────────────────
+function WelcomePopup({ config }) {
+  const toast = useToast();
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [done, setDone] = useState(false);
+  const code = config.welcomeCode || "BIENVENIDA10";
+  useEffect(() => {
+    if (config.popupActive === false) return;
+    let t;
+    storage.get("vk_popup_seen").then(seen => { if (!seen) t = setTimeout(() => setOpen(true), config.popupDelay || 6000); });
+    return () => clearTimeout(t);
+  }, []);
+  const close = () => { setOpen(false); storage.set("vk_popup_seen", true); };
+  const submit = async () => {
+    if (!email.includes("@")) { toast("Ingresa un correo válido", "error"); return; }
+    await saveLead(email, "popup"); setDone(true); storage.set("vk_popup_seen", true);
+  };
+  if (!open) return null;
+  return (
+    <Modal open onClose={close} title={done ? "¡Bienvenida a la familia! 🎀" : (config.popupTitle || "10% en tu primera compra")} width={440}>
+      {done ? (
+        <div style={{ textAlign: "center", padding: "6px 0 4px" }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}><BunnyMark size={54} color={C.noche} src={config.bunnyImage} /></div>
+          <p style={{ color: C.muted, lineHeight: 1.7, marginBottom: 14 }}>Usa este código en tu primera compra:</p>
+          <div style={{ fontFamily: FONT.serif, fontSize: 26, letterSpacing: "0.12em", color: C.terracota, fontWeight: 700, padding: "12px", border: `1.5px dashed ${C.arena}`, borderRadius: 12, marginBottom: 18 }}>{code}</div>
+          <button onClick={close} style={{ padding: "12px 30px", borderRadius: 100, background: C.noche, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Empezar a comprar</button>
+        </div>
+      ) : (
+        <div style={{ textAlign: "center", padding: "2px 0" }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}><BunnyMark size={48} color={C.noche} src={config.bunnyImage} /></div>
+          <p style={{ color: C.muted, lineHeight: 1.7, marginBottom: 18 }}>{config.popupText || "Suscríbete y recibe 10% de descuento en tu primera compra, además de novedades y lanzamientos."}</p>
+          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@correo.com" style={{ width: "100%", padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.arena}`, fontSize: 14, outline: "none", marginBottom: 12, textAlign: "center" }} />
+          <button onClick={submit} style={{ width: "100%", padding: "13px", borderRadius: 100, background: C.terracota, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 14 }}>Quiero mi 10%</button>
+          <p onClick={close} style={{ fontSize: 12, color: C.muted, opacity: 0.7, marginTop: 12, cursor: "pointer" }}>No, gracias</p>
+        </div>
+      )}
+    </Modal>
+  );
+}
+
+// ─── QUIZ "ENCUENTRA EL REGALO PERFECTO" ───────────────────────────────────
+function GiftQuizModal({ open, onClose, products, onPick }) {
+  const [step, setStep] = useState(0);
+  const [age, setAge] = useState(null);
+  const [budget, setBudget] = useState(null);
+  const ages = [["nb", "Recién nacido", "👶"], ["baby", "Bebé (6-24m)", "🍼"], ["small", "Pequeño (2-5a)", "🧸"], ["big", "Grande (6-10a)", "🎈"]];
+  const budgets = [["b1", "Hasta S/ 60", 0, 60], ["b2", "S/ 60 a 120", 60, 120], ["b3", "Más de S/ 120", 120, 999999]];
+  const reset = () => { setStep(0); setAge(null); setBudget(null); };
+  const results = useMemo(() => {
+    if (!budget) return [];
+    const b = budgets.find(x => x[0] === budget);
+    return products.filter(p => p.active && p.price >= b[2] && p.price <= b[3])
+      .sort((a, c) => (c.categoryId === "cat6") - (a.categoryId === "cat6") || c.rating - a.rating).slice(0, 4);
+  }, [budget, products]);
+  if (!open) return null;
+  const opt = (label, emoji, sel, onClick) => (
+    <button onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "15px 18px", borderRadius: 14, border: `1.5px solid ${sel ? C.terracota : C.arena}`, background: sel ? "rgba(188,107,64,0.07)" : "white", cursor: "pointer", marginBottom: 10, textAlign: "left", fontSize: 15, fontWeight: 600, color: C.noche }}>
+      <span style={{ fontSize: 22 }}>{emoji}</span> {label}
+    </button>
+  );
+  return (
+    <Modal open onClose={() => { onClose(); reset(); }} title="Encuentra el regalo perfecto 🎁" width={560}>
+      {step === 0 && (
+        <div>
+          <p style={{ color: C.muted, marginBottom: 18, fontSize: 14 }}>¿Para qué edad buscas el regalo?</p>
+          {ages.map(([id, label, emoji]) => opt(label, emoji, age === id, () => { setAge(id); setStep(1); }))}
+        </div>
+      )}
+      {step === 1 && (
+        <div>
+          <p style={{ color: C.muted, marginBottom: 18, fontSize: 14 }}>¿Cuál es tu presupuesto?</p>
+          {budgets.map(([id, label]) => opt(label, "💝", budget === id, () => { setBudget(id); setStep(2); }))}
+          <button onClick={() => setStep(0)} style={{ marginTop: 6, background: "none", border: "none", color: C.muted, cursor: "pointer", fontSize: 13 }}>← Volver</button>
+        </div>
+      )}
+      {step === 2 && (
+        <div>
+          <p style={{ fontFamily: FONT.serif, fontSize: 18, color: C.noche, margin: "0 0 16px" }}>Nuestras recomendaciones para ti</p>
+          {results.length === 0 ? (
+            <p style={{ color: C.muted, fontSize: 14 }}>No encontramos productos en ese rango. Prueba con otro presupuesto.</p>
+          ) : (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {results.map(p => (
+                <div key={p.id} onClick={() => { onPick(p); reset(); }} style={{ cursor: "pointer", borderRadius: 14, overflow: "hidden", border: `1px solid ${C.arena}` }}>
+                  <div style={{ aspectRatio: "1/1", background: p.bg || C.lino, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 44 }}>{(p.images && p.images[0]) ? <img src={p.images[0]} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : (p.emoji || "🎁")}</div>
+                  <div style={{ padding: "10px 12px" }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: C.noche, margin: "0 0 3px", lineHeight: 1.3 }}>{p.name}</p>
+                    <p style={{ fontSize: 13, color: C.terracota, fontWeight: 700, margin: 0 }}>S/ {p.price.toFixed(2)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <button onClick={reset} style={{ marginTop: 18, padding: "11px 22px", borderRadius: 100, background: C.beige, border: "none", color: C.muted, fontWeight: 600, cursor: "pointer", fontSize: 13 }}>↺ Empezar de nuevo</button>
+        </div>
+      )}
+    </Modal>
+  );
+}
+
 function Storefront({ products, categories, config, coupons, cart, setCart, wishlist, setWishlist, orders, setOrders }) {
   const toast = useToast();
   const [cartOpen, setCartOpen] = useState(false);
@@ -1200,13 +1330,15 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const productsRef = useRef(null);
   const [detailProduct, setDetailProduct] = useState(null);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
+  const [newsEmail, setNewsEmail] = useState("");
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
 
   const filtered = useMemo(() => {
     let p = products.filter(p => p.active);
     if (filterCat !== "all") p = p.filter(p => p.categoryId === filterCat);
-    if (search) p = p.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    if (search) { const q = search.toLowerCase(); p = p.filter(p => p.name.toLowerCase().includes(q) || (p.desc || "").toLowerCase().includes(q)); }
     if (sort === "featured") p = [...p].sort((a, b) => b.featured - a.featured);
     if (sort === "price_asc") p = [...p].sort((a, b) => a.price - b.price);
     if (sort === "price_desc") p = [...p].sort((a, b) => b.price - a.price);
@@ -1242,8 +1374,11 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       paymentStatus: "PAID",
       paymentMethod: orderData.payMethod,
       coupon: orderData.coupon,
+      gift: orderData.gift,
+      giftNote: orderData.giftNote,
       createdAt: Date.now(),
     };
+    saveLead(orderData.email, "checkout");
     setOrders(o => [newOrder, ...o]);
     setCart([]);
     setCheckoutOpen(false);
@@ -1430,6 +1565,10 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
                   </button>
                 ))}
               </div>
+              <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+                <span style={{ position: "absolute", left: 10, color: tc, display: "flex", pointerEvents: "none" }}><Icon d={Icons.search} size={13} strokeWidth={1.7} /></span>
+                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar..." style={{ padding: "7px 11px 7px 30px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, outline: "none", width: isMobile ? 110 : 150 }} />
+              </div>
               <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: "7px 11px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, cursor: "pointer", outline: "none" }}>
                 <option value="featured">Destacados</option>
                 <option value="newest">Nuevos</option>
@@ -1438,6 +1577,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
               </select>
               <button onClick={() => setSizeGuideOpen(true)} style={{ display: "flex", alignItems: "center", gap: 6, padding: isMobile ? "7px 11px" : "7px 13px", borderRadius: 2, border: `1px solid ${brd}`, background: "transparent", color: hc, fontSize: 11, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
                 <Icon d={Icons.tag} size={13} strokeWidth={1.6} /> Guía de tallas
+              </button>
+              <button onClick={() => setQuizOpen(true)} style={{ display: "flex", alignItems: "center", gap: 6, padding: isMobile ? "7px 11px" : "7px 13px", borderRadius: 2, border: "none", background: pc, color: btc, fontSize: 11, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+                <Icon d={Icons.heart} size={13} strokeWidth={1.8} /> Buscar regalo
               </button>
             </div>
           </div>
@@ -1515,14 +1657,38 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         </div>
       </section>
 
+      {/* ── INSTAGRAM ── */}
+      <section style={{ padding: isMobile ? "48px 0 8px" : "72px 0 16px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}` }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 22 : 32 }}>
+            <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600 }}>Comunidad</p>
+            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 300, color: hc, margin: "0 0 6px" }}>{config.instagramTitle || "Síguenos en Instagram"}</h2>
+            <a href={config.instagram || "#"} target="_blank" rel="noreferrer" style={{ fontSize: 13, color: pc, fontWeight: 600, textDecoration: "none" }}>{config.instagramHandle || "@vittoliandco.oficial"}</a>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : "repeat(6, 1fr)", gap: isMobile ? 6 : 10 }}>
+            {(config.instagramPosts && config.instagramPosts.length ? config.instagramPosts : [null, null, null, null, null, null]).slice(0, 6).map((post, i) => {
+              const img = typeof post === "string" ? post : post?.image;
+              const tone = [C.lino, C.arena, "#F2C4C4", C.salviaPale, "#D4E8F0", C.doradoPale][i % 6];
+              return (
+                <a key={i} href={(post && post.url) || config.instagram || "#"} target="_blank" rel="noreferrer"
+                  style={{ aspectRatio: "1/1", borderRadius: 3, overflow: "hidden", background: tone, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                  {img ? <img src={img} alt="Instagram" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                       : <BunnyMark size={isMobile ? 30 : 40} color={C.noche} src={config.bunnyImage} />}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ── NEWSLETTER ── */}
       <section style={{ padding: isMobile ? "52px 20px" : "72px 40px", background: config.newsletterBgColor || pc, textAlign: "center" }}>
         <div style={{ maxWidth: 520, margin: "0 auto" }}>
           <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 24 : 30, fontWeight: 300, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
           <p style={{ fontSize: isMobile ? 13 : 14, color: "rgba(255,255,255,0.75)", marginBottom: 24, lineHeight: 1.7 }}>{config.newsletterText}</p>
           <div style={{ display: "flex", gap: 8, maxWidth: 400, margin: "0 auto", flexDirection: isMobile ? "column" : "row" }}>
-            <input placeholder={config.newsletterInputPlaceholder || "tu@correo.com"} style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.18)", color: "white", fontSize: 13, outline: "none" }} />
-            <button onClick={() => toast("¡Suscripción exitosa!")} style={{ padding: "12px 20px", borderRadius: 2, background: config.newsletterBtnColor || "white", color: config.newsletterBtnTextColor || pc, border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, whiteSpace: "nowrap" }}>{config.newsletterBtnText || "Suscribirse"}</button>
+            <input value={newsEmail} onChange={e => setNewsEmail(e.target.value)} placeholder={config.newsletterInputPlaceholder || "tu@correo.com"} style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.18)", color: "white", fontSize: 13, outline: "none" }} />
+            <button onClick={async () => { if (!newsEmail.includes("@")) { toast("Ingresa un correo válido", "error"); return; } await saveLead(newsEmail, "newsletter"); setNewsEmail(""); toast("¡Suscripción exitosa! 🎀"); }} style={{ padding: "12px 20px", borderRadius: 2, background: config.newsletterBtnColor || "white", color: config.newsletterBtnTextColor || pc, border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, whiteSpace: "nowrap" }}>{config.newsletterBtnText || "Suscribirse"}</button>
           </div>
         </div>
       </section>
@@ -1576,6 +1742,8 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config} products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
       <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} isMobile={isMobile} />
       <SizeGuideModal open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
+      <GiftQuizModal open={quizOpen} onClose={() => setQuizOpen(false)} products={products} onPick={(p) => { setQuizOpen(false); setDetailProduct(p); }} />
+      <WelcomePopup config={config} />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
@@ -1874,7 +2042,7 @@ function AdminOrders({ orders, setOrders }) {
   const exportCSV = () => {
     const rows = [["N°Pedido","Fecha","Cliente","Email","Teléfono","Estado","Pago","Total","Método"], ...orders.map(o => [o.orderNumber, new Date(o.createdAt).toLocaleDateString("es-PE"), o.customerName, o.customerEmail, o.customerPhone, o.status, o.paymentStatus, o.total.toFixed(2), o.paymentMethod || "-"])];
     const csv = rows.map(r => r.join(",")).join("\n");
-    const a = document.createElement("a"); a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv); a.download = `venetus_pedidos_${Date.now()}.csv`; a.click();
+    const a = document.createElement("a"); a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv); a.download = `vittoli_pedidos_${Date.now()}.csv`; a.click();
     toast("📥 Pedidos exportados como CSV");
   };
 
@@ -2831,6 +2999,56 @@ function AdminReviews({ products }) {
 }
 
 // ─── ADMIN LOGIN ──────────────────────────────────────────────────────────────
+function AdminLeads() {
+  const toast = useToast();
+  const [leads, setLeads] = useState([]);
+  const [confirm, setConfirm] = useState(null);
+  useEffect(() => { storage.get("vk_leads").then(v => { if (v) setLeads(v); }); }, []);
+  const save = async (list) => { setLeads(list); await storage.set("vk_leads", list); };
+  const remove = (email) => { save(leads.filter(l => l.email !== email)); setConfirm(null); toast("🗑️ Suscriptor eliminado"); };
+  const exportCSV = () => {
+    const rows = [["Correo", "Origen", "Fecha"], ...leads.map(l => [l.email, l.source || "-", new Date(l.date).toLocaleDateString("es-PE")])];
+    const csv = rows.map(r => r.join(",")).join("\n");
+    const a = document.createElement("a"); a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv); a.download = `vittoli_suscriptores_${Date.now()}.csv`; a.click();
+    toast("📥 Suscriptores exportados");
+  };
+  const srcLabel = { popup: "Pop-up 10%", newsletter: "Newsletter", checkout: "Compra" };
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+        <div>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Suscriptores</h2>
+          <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>{leads.length} correos capturados (pop-up, newsletter y compras)</p>
+        </div>
+        {leads.length > 0 && <button onClick={exportCSV} style={{ display: "flex", alignItems: "center", gap: 8, padding: "11px 20px", borderRadius: 100, background: C.beige, border: "none", fontWeight: 600, cursor: "pointer", fontSize: 13, color: C.muted }}><Icon d={Icons.download} size={15} /> Exportar CSV</button>}
+      </div>
+      {leads.length === 0 ? (
+        <div style={{ textAlign: "center", padding: "60px 0", color: C.muted }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}><Icon d={Icons.mail} size={32} strokeWidth={1.4} /></div>
+          <p style={{ fontFamily: FONT.serif, fontSize: 18, margin: "0 0 6px" }}>Aún no hay suscriptores</p>
+          <p style={{ fontSize: 13, margin: 0 }}>Los correos del pop-up, el newsletter y las compras aparecerán aquí.</p>
+        </div>
+      ) : (
+        <div style={{ background: "white", borderRadius: 16, overflow: "hidden", border: `1px solid ${C.beige}` }}>
+          {leads.map((l, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 18px", borderBottom: i < leads.length - 1 ? `1px solid ${C.beige}` : "none" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ width: 36, height: 36, borderRadius: "50%", background: C.beige, display: "flex", alignItems: "center", justifyContent: "center", color: C.muted, flexShrink: 0 }}><Icon d={Icons.mail} size={15} /></div>
+                <div>
+                  <p style={{ fontWeight: 600, fontSize: 14, color: C.charcoal, margin: "0 0 2px" }}>{l.email}</p>
+                  <p style={{ fontSize: 12, color: C.muted, margin: 0 }}>{srcLabel[l.source] || l.source || "—"} · {new Date(l.date).toLocaleDateString("es-PE")}</p>
+                </div>
+              </div>
+              <button onClick={() => setConfirm(l.email)} style={{ background: "none", border: "none", cursor: "pointer", color: C.roseDeep, padding: 6 }}><Icon d={Icons.trash} size={16} /></button>
+            </div>
+          ))}
+        </div>
+      )}
+      <ConfirmDialog open={!!confirm} onClose={() => setConfirm(null)} onConfirm={() => remove(confirm)} title="Eliminar suscriptor" message="¿Seguro que quieres eliminar este correo de tu lista?" danger />
+    </div>
+  );
+}
+
 function AdminLogin({ onLogin }) {
   const toast = useToast();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -2883,6 +3101,7 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
     { id: "coupons",    icon: Icons.ticket,   label: "Cupones" },
     { id: "reviews",    icon: Icons.star,     label: "Reseñas" },
     { id: "clients",    icon: Icons.users,    label: "Clientes" },
+    { id: "leads",      icon: Icons.mail,     label: "Suscriptores" },
     { id: "pageeditor", icon: Icons.save,     label: "📝 Editor de Página", badge: "CMS" },
     { id: "visual",     icon: Icons.sun,      label: "🎨 Diseño Visual",    badge: "CMS" },
     { id: "settings",   icon: Icons.settings, label: "⚙️ Config. Técnica" },
@@ -2929,6 +3148,7 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
               {section === "coupons" && <AdminCoupons coupons={coupons} setCoupons={setCoupons} />}
               {section === "reviews" && <AdminReviews products={products} />}
               {section === "clients" && <AdminClients orders={orders} setOrders={setOrders} />}
+              {section === "leads" && <AdminLeads />}
               {section === "pageeditor" && <AdminPageEditor config={config} setConfig={setConfig} />}
         {section === "visual" && <AdminVisualEditor config={config} setConfig={setConfig} />}
         {section === "settings" && <AdminSettings config={config} setConfig={setConfig} />}
