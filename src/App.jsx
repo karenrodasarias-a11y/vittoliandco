@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // ─── ICONS ─────────────────────────────────────────────────────────────────
 const Icon = ({ d, size = 20, className = "", strokeWidth = 1.8 }) => (
@@ -3269,6 +3270,7 @@ export default function App() {
       </AnimatePresence>
 
       <Toast />
+      <SpeedInsights />
     </div>
   );
 }
