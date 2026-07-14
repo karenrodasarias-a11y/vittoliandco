@@ -265,7 +265,7 @@ const INIT_CONFIG = {
   popupActive: true,
   popupTitle: "10% en tu primera compra",
   popupText: "Suscríbete y recibe 10% de descuento en tu primera compra, además de novedades y lanzamientos.",
-  popupDelay: 6000,
+  popupDelay: 4000,
   welcomeCode: "BIENVENIDA10",
   // Instagram
   instagramHandle: "@vittoliandco.oficial",
@@ -687,7 +687,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
   const pc = config?.primaryColor || "#899180";
 
   return (
-    <motion.div whileHover={{ y: -6 }} onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)}
+    <motion.div whileHover={{ y: -6 }} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.5, ease: "easeOut" }} onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)}
       style={{ background: "white", borderRadius: 16, overflow: "hidden", boxShadow: "0 2px 16px rgba(61,56,50,0.07)", cursor: "pointer" }}
       onClick={() => onDetail(product)}>
       <div style={{ position: "relative", aspectRatio: "1/1.1", background: product.bg || "#F5EEEC", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
@@ -1220,7 +1220,7 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
 
 
 // ─── POP-UP DE BIENVENIDA (captura de correo) ──────────────────────────────
-function WelcomePopup({ config }) {
+function WelcomePopup({ config, trigger = 0 }) {
   const toast = useToast();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -1229,9 +1229,11 @@ function WelcomePopup({ config }) {
   useEffect(() => {
     if (config.popupActive === false) return;
     let t;
-    storage.get("vk_popup_seen").then(seen => { if (!seen) t = setTimeout(() => setOpen(true), config.popupDelay || 6000); });
+    storage.get("vk_popup_seen").then(seen => { if (!seen) t = setTimeout(() => setOpen(true), config.popupDelay || 4000); });
     return () => clearTimeout(t);
   }, []);
+  // Apertura manual desde el botón flotante (siempre abre, ignora "visto")
+  useEffect(() => { if (trigger > 0) { setDone(false); setOpen(true); } }, [trigger]);
   const close = () => { setOpen(false); storage.set("vk_popup_seen", true); };
   const submit = async () => {
     if (!email.includes("@")) { toast("Ingresa un correo válido", "error"); return; }
@@ -1331,6 +1333,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const [detailProduct, setDetailProduct] = useState(null);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
+  const [offerTrigger, setOfferTrigger] = useState(0);
   const [newsEmail, setNewsEmail] = useState("");
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
@@ -1486,7 +1489,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           {config.heroImage
             ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             : <div style={{ width: "100%", height: "100%", background: config.heroBgGradient || "linear-gradient(160deg,#F5EEEC,#F5F2EE,#EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center" }}><BunnyMark size={isMobile ? 70 : 96} color={C.noche} src={config.bunnyImage} /><div style={{ marginTop: 16 }}><Wordmark text={config.storeName} size={isMobile ? 15 : 18} color={C.muted} /></div></div>
+                <div style={{ textAlign: "center" }}><motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} style={{ display: "inline-block" }}><BunnyMark size={isMobile ? 70 : 96} color={C.noche} src={config.bunnyImage} /></motion.div><div style={{ marginTop: 16 }}><Wordmark text={config.storeName} size={isMobile ? 15 : 18} color={C.muted} /></div></div>
               </div>
           }
           {!isMobile && (
@@ -1743,11 +1746,18 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} isMobile={isMobile} />
       <SizeGuideModal open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
       <GiftQuizModal open={quizOpen} onClose={() => setQuizOpen(false)} products={products} onPick={(p) => { setQuizOpen(false); setDetailProduct(p); }} />
-      <WelcomePopup config={config} />
+      <WelcomePopup config={config} trigger={offerTrigger} />
+      {config.popupActive !== false && (
+        <motion.button onClick={() => setOfferTrigger(t => t + 1)}
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+          style={{ position: "fixed", bottom: isMobile ? 20 : 26, left: isMobile ? 16 : 26, background: C.terracota, color: "#fff", border: "none", borderRadius: 100, padding: isMobile ? "10px 15px" : "12px 20px", fontWeight: 700, fontSize: isMobile ? 12 : 13, cursor: "pointer", boxShadow: "0 6px 20px rgba(188,107,64,0.35)", zIndex: 500, display: "flex", alignItems: "center", gap: 8 }}>
+          <motion.span animate={{ scale: [1, 1.25, 1], rotate: [0, -8, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>🎁</motion.span> 10% OFF
+        </motion.button>
+      )}
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
-        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
         ::selection { background: rgba(188,107,64,0.18); color: #2B3A4A; }
         * { box-sizing: border-box; } body { margin: 0; }
         input, select, textarea, button { font-family: inherit; }
@@ -3232,7 +3242,7 @@ export default function App() {
     <div style={{ fontFamily: FONT.sans, minHeight: "100vh" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
-        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
         ::selection { background: rgba(188,107,64,0.18); color: #2B3A4A; }
         * { box-sizing: border-box; }
         body { margin: 0; }
