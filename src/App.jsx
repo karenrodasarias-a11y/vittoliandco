@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 // ─── ICONS ─────────────────────────────────────────────────────────────────
 const Icon = ({ d, size = 20, className = "", strokeWidth = 1.8 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -282,12 +281,12 @@ const INIT_CONFIG = {
 };
 
 const INIT_CATEGORIES = [
-  { id: "cat1", name: "Recién nacidos", slug: "recien-nacidos", emoji: "👼", image: "", color: "#F2D9C9" },
-  { id: "cat2", name: "Conjuntos & Outfits", slug: "conjuntos", emoji: "👕", image: "", color: "#E3D5C2" },
-  { id: "cat3", name: "Accesorios", slug: "accesorios", emoji: "🎀", image: "", color: "#F0E4CC" },
-  { id: "cat4", name: "Zapatos para bebé", slug: "zapatos", emoji: "👟", image: "", color: "#E8EEE5" },
-  { id: "cat5", name: "Mantas & Esenciales", slug: "mantas", emoji: "🧸", image: "", color: "#DCE6DE" },
-  { id: "cat6", name: "Regalos Baby Shower", slug: "baby-shower", emoji: "🎁", image: "", color: "#E9C9B0" },
+  { id: "cat1", name: "Recién nacidos", slug: "recien-nacidos", emoji: "👼", image: "", color: "#FAE8E8" },
+  { id: "cat2", name: "Conjuntos & Outfits", slug: "conjuntos", emoji: "👕", image: "", color: "#D4E8F0" },
+  { id: "cat3", name: "Accesorios", slug: "accesorios", emoji: "🎀", image: "", color: "#F0E8D4" },
+  { id: "cat4", name: "Zapatos para bebé", slug: "zapatos", emoji: "👟", image: "", color: "#EDE8F5" },
+  { id: "cat5", name: "Mantas & Esenciales", slug: "mantas", emoji: "🧸", image: "", color: "#E8F5E8" },
+  { id: "cat6", name: "Regalos Baby Shower", slug: "baby-shower", emoji: "🎁", image: "", color: "#F5F0D4" },
 ];
 
 const INIT_PRODUCTS = [
@@ -295,49 +294,49 @@ const INIT_PRODUCTS = [
     desc: "Pack de 3 bodys ultra suaves de algodón orgánico 100% hipoalergénico.",
     details: "• Material: 100% algodón orgánico certificado\n• Tallas: 0-3m, 3-6m, 6-9m, 9-12m\n• Colores: blanco, rosado, celeste\n• Cierre: botones a presión\n• Lavable a máquina 30°C",
     price: 89.90, oldPrice: null, stock: 50, categoryId: "cat1", badge: "nuevo",
-    emoji: "👶", images: [], colors: ["#FFFFFF", "#F5EEEC", "#C8DEE8"], bg: "#F2D9C9",
+    emoji: "👶", images: [], colors: ["#FFFFFF", "#F5EEEC", "#C8DEE8"], bg: "#FAE8E8",
     featured: true, active: true, rating: 5, reviews: 124, createdAt: Date.now() - 86400000 * 5 },
   { id: "p2", name: "Conjunto Floral Niña", slug: "conjunto-floral",
     desc: "Blusa + shorts florales para niñas de 3 a 24 meses. Tela fresca y cómoda para todo el día.",
     details: "• Composición: 95% algodón, 5% elastano\n• Tallas: 3-6m, 6-12m, 12-18m, 18-24m\n• Estampado: flores tropicales\n• Incluye: blusa + short con elástico",
     price: 125.00, oldPrice: 160.00, stock: 30, categoryId: "cat2", badge: "oferta",
-    emoji: "👗", images: [], colors: ["#F2C4C4", "#FFFFFF"], bg: "#E3D5C2",
+    emoji: "👗", images: [], colors: ["#F2C4C4", "#FFFFFF"], bg: "#F2C4C4",
     featured: true, active: true, rating: 5, reviews: 87, createdAt: Date.now() - 86400000 * 4 },
   { id: "p3", name: "Gorro de Punto Suave", slug: "gorro-punto",
     desc: "Gorro tejido a mano de acrílico premium, suave y transpirable.",
     details: "• Material: acrílico premium antialérgico\n• Tallas: 0-6m, 6-12m\n• Colores: blanco, rosado, beige, azul, lila\n• Tejido a mano",
     price: 45.00, oldPrice: null, stock: 80, categoryId: "cat3", badge: "mas_vendido",
-    emoji: "🧢", images: [], colors: ["#FFFFFF", "#F2C4C4", "#D4E8F0", "#E8D5B7", "#EDE8F5"], bg: "#F0E4CC",
+    emoji: "🧢", images: [], colors: ["#FFFFFF", "#F2C4C4", "#D4E8F0", "#E8D5B7", "#EDE8F5"], bg: "#D4E8F0",
     featured: true, active: true, rating: 4.8, reviews: 56, createdAt: Date.now() - 86400000 * 3 },
   { id: "p4", name: "Zapatos Gateo Cuero", slug: "zapatos-gateo",
     desc: "Primeros zapatos de cuero natural. Suela antideslizante y cierre fácil.",
     details: "• Material: cuero natural 100%\n• Suela: goma antideslizante ultrafina\n• Cierre: velcro ajustable\n• Tallas: 11, 12, 13 cm de pie",
     price: 79.90, oldPrice: null, stock: 40, categoryId: "cat4", badge: "mas_vendido",
-    emoji: "👟", images: [], colors: ["#C9A97A", "#8B6E52"], bg: "#E8EEE5",
+    emoji: "👟", images: [], colors: ["#C9A97A", "#8B6E52"], bg: "#EDE8F5",
     featured: true, active: true, rating: 4.9, reviews: 203, createdAt: Date.now() - 86400000 * 2 },
   { id: "p5", name: "Manta Muslina Premium", slug: "manta-muslina",
     desc: "100% algodón orgánico GOTS. Doble capa ultra suave, transpirable y termorreguladora.",
     details: "• Material: muslina 100% algodón GOTS\n• Dimensiones: 120cm x 120cm\n• Doble capa, transpirable\n• Usos: arrullo, cobertor, lactancia",
     price: 69.90, oldPrice: 89.90, stock: 60, categoryId: "cat5", badge: "mas_vendido",
-    emoji: "🧸", images: [], colors: ["#FFFFFF", "#F5EEEC", "#EDF0EC"], bg: "#DCE6DE",
+    emoji: "🧸", images: [], colors: ["#FFFFFF", "#F5EEEC", "#EDF0EC"], bg: "#E8F5E8",
     featured: true, active: true, rating: 5, reviews: 341, createdAt: Date.now() - 86400000 },
   { id: "p6", name: "Kit Baby Shower Lujo", slug: "kit-baby-shower",
     desc: "Set regalo premium en caja kraft con lazo. Body, gorro, manoplas, medias y manta.",
     details: "• Incluye: body + gorro + manoplas + medias + manta\n• Presentación: caja kraft con lazo\n• Talla: 0-3 meses\n• Personalizable con tarjeta",
     price: 199.00, oldPrice: 250.00, stock: 20, categoryId: "cat6", badge: "oferta",
-    emoji: "🎁", images: [], colors: ["#F5EEEC", "#EDF0EC", "#FFFFFF"], bg: "#E9C9B0",
+    emoji: "🎁", images: [], colors: ["#F5EEEC", "#EDF0EC", "#FFFFFF"], bg: "#F5F0D4",
     featured: true, active: true, rating: 5, reviews: 68, createdAt: Date.now() - 3600000 * 5 },
   { id: "p7", name: "Pelele Estampado Oso", slug: "pelele-oso",
     desc: "Pelele de algodón suavísimo con estampado de osito. Con botones a presión.",
     details: "• Material: 100% algodón\n• Estampado: oso bordado\n• Botones a presión\n• Tallas: 0-3m, 3-6m, 6-9m",
     price: 55.00, oldPrice: null, stock: 3, categoryId: "cat1", badge: "nuevo",
-    emoji: "🐻", images: [], colors: ["#F2D9C9", "#FFFFFF"], bg: "#F2D9C9",
+    emoji: "🐻", images: [], colors: ["#FAE8E8", "#FFFFFF"], bg: "#FAE8E8",
     featured: false, active: true, rating: 4.7, reviews: 92, createdAt: Date.now() - 3600000 * 2 },
   { id: "p8", name: "Vincha Lazos Artesanal", slug: "vincha-lazos",
     desc: "Hecha a mano con lazo de tela. Sin caucho, no aprieta ni irrita el cuero cabelludo.",
     details: "• Material: tela algodón + goma suave\n• Sin caucho duro\n• Tamaño único ajustable\n• 12 colores disponibles",
     price: 28.00, oldPrice: null, stock: 100, categoryId: "cat3", badge: "mas_vendido",
-    emoji: "🎀", images: [], colors: ["#F2C4C4", "#D4E8F0", "#FFFFFF", "#EDE8F5"], bg: "#F0E4CC",
+    emoji: "🎀", images: [], colors: ["#F2C4C4", "#D4E8F0", "#FFFFFF", "#EDE8F5"], bg: "#F2C4C4",
     featured: false, active: true, rating: 4.9, reviews: 178, createdAt: Date.now() - 3600000 },
 ];
 
@@ -602,11 +601,11 @@ function ColorSwatchInput({ colors = [], onChange, label = "Colores disponibles"
 function ColorInput({ label, value, onChange }) {
   return (
     <div style={{ marginBottom: 14 }}>
-      <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>{label}</label>
+      <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>{label}</label>
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-        <input type="color" value={value || C.terracota} onChange={e => onChange(e.target.value)} style={{ width: 42, height: 38, borderRadius: 8, border: `1.5px solid ${C.arenaDark}`, cursor: "pointer", padding: 2 }} />
-        <input value={value || ""} onChange={e => onChange(e.target.value)} placeholder={C.terracota} maxLength={7} style={{ flex: 1, padding: "8px 12px", borderRadius: 8, border: `1.5px solid ${C.arenaDark}`, background: C.lino, fontSize: 13, fontFamily: "monospace", letterSpacing: "1px", outline: "none", color: C.charcoal }} />
-        <div style={{ width: 38, height: 38, borderRadius: 8, background: value || C.terracota, border: `1.5px solid ${C.arenaDark}`, flexShrink: 0 }} />
+        <input type="color" value={value || "#899180"} onChange={e => onChange(e.target.value)} style={{ width: 42, height: 38, borderRadius: 8, border: "1.5px solid #D8D0C8", cursor: "pointer", padding: 2 }} />
+        <input value={value || ""} onChange={e => onChange(e.target.value)} placeholder="#899180" maxLength={7} style={{ flex: 1, padding: "8px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", fontSize: 13, fontFamily: "monospace", letterSpacing: "1px", outline: "none" }} />
+        <div style={{ width: 38, height: 38, borderRadius: 8, background: value || "#899180", border: "1.5px solid #D8D0C8", flexShrink: 0 }} />
       </div>
     </div>
   );
@@ -638,10 +637,10 @@ function StatCard({ icon, label, value, sub, color = C.roseDeep, trend }) {
 
 // ─── BADGE COMPONENT ───────────────────────────────────────────────────────
 const badgeColors = {
-  nuevo: { bg: C.salviaPale, text: C.salviaDark },
-  oferta: { bg: C.terracotaLight, text: C.terracota },
+  nuevo: { bg: "#E8F3F8", text: "#2A6A8A" },
+  oferta: { bg: "#FFF0E8", text: "#C45000" },
   mas_vendido: { bg: C.roseLight, text: C.roseDeep },
-  favorito: { bg: C.sandLight, text: C.brownDark },
+  favorito: { bg: C.sandLight, text: C.brown },
 };
 const badgeLabels = { nuevo: "Nuevo", oferta: "Oferta", mas_vendido: "Más vendido", favorito: "Favorito" };
 function Badge({ badge }) {
@@ -689,12 +688,12 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
 
   return (
     <motion.div whileHover={{ y: -6 }} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.5, ease: "easeOut" }} onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)}
-      style={{ background: "white", borderRadius: 18, overflow: "hidden", boxShadow: hovered ? "0 18px 36px rgba(43,58,74,0.12)" : "0 2px 16px rgba(43,58,74,0.06)", border: `1px solid ${C.arena}`, transition: "box-shadow 0.3s ease", cursor: "pointer" }}
+      style={{ background: "white", borderRadius: 16, overflow: "hidden", boxShadow: "0 2px 16px rgba(61,56,50,0.07)", cursor: "pointer" }}
       onClick={() => onDetail(product)}>
-      <div style={{ position: "relative", aspectRatio: "1/1.1", background: `radial-gradient(120% 120% at 50% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%), ${product.bg || "#F5EEEC"}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1.1", background: product.bg || "#F5EEEC", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         {thumb
           ? <motion.img src={thumb} alt={product.name} animate={{ scale: hovered ? 1.06 : 1 }} transition={{ duration: 0.4 }} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-          : <motion.span animate={{ scale: hovered ? 1.1 : 1 }} transition={{ duration: 0.4 }} style={{ fontSize: 62, userSelect: "none", filter: "drop-shadow(0 8px 14px rgba(43,58,74,0.14))" }}>{product.emoji || "🎁"}</motion.span>
+          : <motion.span animate={{ scale: hovered ? 1.1 : 1 }} transition={{ duration: 0.4 }} style={{ fontSize: 66, userSelect: "none" }}>{product.emoji || "🎁"}</motion.span>
         }
         {product.badge && <div style={{ position: "absolute", top: 10, left: 10 }}><Badge badge={product.badge} /></div>}
         <motion.button animate={{ opacity: hovered || inWish ? 1 : 0 }}
@@ -719,9 +718,9 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
           </div>
         )}
         <motion.div animate={{ opacity: hovered && product.stock > 0 ? 1 : 0, y: hovered && product.stock > 0 ? 0 : 8 }}
-          style={{ position: "absolute", bottom: 10, left: 10, right: 10 }}
+          style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "8px 10px", background: "rgba(255,255,255,0.95)" }}
           onClick={e => { e.stopPropagation(); onAddCart(product); }}>
-          <button style={{ width: "100%", padding: "10px", background: pc, color: "white", border: "none", borderRadius: 100, fontSize: 11, fontWeight: 600, letterSpacing: "0.4px", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 6px 16px rgba(43,58,74,0.22)" }}>Añadir al carrito</button>
+          <button style={{ width: "100%", padding: "9px", background: pc, color: "white", border: "none", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>Añadir al carrito</button>
         </motion.div>
       </div>
       <div style={{ padding: "13px 14px 14px" }}>
@@ -1051,7 +1050,7 @@ function HeroSection({ config, onShop }) {
           {config.heroBadgeText || "Nueva Colección"}
         </motion.p>
         <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          style={{ fontFamily: FONT.serif, fontSize: "clamp(34px, 3.8vw, 56px)", fontWeight: 700, lineHeight: 1.1, color: C.charcoal, margin: "0 0 20px", letterSpacing: "0.2px" }}>
+          style={{ fontFamily: FONT.serif, fontSize: "clamp(34px, 3.8vw, 54px)", fontWeight: 300, lineHeight: 1.15, color: C.charcoal, margin: "0 0 20px", letterSpacing: "0.3px" }}>
           {(config.heroTitle || "").split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
@@ -1534,16 +1533,16 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: isMobile ? 20 : 28 }}>
             <div>
               <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600 }}>{config.catSectionLabel || "Explorar"}</p>
-              <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 28, fontWeight: 400, color: hc, margin: 0 }}>{config.catSectionTitle || "Todo lo que tu bebé necesita"}</h2>
+              <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 28, fontWeight: 300, color: hc, margin: 0 }}>{config.catSectionTitle || "Todo lo que tu bebé necesita"}</h2>
             </div>
             <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontWeight: 500, whiteSpace: "nowrap" }}>{config.catSectionLinkText || "Ver todo →"}</button>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : isTablet ? "repeat(4, 1fr)" : "repeat(6, 1fr)", gap: isMobile ? 10 : 14 }}>
             {categories.map((cat, i) => (
-              <motion.div key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -3 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
                 onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }} style={{ cursor: "pointer" }}>
-                <div style={{ aspectRatio: "3/4", borderRadius: 16, overflow: "hidden", background: `radial-gradient(120% 120% at 50% 28%, rgba(255,255,255,0.5), rgba(255,255,255,0) 60%), ${cat.color || "#F5EEEC"}`, marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", boxShadow: filterCat === cat.id ? "0 8px 20px rgba(43,58,74,0.14)" : "0 1px 8px rgba(43,58,74,0.05)", transition: "border-color 0.2s, box-shadow 0.2s" }}>
-                  {cat.image ? <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 26 : 32, filter: "drop-shadow(0 6px 10px rgba(43,58,74,0.12))" }}>{cat.emoji}</div>}
+                <div style={{ aspectRatio: "3/4", borderRadius: 3, overflow: "hidden", background: cat.color || "#F5EEEC", marginBottom: 8, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", transition: "border-color 0.15s" }}>
+                  {cat.image ? <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 26 : 32 }}>{cat.emoji}</div>}
                 </div>
                 <p style={{ fontSize: isMobile ? 10 : 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : hc, margin: "0 0 2px", textAlign: "center" }}>{cat.name}</p>
                 {!isMobile && <p style={{ fontSize: 10, color: tc, margin: 0, textAlign: "center", opacity: 0.7 }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>}
@@ -1559,7 +1558,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", marginBottom: isMobile ? 20 : 36, flexWrap: "wrap", gap: 14, flexDirection: isMobile ? "column" : "row" }}>
             <div>
               <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600 }}>{config.prodSectionLabel || "Colección"}</p>
-              <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 28, fontWeight: 400, color: hc, margin: 0 }}>{config.prodSectionTitle || "Más queridos"}</h2>
+              <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 28, fontWeight: 300, color: hc, margin: 0 }}>{config.prodSectionTitle || "Más queridos"}</h2>
             </div>
             <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
@@ -1605,7 +1604,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}`, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 72, alignItems: "center" }}>
           <div>
             <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600 }}>{config.aboutLabel || "Nuestra historia"}</p>
-            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 400, color: hc, lineHeight: 1.35, marginBottom: 16 }}>"{config.aboutTitle}"</h2>
+            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 300, color: hc, lineHeight: 1.35, marginBottom: 16 }}>"{config.aboutTitle}"</h2>
             <p style={{ fontSize: isMobile ? 13 : 14, color: tc, lineHeight: 1.85, marginBottom: 24 }}>{config.aboutText}</p>
             <p style={{ fontFamily: SERIF, fontSize: 15, fontStyle: "italic", color: pc, margin: 0 }}>— {config.aboutSignature || "Con cariño, el equipo de Vittoli & Co."}</p>
           </div>
@@ -1625,7 +1624,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}` }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 28 : 44 }}>
             <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600 }}>{config.testimonialsLabel || "Testimonios"}</p>
-            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 400, color: hc, margin: 0 }}>{config.testimonialsTitle || "Lo que dicen nuestras clientas"}</h2>
+            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 300, color: hc, margin: 0 }}>{config.testimonialsTitle || "Lo que dicen nuestras clientas"}</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)", gap: 16 }}>
             {(config.testimonials || []).map((t, i) => (
@@ -1666,7 +1665,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}` }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 22 : 32 }}>
             <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px", fontWeight: 600 }}>Comunidad</p>
-            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 400, color: hc, margin: "0 0 6px" }}>{config.instagramTitle || "Síguenos en Instagram"}</h2>
+            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 300, color: hc, margin: "0 0 6px" }}>{config.instagramTitle || "Síguenos en Instagram"}</h2>
             <a href={config.instagram || "#"} target="_blank" rel="noreferrer" style={{ fontSize: 13, color: pc, fontWeight: 600, textDecoration: "none" }}>{config.instagramHandle || "@vittoliandco.oficial"}</a>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : "repeat(6, 1fr)", gap: isMobile ? 6 : 10 }}>
@@ -1688,7 +1687,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       {/* ── NEWSLETTER ── */}
       <section style={{ padding: isMobile ? "52px 20px" : "72px 40px", background: config.newsletterBgColor || pc, textAlign: "center" }}>
         <div style={{ maxWidth: 520, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 24 : 30, fontWeight: 400, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
+          <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 24 : 30, fontWeight: 300, color: "white", marginBottom: 10 }}>{config.newsletterTitle}</h2>
           <p style={{ fontSize: isMobile ? 13 : 14, color: "rgba(255,255,255,0.75)", marginBottom: 24, lineHeight: 1.7 }}>{config.newsletterText}</p>
           <div style={{ display: "flex", gap: 8, maxWidth: 400, margin: "0 auto", flexDirection: isMobile ? "column" : "row" }}>
             <input value={newsEmail} onChange={e => setNewsEmail(e.target.value)} placeholder={config.newsletterInputPlaceholder || "tu@correo.com"} style={{ flex: 1, padding: "12px 16px", borderRadius: 2, border: "none", background: "rgba(255,255,255,0.18)", color: "white", fontSize: 13, outline: "none" }} />
@@ -1780,7 +1779,11 @@ function AdminDashboard({ products, orders, categories, config }) {
 
   return (
     <div>
-      <p style={{ color: C.muted, fontSize: 14, margin: "0 0 24px" }}>Aquí está el resumen de tu tienda hoy.</p>
+      <div style={{ marginBottom: 28 }}>
+        <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 4px" }}>Bienvenida de nuevo 👋</h2>
+        <p style={{ color: C.muted, fontSize: 14, margin: 0 }}>Aquí está el resumen de tu tienda hoy.</p>
+      </div>
+
       {/* Stats grid */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 32 }}>
         <StatCard icon={Icons.bar} label="Ingresos totales" value={`S/. ${revenue.toFixed(0)}`} sub={`S/. ${monthRevenue.toFixed(0)} este mes`} color={C.success} trend={12} />
@@ -2561,16 +2564,19 @@ function AdminVisualEditor({ config, setConfig }) {
   const [form, setForm] = useState({ ...config });
   const save = () => { setConfig({ ...form }); toast("✅ Diseño actualizado — visible en la tienda ahora mismo"); };
 
-  const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: `1.5px solid ${C.arenaDark}`, background: C.lino, color: C.charcoal, fontSize: 13, outline: "none", boxSizing: "border-box" };
+  const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box" };
 
   const PREVIEW_SERIF = `"${form.fontHeading || "Playfair Display"}", serif`;
   const PREVIEW_SANS  = `"${form.fontBody    || "DM Sans"}", system-ui, sans-serif`;
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-        <p style={{ color: C.muted, fontSize: 13, margin: 0, maxWidth: 420 }}>Cambia colores, fuentes y estilos de toda la tienda sin tocar código.</p>
-        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "12px 26px", borderRadius: 100, background: `linear-gradient(135deg, ${C.terracota}, ${C.dorado})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, letterSpacing: "0.3px", boxShadow: "0 6px 16px rgba(188,107,64,0.28)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+        <div>
+          <h2 style={{ fontFamily: "serif", fontSize: 26, color: "#3D3830", margin: "0 0 3px" }}>Diseño Visual</h2>
+          <p style={{ color: "#A89888", fontSize: 12, margin: 0 }}>Cambia colores, fuentes y estilos de toda la tienda sin tocar código.</p>
+        </div>
+        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "11px 24px", borderRadius: 100, background: "#899180", color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
           <Icon d={Icons.save} size={14} /> Guardar diseño
         </button>
       </div>
@@ -2579,39 +2585,39 @@ function AdminVisualEditor({ config, setConfig }) {
 
         {/* LEFT: Colors */}
         <div>
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Colores principales</p>
-            <ColorInput label="Color primario (navbar, badges, acentos)" value={form.primaryColor || C.terracota} onChange={v => setForm(f => ({ ...f, primaryColor: v }))} />
-            <ColorInput label="Color de acento (detalles, gradientes)" value={form.accentColor || C.dorado} onChange={v => setForm(f => ({ ...f, accentColor: v }))} />
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🎨 Colores principales</p>
+            <ColorInput label="Color primario (navbar, badges, acentos)" value={form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, primaryColor: v }))} />
+            <ColorInput label="Color de acento (detalles, gradientes)" value={form.accentColor || "#B5A99A"} onChange={v => setForm(f => ({ ...f, accentColor: v }))} />
           </div>
 
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Botones</p>
-            <ColorInput label="Color de fondo de botones" value={form.buttonColor || form.primaryColor || C.terracota} onChange={v => setForm(f => ({ ...f, buttonColor: v }))} />
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔘 Botones</p>
+            <ColorInput label="Color de fondo de botones" value={form.buttonColor || form.primaryColor || "#899180"} onChange={v => setForm(f => ({ ...f, buttonColor: v }))} />
             <ColorInput label="Color del texto en botones" value={form.buttonTextColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, buttonTextColor: v }))} />
-            <ColorInput label="Color botón hero (principal)" value={form.heroBtn1Color || form.buttonColor || C.terracota} onChange={v => setForm(f => ({ ...f, heroBtn1Color: v }))} />
+            <ColorInput label="Color botón hero (principal)" value={form.heroBtn1Color || form.buttonColor || "#899180"} onChange={v => setForm(f => ({ ...f, heroBtn1Color: v }))} />
             <ColorInput label="Color texto botón hero" value={form.heroBtn1TextColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, heroBtn1TextColor: v }))} />
-            <ColorInput label="Borde botón secundario hero" value={form.heroBtn2BorderColor || C.arenaDark} onChange={v => setForm(f => ({ ...f, heroBtn2BorderColor: v }))} />
-            <ColorInput label="Color texto botón secundario hero" value={form.heroBtn2TextColor || C.charcoal} onChange={v => setForm(f => ({ ...f, heroBtn2TextColor: v }))} />
+            <ColorInput label="Borde botón secundario hero" value={form.heroBtn2BorderColor || "#D8D0C8"} onChange={v => setForm(f => ({ ...f, heroBtn2BorderColor: v }))} />
+            <ColorInput label="Color texto botón secundario hero" value={form.heroBtn2TextColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, heroBtn2TextColor: v }))} />
           </div>
 
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Tipografía y fondos</p>
-            <ColorInput label="Color de encabezados / títulos" value={form.headingColor || C.charcoal} onChange={v => setForm(f => ({ ...f, headingColor: v }))} />
-            <ColorInput label="Color de texto general" value={form.textColor || C.muted} onChange={v => setForm(f => ({ ...f, textColor: v }))} />
-            <ColorInput label="Color de fondo del sitio" value={form.bgColor || C.lino} onChange={v => setForm(f => ({ ...f, bgColor: v }))} />
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>📝 Tipografía y fondos</p>
+            <ColorInput label="Color de encabezados / títulos" value={form.headingColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, headingColor: v }))} />
+            <ColorInput label="Color de texto general" value={form.textColor || "#7A7068"} onChange={v => setForm(f => ({ ...f, textColor: v }))} />
+            <ColorInput label="Color de fondo del sitio" value={form.bgColor || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, bgColor: v }))} />
             <ColorInput label="Color de fondo de tarjetas" value={form.cardBgColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, cardBgColor: v }))} />
-            <ColorInput label="Color de bordes / líneas divisoras" value={form.borderColor || C.arena} onChange={v => setForm(f => ({ ...f, borderColor: v }))} />
-            <ColorInput label="Color de fondo navbar" value={form.navBgColor?.replace("rgba(250,250,248,0.96)", C.lino) || C.lino} onChange={v => setForm(f => ({ ...f, navBgColor: v }))} />
-            <ColorInput label="Color de texto navbar" value={form.navTextColor || C.charcoal} onChange={v => setForm(f => ({ ...f, navTextColor: v }))} />
-            <ColorInput label="Color activo navbar" value={form.navActiveColor || C.terracota} onChange={v => setForm(f => ({ ...f, navActiveColor: v }))} />
+            <ColorInput label="Color de bordes / líneas divisoras" value={form.borderColor || "#EDE8E2"} onChange={v => setForm(f => ({ ...f, borderColor: v }))} />
+            <ColorInput label="Color de fondo navbar" value={form.navBgColor?.replace("rgba(250,250,248,0.96)", "#FAFAF8") || "#FAFAF8"} onChange={v => setForm(f => ({ ...f, navBgColor: v }))} />
+            <ColorInput label="Color de texto navbar" value={form.navTextColor || "#3D3830"} onChange={v => setForm(f => ({ ...f, navTextColor: v }))} />
+            <ColorInput label="Color activo navbar" value={form.navActiveColor || "#899180"} onChange={v => setForm(f => ({ ...f, navActiveColor: v }))} />
           </div>
         </div>
 
         {/* RIGHT: Typography + Preview + Payments */}
         <div>
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Tipografía</p>
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>🔤 Tipografía</p>
             <div style={{ marginBottom: 16 }}>
               <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Fuente para títulos y headings</label>
               <select value={form.fontHeading || "Playfair Display"} onChange={e => setForm(f => ({ ...f, fontHeading: e.target.value }))} style={{ ...iS, cursor: "pointer" }}>
@@ -2636,62 +2642,62 @@ function AdminVisualEditor({ config, setConfig }) {
           </div>
 
           {/* Live Preview */}
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Vista previa — Paleta Vittoli & Co.</p>
-            <div style={{ background: form.bgColor || C.lino, borderRadius: 14, padding: 20, border: `1px solid ${C.beige}` }}>
-              <div style={{ background: form.promoBannerColor || C.charcoal, color: form.promoBannerTextColor || C.lino, textAlign: "center", padding: "6px 12px", borderRadius: 6, marginBottom: 12, fontSize: 11 }}>Barra de promoción</div>
-              <p style={{ fontSize: 10, color: form.primaryColor || C.terracota, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: PREVIEW_SANS }}>Etiqueta de sección</p>
-              <h3 style={{ fontFamily: PREVIEW_SERIF, fontSize: 24, fontWeight: 400, color: form.headingColor || C.charcoal, margin: "0 0 8px" }}>Título de ejemplo</h3>
-              <p style={{ fontFamily: PREVIEW_SANS, color: form.textColor || C.muted, fontSize: 13, lineHeight: 1.6, margin: "0 0 14px" }}>Este es un texto de ejemplo para ver cómo quedará el contenido de tu tienda con la configuración visual actual.</p>
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#BC6B40", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>👁️ Vista previa — Paleta Vittoli & Co.</p>
+            <div style={{ background: form.bgColor || "#FAFAF8", borderRadius: 10, padding: 20, border: "1px solid #EDE8E2" }}>
+              <div style={{ background: form.promoBannerColor || "#3D3830", color: form.promoBannerTextColor || "#FAFAF8", textAlign: "center", padding: "6px 12px", borderRadius: 6, marginBottom: 12, fontSize: 11 }}>Barra de promoción</div>
+              <p style={{ fontSize: 10, color: form.primaryColor || "#899180", textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600, fontFamily: PREVIEW_SANS }}>Etiqueta de sección</p>
+              <h3 style={{ fontFamily: PREVIEW_SERIF, fontSize: 24, fontWeight: 300, color: form.headingColor || "#3D3830", margin: "0 0 8px" }}>Título de ejemplo</h3>
+              <p style={{ fontFamily: PREVIEW_SANS, color: form.textColor || "#7A7068", fontSize: 13, lineHeight: 1.6, margin: "0 0 14px" }}>Este es un texto de ejemplo para ver cómo quedará el contenido de tu tienda con la configuración visual actual.</p>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <button style={{ padding: "10px 22px", borderRadius: 100, background: form.buttonColor || form.primaryColor || C.terracota, color: form.buttonTextColor || "white", border: "none", fontSize: 12, fontWeight: 600, fontFamily: PREVIEW_SANS }}>Botón principal</button>
-                <button style={{ padding: "10px 20px", borderRadius: 100, background: "transparent", color: form.heroBtn2TextColor || form.headingColor || C.charcoal, border: `1px solid ${form.heroBtn2BorderColor || C.arenaDark}`, fontSize: 12, fontFamily: PREVIEW_SANS }}>Botón secundario</button>
+                <button style={{ padding: "9px 20px", borderRadius: 2, background: form.buttonColor || form.primaryColor || "#899180", color: form.buttonTextColor || "white", border: "none", fontSize: 12, fontWeight: 600, fontFamily: PREVIEW_SANS }}>Botón principal</button>
+                <button style={{ padding: "9px 18px", borderRadius: 2, background: "transparent", color: form.heroBtn2TextColor || form.headingColor || "#3D3830", border: `1px solid ${form.heroBtn2BorderColor || "#D8D0C8"}`, fontSize: 12, fontFamily: PREVIEW_SANS }}>Botón secundario</button>
               </div>
               <div style={{ marginTop: 12, display: "flex", gap: 6, alignItems: "center" }}>
-                <span style={{ background: (form.primaryColor || C.terracota) + "20", color: form.primaryColor || C.terracota, padding: "3px 9px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>Badge</span>
-                <span style={{ color: form.textColor || C.muted, fontSize: 11, fontFamily: PREVIEW_SANS, opacity: 0.7 }}>Texto secundario</span>
+                <span style={{ background: (form.primaryColor || "#899180") + "20", color: form.primaryColor || "#899180", padding: "3px 9px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>Badge</span>
+                <span style={{ color: form.textColor || "#7A7068", fontSize: 11, fontFamily: PREVIEW_SANS, opacity: 0.7 }}>Texto secundario</span>
               </div>
             </div>
           </div>
 
           {/* Payments */}
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Métodos de pago</p>
-            <div style={{ background: C.salviaPale, borderRadius: 10, padding: "9px 13px", marginBottom: 14, fontSize: 12, color: C.salviaDark }}>Activa o desactiva cada método. Yape y Transferencia no requieren clave API.</div>
+          <div style={{ background: "white", borderRadius: 12, padding: 22, border: "1px solid #EDE8E2" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#899180", textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>💳 Métodos de pago</p>
+            <div style={{ background: "#EDF0EC", borderRadius: 8, padding: "9px 13px", marginBottom: 14, fontSize: 12, color: "#6B7264" }}>Activa o desactiva cada método. Yape y Transferencia no requieren clave API.</div>
             {/* Yape toggle */}
-            <div style={{ border: `1.5px solid ${form.yapeEnabled !== false ? C.terracota : C.beige}`, borderRadius: 12, padding: 14, marginBottom: 10, transition: "border-color 0.15s" }}>
+            <div style={{ border: `1.5px solid ${form.yapeEnabled !== false ? "#899180" : "#EDE8E2"}`, borderRadius: 10, padding: 14, marginBottom: 10 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: form.yapeEnabled !== false ? 10 : 0 }}>
-                <span style={{ fontWeight: 600, fontSize: 13, color: C.charcoal }}>Yape / Plin</span>
-                <div onClick={() => setForm(f => ({ ...f, yapeEnabled: f.yapeEnabled === false ? true : false }))} style={{ width: 44, height: 24, borderRadius: 100, background: form.yapeEnabled !== false ? C.terracota : C.arenaDark, position: "relative", cursor: "pointer", flexShrink: 0, transition: "background 0.15s" }}>
+                <span style={{ fontWeight: 600, fontSize: 13, color: "#3D3830" }}>💜 Yape / Plin</span>
+                <div onClick={() => setForm(f => ({ ...f, yapeEnabled: f.yapeEnabled === false ? true : false }))} style={{ width: 44, height: 24, borderRadius: 100, background: form.yapeEnabled !== false ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", flexShrink: 0 }}>
                   <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form.yapeEnabled !== false ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
                 </div>
               </div>
-              {form.yapeEnabled !== false && <p style={{ fontSize: 12, color: C.terracota, margin: 0, background: C.terracotaLight, borderRadius: 8, padding: "6px 10px" }}>Número Yape/Plin: <strong>{form.whatsapp}</strong> — configurable en Contacto</p>}
+              {form.yapeEnabled !== false && <p style={{ fontSize: 12, color: "#9C27B0", margin: 0, background: "#F3E5F5", borderRadius: 6, padding: "6px 10px" }}>Número Yape/Plin: <strong>{form.whatsapp}</strong> — configurable en Contacto</p>}
             </div>
             {/* Transfer toggle */}
-            <div style={{ border: `1.5px solid ${form.transferEnabled !== false ? C.terracota : C.beige}`, borderRadius: 12, padding: 14, marginBottom: 10, transition: "border-color 0.15s" }}>
+            <div style={{ border: `1.5px solid ${form.transferEnabled !== false ? "#899180" : "#EDE8E2"}`, borderRadius: 10, padding: 14, marginBottom: 10 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: form.transferEnabled !== false ? 10 : 0 }}>
-                <span style={{ fontWeight: 600, fontSize: 13, color: C.charcoal }}>Transferencia bancaria</span>
-                <div onClick={() => setForm(f => ({ ...f, transferEnabled: f.transferEnabled === false ? true : false }))} style={{ width: 44, height: 24, borderRadius: 100, background: form.transferEnabled !== false ? C.terracota : C.arenaDark, position: "relative", cursor: "pointer", flexShrink: 0, transition: "background 0.15s" }}>
+                <span style={{ fontWeight: 600, fontSize: 13, color: "#3D3830" }}>🏦 Transferencia bancaria</span>
+                <div onClick={() => setForm(f => ({ ...f, transferEnabled: f.transferEnabled === false ? true : false }))} style={{ width: 44, height: 24, borderRadius: 100, background: form.transferEnabled !== false ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", flexShrink: 0 }}>
                   <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form.transferEnabled !== false ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
                 </div>
               </div>
               {form.transferEnabled !== false && (
                 <div>
-                  <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Datos bancarios (se muestran al cliente)</label>
-                  <textarea value={form.transferDetails || ""} onChange={e => setForm(f => ({ ...f, transferDetails: e.target.value }))} style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: `1.5px solid ${C.arenaDark}`, background: C.lino, color: C.charcoal, fontSize: 13, outline: "none", boxSizing: "border-box", resize: "vertical", minHeight: 55 }} placeholder={"BCP: 123-456789-0-12\nInterbank: 200-123456789-01"} />
+                  <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#7A7068", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>Datos bancarios (se muestran al cliente)</label>
+                  <textarea value={form.transferDetails || ""} onChange={e => setForm(f => ({ ...f, transferDetails: e.target.value }))} style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1.5px solid #D8D0C8", background: "#FAFAF8", color: "#3D3830", fontSize: 13, outline: "none", boxSizing: "border-box", resize: "vertical", minHeight: 55 }} placeholder={"BCP: 123-456789-0-12\nInterbank: 200-123456789-01"} />
                 </div>
               )}
             </div>
             {[
-              { key: "stripe", label: "Stripe — Tarjetas de crédito/débito", kf: "stripeKey", ph: "sk_live_..." },
-              { key: "mp", label: "MercadoPago — Perú y Latinoamérica", kf: "mpKey", ph: "APP_USR-..." },
-              { key: "paypal", label: "PayPal — Internacional", kf: "paypalId", ph: "AXxxxxxxx..." },
+              { key: "stripe", label: "💳 Stripe — Tarjetas de crédito/débito", kf: "stripeKey", ph: "sk_live_..." },
+              { key: "mp", label: "🟡 MercadoPago — Perú y Latinoamérica", kf: "mpKey", ph: "APP_USR-..." },
+              { key: "paypal", label: "💙 PayPal — Internacional", kf: "paypalId", ph: "AXxxxxxxx..." },
             ].map(gw => (
-              <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? C.terracota : C.beige}`, borderRadius: 12, padding: 14, marginBottom: 10, transition: "border-color 0.15s" }}>
+              <div key={gw.key} style={{ border: `1.5px solid ${form[gw.key + "Enabled"] ? "#899180" : "#EDE8E2"}`, borderRadius: 10, padding: 14, marginBottom: 10 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: form[gw.key + "Enabled"] ? 12 : 0 }}>
-                  <span style={{ fontWeight: 600, fontSize: 13, color: C.charcoal }}>{gw.label}</span>
-                  <div onClick={() => setForm(f => ({ ...f, [gw.key + "Enabled"]: !f[gw.key + "Enabled"] }))} style={{ width: 44, height: 24, borderRadius: 100, background: form[gw.key + "Enabled"] ? C.terracota : C.arenaDark, position: "relative", cursor: "pointer", flexShrink: 0, transition: "background 0.15s" }}>
+                  <span style={{ fontWeight: 600, fontSize: 13, color: "#3D3830" }}>{gw.label}</span>
+                  <div onClick={() => setForm(f => ({ ...f, [gw.key + "Enabled"]: !f[gw.key + "Enabled"] }))} style={{ width: 44, height: 24, borderRadius: 100, background: form[gw.key + "Enabled"] ? "#899180" : "#D8D0C8", position: "relative", cursor: "pointer", flexShrink: 0 }}>
                     <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form[gw.key + "Enabled"] ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
                   </div>
                 </div>
@@ -2702,9 +2708,9 @@ function AdminVisualEditor({ config, setConfig }) {
                 )}
               </div>
             ))}
-            <div style={{ background: C.doradoPale, borderRadius: 12, padding: 14, border: `1.5px solid ${C.dorado}` }}>
-              <p style={{ fontWeight: 700, fontSize: 13, color: C.charcoal, margin: "0 0 3px" }}>Yape — Siempre activo</p>
-              <p style={{ fontSize: 12, color: C.muted, margin: 0 }}>Al pagar con Yape el cliente va a WhatsApp con el número: <strong>{form.whatsapp}</strong></p>
+            <div style={{ background: "linear-gradient(135deg, #F5EEF8, #EDE0F8)", borderRadius: 10, padding: 14, border: "1.5px solid #CE93D8" }}>
+              <p style={{ fontWeight: 700, fontSize: 13, color: "#7B1FA2", margin: "0 0 3px" }}>💜 Yape — Siempre activo</p>
+              <p style={{ fontSize: 12, color: "#9C27B0", margin: 0 }}>Al pagar con Yape el cliente va a WhatsApp con el número: <strong>{form.whatsapp}</strong></p>
             </div>
           </div>
         </div>
@@ -3105,13 +3111,12 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
     { id: "coupons",    icon: Icons.ticket,   label: "Cupones" },
     { id: "reviews",    icon: Icons.star,     label: "Reseñas" },
     { id: "clients",    icon: Icons.users,    label: "Clientes" },
-    { id: "leads",      icon: Icons.mail,     label: "Suscriptores", divider: "Contenido" },
-    { id: "pageeditor", icon: Icons.save,     label: "Editor de página", badge: "CMS" },
-    { id: "visual",     icon: Icons.sun,      label: "Diseño visual",    badge: "CMS" },
-    { id: "settings",   icon: Icons.settings, label: "Config. técnica" },
+    { id: "leads",      icon: Icons.mail,     label: "Suscriptores" },
+    { id: "pageeditor", icon: Icons.save,     label: "📝 Editor de Página", badge: "CMS" },
+    { id: "visual",     icon: Icons.sun,      label: "🎨 Diseño Visual",    badge: "CMS" },
+    { id: "settings",   icon: Icons.settings, label: "⚙️ Config. Técnica" },
   ]
   const pendingOrders = orders.filter(o => o.status === "PENDING").length;
-  const sectionLabels = { dashboard: "Dashboard", products: "Productos", orders: "Pedidos", categories: "Categorías", coupons: "Cupones", reviews: "Reseñas", clients: "Clientes", leads: "Suscriptores", pageeditor: "Editor de página", visual: "Diseño visual", settings: "Configuración técnica" };
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: C.linen }}>
@@ -3121,25 +3126,21 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
           <div style={{ fontFamily: FONT.serif, fontSize: 20, fontWeight: 600, color: "#F4EDE2", letterSpacing: "0.1em" }}>VITTOLI <span style={{ color: "#C9A66B", fontStyle: "italic", fontWeight: 500 }}>&amp;</span> CO.</div>
           <div style={{ fontSize: 11, color: "rgba(250,246,240,0.4)", marginTop: 2 }}>Panel Administrador</div>
         </div>
-        <nav style={{ flex: 1, padding: "16px 12px", overflowY: "auto", overflowX: "hidden" }}>
-          {navItems.map(({ id, icon, label, badge, divider }) => (
-            <React.Fragment key={id}>
-              {divider && <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "rgba(250,246,240,0.32)", margin: "18px 14px 8px" }}>{divider}</p>}
-              <button onClick={() => setSection(id)}
-                style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 12, border: "none", background: section === id ? "rgba(201,166,107,0.16)" : "transparent", color: section === id ? "#F4EDE2" : "rgba(250,246,240,0.55)", fontWeight: section === id ? 600 : 400, fontSize: 13, cursor: "pointer", marginBottom: 2, position: "relative", textAlign: "left", boxShadow: section === id ? "inset 3px 0 0 #C9A66B" : "none", transition: "background 0.15s, box-shadow 0.15s" }}>
-                <Icon d={icon} size={16} />
-                {label}
-                {badge && <span style={{ fontSize: 9, fontWeight: 700, color: "#C9A66B", background: "rgba(201,166,107,0.14)", padding: "2px 6px", borderRadius: 6, letterSpacing: "0.4px" }}>{badge}</span>}
-                {id === "orders" && pendingOrders > 0 && <span style={{ position: "absolute", right: 12, background: C.terracota, color: "white", fontSize: 9, fontWeight: 800, padding: "2px 7px", borderRadius: 100 }}>{pendingOrders}</span>}
-              </button>
-            </React.Fragment>
+        <nav style={{ flex: 1, padding: "12px 12px", overflowY: "auto" }}>
+          {navItems.map(({ id, icon, label, badge }) => (
+            <button key={id} onClick={() => setSection(id)}
+              style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 14, border: "none", background: section === id ? "rgba(255,255,255,0.12)" : "transparent", color: section === id ? "white" : "rgba(250,246,240,0.55)", fontWeight: section === id ? 600 : 400, fontSize: 13, cursor: "pointer", marginBottom: 2, position: "relative", textAlign: "left" }}>
+              <Icon d={icon} size={16} />
+              {label}
+              {id === "orders" && pendingOrders > 0 && <span style={{ position: "absolute", right: 12, background: C.roseDeep, color: "white", fontSize: 9, fontWeight: 800, padding: "2px 7px", borderRadius: 100 }}>{pendingOrders}</span>}
+            </button>
           ))}
         </nav>
-        <div style={{ padding: "16px 12px", borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", gap: 2 }}>
-          <button onClick={onExitAdmin} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 12, border: "none", background: "transparent", color: "rgba(250,246,240,0.5)", cursor: "pointer", fontSize: 13 }}>
+        <div style={{ padding: "16px 12px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <button onClick={onExitAdmin} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 14, border: "none", background: "transparent", color: "rgba(250,246,240,0.5)", cursor: "pointer", fontSize: 13 }}>
             <Icon d={Icons.home} size={16} /> Ver tienda
           </button>
-          <button onClick={onExitAdmin} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 12, border: "none", background: "transparent", color: "rgba(250,246,240,0.4)", cursor: "pointer", fontSize: 13 }}>
+          <button onClick={onExitAdmin} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", borderRadius: 14, border: "none", background: "transparent", color: "rgba(250,246,240,0.4)", cursor: "pointer", fontSize: 13 }}>
             <Icon d={Icons.logout} size={16} /> Salir del admin
           </button>
         </div>
@@ -3147,10 +3148,6 @@ function AdminPanel({ products, setProducts, categories, setCategories, orders, 
 
       {/* Content */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: "100vh", overflow: "auto" }}>
-        <div style={{ padding: "20px 32px", borderBottom: `1px solid ${C.beige}`, background: "rgba(255,255,255,0.6)", position: "sticky", top: 0, zIndex: 5, backdropFilter: "blur(8px)" }}>
-          <p style={{ fontSize: 11, color: C.muted, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "1px" }}>Panel administrador</p>
-          <h1 style={{ fontFamily: FONT.serif, fontSize: 22, fontWeight: 500, color: C.charcoal, margin: 0 }}>{sectionLabels[section] || "Dashboard"}</h1>
-        </div>
         <div style={{ padding: "32px" }}>
           <AnimatePresence mode="wait">
             <motion.div key={section} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}>
