@@ -34,6 +34,7 @@ const Icons = {
   package:  "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z",
   tag:      "M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01",
   settings: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z",
+  user:      "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
   users:    "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
   bar:      "M18 20V10M12 20V4M6 20v-6",
   logout:   "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9",
@@ -1413,6 +1414,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("featured");
   const productsRef = useRef(null);
+  const searchInputRef = useRef(null);
   const [detailProduct, setDetailProduct] = useState(null);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -1511,35 +1513,46 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
 
       {/* ── NAVBAR ── */}
       <nav style={{ position: "sticky", top: 0, zIndex: 200, background: config.navBgColor || "rgba(250,250,248,0.96)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${brd}` }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 48px", height: isMobile ? 56 : 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        {/* Row 1: centered logo, cart on the right */}
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 48px", height: isMobile ? 56 : 62, display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
+          <div />
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             {config.logoImage
               ? <img src={config.logoImage} alt={config.storeName} style={{ height: isMobile ? 28 : 36, objectFit: "contain" }} />
-              : <Wordmark text={config.storeName} size={isMobile ? 16 : 19} color={config.navTextColor || hc} />
+              : <Wordmark text={config.storeName} size={isMobile ? 16 : 20} color={config.navTextColor || hc} />
             }
           </div>
-          {!isMobile && (
-            <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
-              {categories.slice(0, 4).map(cat => (
-                <button key={cat.id} onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
-                  style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, fontFamily: SANS, color: filterCat === cat.id ? (config.navActiveColor || pc) : (config.navTextColor || tc), fontWeight: filterCat === cat.id ? 600 : 400, borderBottom: `1px solid ${filterCat === cat.id ? (config.navActiveColor || pc) : "transparent"}`, padding: "4px 0", transition: "all 0.15s" }}>
-                  {cat.name}
-                </button>
-              ))}
-            </div>
-          )}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: isMobile ? 8 : 14 }}>
             {isMobile && (
               <button onClick={() => setMobileNavOpen(true)} aria-label="Abrir menú" style={{ background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
                 <Icon d={Icons.menu} size={22} strokeWidth={1.5} />
               </button>
             )}
+            <button onClick={() => { productsRef.current?.scrollIntoView({ behavior: "smooth" }); setTimeout(() => searchInputRef.current?.focus(), 400); }} aria-label="Buscar" style={{ background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
+              <Icon d={Icons.search} size={isMobile ? 20 : 18} strokeWidth={1.5} />
+            </button>
+            <button onClick={() => toast("👤 Cuentas de cliente — próximamente")} aria-label="Mi cuenta" style={{ background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
+              <Icon d={Icons.user} size={isMobile ? 20 : 18} strokeWidth={1.5} />
+            </button>
             <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4, borderRadius: 8, transform: cartBump ? "scale(1.32)" : "scale(1)", transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}>
               <Icon d={Icons.cart} size={isMobile ? 22 : 19} strokeWidth={1.4} />
               {cartCount > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: bc, color: btc, fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
             </button>
           </div>
         </div>
+        {/* Row 2: centered category nav */}
+        {!isMobile && (
+          <div style={{ borderTop: `1px solid ${brd}`, padding: "10px 48px" }}>
+            <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 30 }}>
+              {categories.slice(0, 6).map(cat => (
+                <button key={cat.id} onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }}
+                  style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, fontFamily: SANS, color: filterCat === cat.id ? (config.navActiveColor || pc) : (config.navTextColor || tc), fontWeight: filterCat === cat.id ? 600 : 400, borderBottom: `1px solid ${filterCat === cat.id ? (config.navActiveColor || pc) : "transparent"}`, padding: "4px 0", transition: "all 0.15s", whiteSpace: "nowrap" }}>
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* ── MOBILE NAV DRAWER ── */}
@@ -1713,7 +1726,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
               </div>
               <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
                 <span style={{ position: "absolute", left: 10, color: tc, display: "flex", pointerEvents: "none" }}><Icon d={Icons.search} size={13} strokeWidth={1.7} /></span>
-                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar..." style={{ padding: "7px 11px 7px 30px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, outline: "none", width: isMobile ? 110 : 150 }} />
+                <input ref={searchInputRef} value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar..." style={{ padding: "7px 11px 7px 30px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, outline: "none", width: isMobile ? 110 : 150 }} />
               </div>
               <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: "7px 11px", borderRadius: 2, border: `1px solid ${brd}`, background: bg, color: hc, fontSize: 11, cursor: "pointer", outline: "none" }}>
                 <option value="featured">Destacados</option>
