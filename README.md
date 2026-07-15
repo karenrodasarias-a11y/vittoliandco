@@ -1,43 +1,25 @@
-# Venetus Kids ✨
+# Vittoli & Co. — Tienda
 
-Tienda online de ropa y accesorios premium para bebés.
+Proyecto listo para correr con Vite + React.
 
-## Estructura del proyecto
+## Instalar y correr
 
-```
-venetus-kids/
-├── public/
-│   └── index.html        ← Página HTML base
-├── src/
-│   ├── index.js          ← Punto de entrada React
-│   └── App.jsx           ← App completa (tienda + admin)
-├── package.json
-├── vercel.json
-└── .gitignore
+```bash
+npm install
+npm run dev
 ```
 
-## Cómo desplegar en Vercel (gratis)
+Abre http://localhost:5173
 
-1. Sube esta carpeta a GitHub
-2. Ve a vercel.com → New Project → importa el repo
-3. Vercel detecta React automáticamente → clic en Deploy
-4. Tu tienda estará en: `tu-proyecto.vercel.app`
+## Desplegar
 
-## Acceso al Panel Admin
+```bash
+npm run build
+```
 
-- Botón "Panel Admin" abajo a la izquierda en la tienda
-- Contraseña de demo: **admin123**
-- Cambia la contraseña en src/App.jsx buscando: `form.password === "admin123"`
+Sube la carpeta `dist/` a Vercel, Netlify o GitHub Pages.
 
-## Persistencia de datos
-
-Los datos se guardan en **localStorage** del navegador del admin.
-Para una base de datos real, consulta la carpeta `/backend` del proyecto completo.
-
-## Pasarelas de pago
-
-Configúralas desde: Panel Admin → Configuración → Pasarelas de pago
-- **Yape/Plin**: disponible sin configuración
-- **Culqi**: recomendado para Perú (culqi.com)
-- **MercadoPago**: fácil de activar (mercadopago.com.pe)
-- **Stripe**: tarjetas internacionales (stripe.com)
+## Estructura
+- `src/App.jsx` — toda la tienda + panel admin
+- `src/main.jsx` — punto de entrada de React
+- `index.html` — HTML base
