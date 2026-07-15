@@ -365,13 +365,13 @@ const INIT_ORDERS = [
   { id: "ord5", orderNumber: "VC-005", customerName: "Sofia Vega", customerEmail: "sofia@example.com", customerPhone: "954321098", address: "Jr. Arequipa 789, Barranco", items: [{ productId: "p4", name: "Zapatos Gateo Cuero", price: 79.90, qty: 1, emoji: "👟" }, { productId: "p7", name: "Pelele Estampado Oso", price: 55.00, qty: 1, emoji: "🐻" }], subtotal: 134.90, discount: 0, shipping: 0, total: 134.90, status: "PREPARING", paymentStatus: "PAID", paymentMethod: "PayPal", coupon: null, createdAt: Date.now() - 3600000 },
 ];
 
-// ─── STORAGE HELPERS ───────────────────────────────────────────────────────
+// ─── STORAGE HELPERS (localStorage — funciona en cualquier despliegue) ─────
 const storage = {
   async get(key) {
-    try { const r = await window.storage.get(key); return r ? JSON.parse(r.value) : null; } catch { return null; }
+    try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null; } catch { return null; }
   },
   async set(key, val) {
-    try { await window.storage.set(key, JSON.stringify(val)); return true; } catch { return false; }
+    try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch { return false; }
   },
 };
 
