@@ -2867,7 +2867,7 @@ function AdminVisualEditor({ config, setConfig }) {
           </div>
 
           {/* Live Preview */}
-          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
+          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Vista previa — Paleta Vittoli & Co.</p>
             <div style={{ background: form.bgColor || C.lino, borderRadius: 14, padding: 20, border: `1px solid ${C.beige}` }}>
               <div style={{ background: form.promoBannerColor || C.charcoal, color: form.promoBannerTextColor || C.lino, textAlign: "center", padding: "6px 12px", borderRadius: 6, marginBottom: 12, fontSize: 11 }}>Barra de promoción</div>
@@ -2885,6 +2885,45 @@ function AdminVisualEditor({ config, setConfig }) {
             </div>
           </div>
 
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminSettings({ config, setConfig }) {
+  const toast = useToast();
+  const [form, setForm] = useState({ ...config });
+  const save = () => { setConfig({ ...form }); toast("✅ Configuración guardada"); };
+  const iS = { width: "100%", padding: "9px 12px", borderRadius: 8, border: `1.5px solid ${C.arenaDark}`, background: C.lino, color: C.charcoal, fontSize: 13, outline: "none", boxSizing: "border-box" };
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+        <p style={{ color: C.muted, fontSize: 13, margin: 0, maxWidth: 460 }}>Datos de contacto, envío y métodos de pago de la tienda.</p>
+        <button onClick={save} style={{ display: "flex", alignItems: "center", gap: 7, padding: "12px 26px", borderRadius: 100, background: `linear-gradient(135deg, ${C.terracota}, ${C.dorado})`, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 13, letterSpacing: "0.3px", boxShadow: "0 6px 16px rgba(188,107,64,0.28)" }}>
+          <Icon d={Icons.save} size={14} /> Guardar configuración
+        </button>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div>
+          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", marginBottom: 16 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Contacto y envío</p>
+            <Field label="WhatsApp (con código de país)"><input value={form.whatsapp || ""} onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))} style={iS} placeholder="51999999999" /></Field>
+            <Field label="Correo electrónico"><input value={form.email || ""} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} style={iS} /></Field>
+            <Field label="Dirección"><input value={form.address || ""} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} style={iS} /></Field>
+            <Field label="Monto para envío gratis (S/.)"><input type="number" value={form.freeShipping || ""} onChange={e => setForm(f => ({ ...f, freeShipping: parseFloat(e.target.value) }))} style={iS} /></Field>
+          </div>
+          <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 16px" }}>Redes sociales</p>
+            <Field label="Instagram (URL completa)"><input value={form.instagram || ""} onChange={e => setForm(f => ({ ...f, instagram: e.target.value }))} style={iS} /></Field>
+            <Field label="TikTok (URL completa)"><input value={form.tiktok || ""} onChange={e => setForm(f => ({ ...f, tiktok: e.target.value }))} style={iS} /></Field>
+            <Field label="Facebook (URL completa)"><input value={form.facebook || ""} onChange={e => setForm(f => ({ ...f, facebook: e.target.value }))} style={iS} /></Field>
+          </div>
+        </div>
+
+        <div>
           {/* Payments */}
           <div style={{ background: "white", borderRadius: 16, padding: 22, border: `1px solid ${C.beige}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: C.terracota, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>Métodos de pago</p>
@@ -2897,7 +2936,7 @@ function AdminVisualEditor({ config, setConfig }) {
                   <div style={{ width: 18, height: 18, borderRadius: "50%", background: "white", position: "absolute", top: 3, left: form.yapeEnabled !== false ? 22 : 4, transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }} />
                 </div>
               </div>
-              {form.yapeEnabled !== false && <p style={{ fontSize: 12, color: C.terracota, margin: 0, background: C.terracotaLight, borderRadius: 8, padding: "6px 10px" }}>Número Yape/Plin: <strong>{form.whatsapp}</strong> — configurable en Contacto</p>}
+              {form.yapeEnabled !== false && <p style={{ fontSize: 12, color: C.terracota, margin: 0, background: C.terracotaLight, borderRadius: 8, padding: "6px 10px" }}>Número Yape/Plin: <strong>{form.whatsapp}</strong></p>}
             </div>
             {/* Transfer toggle */}
             <div style={{ border: `1.5px solid ${form.transferEnabled !== false ? C.terracota : C.beige}`, borderRadius: 12, padding: 14, marginBottom: 10, transition: "border-color 0.15s" }}>
@@ -2942,10 +2981,6 @@ function AdminVisualEditor({ config, setConfig }) {
       </div>
     </div>
   );
-}
-
-function AdminSettings({ config, setConfig }) {
-  return <AdminVisualEditor config={config} setConfig={setConfig} />;
 }
 
 function AdminClients({ orders, setOrders }) {
