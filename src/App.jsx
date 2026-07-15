@@ -177,6 +177,7 @@ const INIT_CONFIG = {
   navBgColor: "rgba(244,237,226,0.96)",
   navTextColor: "#2B3A4A",
   navActiveColor: "#BC6B40",
+  navLogoSize: 20,
 
   /* ── HERO ───────────────────────────────────────────── */
   heroBadgeText: "Esenciales en algodón · Nueva colección",
@@ -752,7 +753,7 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
       <div style={{ position: "relative", aspectRatio: "1/1.1", background: `radial-gradient(120% 120% at 50% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%), ${product.bg || "#F5EEEC"}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         {thumb
           ? <motion.img src={thumb} alt={product.name} loading="lazy" decoding="async" animate={{ scale: hovered ? 1.06 : 1 }} transition={{ duration: 0.4 }} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-          : <motion.span animate={{ scale: hovered ? 1.1 : 1 }} transition={{ duration: 0.4 }} style={{ fontSize: 62, userSelect: "none", filter: "drop-shadow(0 8px 14px rgba(43,58,74,0.14))" }}>{product.emoji || "🎁"}</motion.span>
+          : React.createElement("image-slot", { id: `product-photo-${product.id}`, shape: "rect", placeholder: "Foto de producto", style: { width: "100%", height: "100%" } })
         }
         {product.badge && <div style={{ position: "absolute", top: 10, left: 10 }}><Badge badge={product.badge} /></div>}
         <motion.button animate={{ opacity: hovered || inWish ? 1 : 0 }}
@@ -1226,7 +1227,7 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
                 )}
               </>
             ) : (
-              <span style={{ fontSize: 90, userSelect: "none" }}>{product.emoji || "🎁"}</span>
+              React.createElement("image-slot", { id: `product-photo-${product.id}`, shape: "rect", placeholder: "Foto de producto", style: { width: "100%", height: "100%" } })
             )}
             {product.stock <= 5 && product.stock > 0 && (
               <div style={{ position: "absolute", top: 12, left: 12, background: "#C8A860", color: "white", padding: "3px 10px", borderRadius: 20, fontSize: 10, fontWeight: 700 }}>⚡ Solo {product.stock}</div>
@@ -1519,7 +1520,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             {config.logoImage
               ? <img src={config.logoImage} alt={config.storeName} style={{ height: isMobile ? 28 : 36, objectFit: "contain" }} />
-              : <Wordmark text={config.storeName} size={isMobile ? 16 : 20} color={config.navTextColor || hc} />
+              : <Wordmark text={config.storeName} size={isMobile ? Math.round((config.navLogoSize || 20) * 0.8) : (config.navLogoSize || 20)} color={config.navTextColor || hc} />
             }
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: isMobile ? 8 : 14 }}>
@@ -2848,8 +2849,14 @@ function AdminVisualEditor({ config, setConfig }) {
             <ColorInput label="Color de fondo de tarjetas" value={form.cardBgColor || "#FFFFFF"} onChange={v => setForm(f => ({ ...f, cardBgColor: v }))} />
             <ColorInput label="Color de bordes / líneas divisoras" value={form.borderColor || C.arena} onChange={v => setForm(f => ({ ...f, borderColor: v }))} />
             <ColorInput label="Color de fondo navbar" value={form.navBgColor?.replace("rgba(250,250,248,0.96)", C.lino) || C.lino} onChange={v => setForm(f => ({ ...f, navBgColor: v }))} />
-            <ColorInput label="Color de texto navbar" value={form.navTextColor || C.charcoal} onChange={v => setForm(f => ({ ...f, navTextColor: v }))} />
+            <ColorInput label="Color del nombre de tienda (navbar)" value={form.navTextColor || C.charcoal} onChange={v => setForm(f => ({ ...f, navTextColor: v }))} />
             <ColorInput label="Color activo navbar" value={form.navActiveColor || C.terracota} onChange={v => setForm(f => ({ ...f, navActiveColor: v }))} />
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ display: "flex", justifyContent: "space-between", fontSize: 11, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>
+                <span>Tamaño del nombre de tienda</span><span style={{ color: C.terracota }}>{form.navLogoSize || 20}px</span>
+              </label>
+              <input type="range" min="14" max="36" step="1" value={form.navLogoSize || 20} onChange={e => setForm(f => ({ ...f, navLogoSize: parseInt(e.target.value) }))} style={{ width: "100%", accentColor: C.terracota }} />
+            </div>
           </div>
         </div>
 
