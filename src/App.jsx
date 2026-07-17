@@ -35,6 +35,9 @@ const Icons = {
   tag:      "M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01",
   settings: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z",
   user:      "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM17.5 6.5h.01",
+  tiktok:    "M9 12a4 4 0 1 0 4 4V4c1 2 3 3.5 5 3.5V11c-2 0-4-.9-5-2.2V16a6 6 0 1 1-6-6",
+  facebook:  "M14 9V6a1 1 0 0 1 1-1h2V2h-3a4 4 0 0 0-4 4v3H8v3h2v9h3v-9h2.5l.5-3H13z",
   users:    "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
   bar:      "M18 20V10M12 20V4M6 20v-6",
   logout:   "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9",
@@ -728,7 +731,7 @@ function StatusBadge({ status }) {
 // ─── STARS ─────────────────────────────────────────────────────────────────
 function Stars({ rating, size = 13 }) {
   return (
-    <span style={{ color: "#F5A623", fontSize: size, display: "flex", gap: 1 }}>
+    <span style={{ color: C.dorado, fontSize: size, display: "flex", gap: 1 }}>
       {[1,2,3,4,5].map(i => <span key={i} style={{ opacity: i <= Math.round(rating) ? 1 : 0.25 }}>★</span>)}
     </span>
   );
@@ -741,6 +744,7 @@ function Stars({ rating, size = 13 }) {
 // ─── PRODUCT CARD (store) ──────────────────────────────────────────────────
 function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = [], onDetail, config, isMobile = false }) {
   const [hovered, setHovered] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const cat = categories.find(c => c.id === product.categoryId);
   const inWish = wishlist.includes(product.id);
   const thumb = product.images && product.images[0];
@@ -752,7 +756,10 @@ function ProductCard({ product, categories, onAddCart, onWishlist, wishlist = []
       onClick={() => onDetail(product)}>
       <div style={{ position: "relative", aspectRatio: "1/1.1", background: `radial-gradient(120% 120% at 50% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%), ${product.bg || "#F5EEEC"}`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         {thumb
-          ? <motion.img src={thumb} alt={product.name} loading="lazy" decoding="async" animate={{ scale: hovered ? 1.06 : 1 }} transition={{ duration: 0.4 }} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+          ? <>
+              <motion.img src={thumb} alt={product.name} loading="lazy" decoding="async" onLoad={() => setImgLoaded(true)} animate={{ scale: hovered ? 1.06 : 1, opacity: imgLoaded ? 1 : 0 }} transition={{ duration: 0.4 }} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+              {!imgLoaded && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%)", backgroundSize: "200% 100%", animation: "skeleton-shimmer 1.4s infinite" }} />}
+            </>
           : React.createElement("image-slot", { id: `product-photo-${product.id}`, shape: "rect", placeholder: "Foto de producto", style: { width: "100%", height: "100%" } })
         }
         {product.badge && <div style={{ position: "absolute", top: 10, left: 10 }}><Badge badge={product.badge} /></div>}
@@ -879,6 +886,59 @@ function CartSidebar({ open, onClose, cart, setCart, config, onCheckout, isMobil
               </button>
             </div>
           </>
+        )}
+      </motion.div>
+    </>
+  );
+}
+
+function WishlistSidebar({ open, onClose, products, wishlist, onRemove, onAddCart, onDetail, config, isMobile = false }) {
+  const items = products.filter(p => wishlist.includes(p.id));
+  return (
+    <>
+      <AnimatePresence>
+        {open && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 800 }} />}
+      </AnimatePresence>
+      <motion.div initial={{ x: "100%" }} animate={{ x: open ? 0 : "100%" }} transition={{ type: "spring", damping: 28, stiffness: 280 }}
+        style={{ position: "fixed", top: 0, right: 0, width: isMobile ? "100vw" : 420, height: "100vh", background: C.white, zIndex: 801, display: "flex", flexDirection: "column", padding: 32, overflowY: "auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+          <h2 style={{ fontFamily: FONT.serif, fontSize: 24, color: C.charcoal, margin: 0 }}>Mis favoritos</h2>
+          <button onClick={onClose} style={{ background: C.beige, border: "none", borderRadius: "50%", width: 38, height: 38, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.muted }}>
+            <Icon d={Icons.x} size={16} />
+          </button>
+        </div>
+        {items.length === 0 ? (
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
+            <Icon d={Icons.heart} size={54} strokeWidth={1.2} style={{ color: C.muted, opacity: 0.4 }} />
+            <p style={{ fontFamily: FONT.serif, fontSize: 20, color: C.charcoal, margin: 0 }}>Aún no tienes favoritos</p>
+            <p style={{ fontSize: 14, color: C.muted, margin: 0, textAlign: "center" }}>Toca el corazón en cualquier producto para guardarlo aquí.</p>
+            <button onClick={onClose} style={{ marginTop: 8, padding: "12px 28px", borderRadius: 100, background: C.sage, color: "white", border: "none", fontWeight: 600, cursor: "pointer", fontSize: 14 }}>Ver productos</button>
+          </div>
+        ) : (
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 0 }}>
+            {items.map(item => {
+              const thumb = item.images && item.images[0];
+              return (
+                <div key={item.id} style={{ display: "flex", gap: 14, padding: "16px 0", borderBottom: `1px solid ${C.beige}` }}>
+                  <div onClick={() => onDetail(item)} style={{ width: 64, height: 64, borderRadius: 14, background: item.bg || C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0, overflow: "hidden", cursor: "pointer" }}>
+                    {thumb ? <img src={thumb} alt="" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : item.emoji}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div onClick={() => onDetail(item)} style={{ fontWeight: 600, fontSize: 14, color: C.charcoal, marginBottom: 3, cursor: "pointer" }}>{item.name}</div>
+                    <div style={{ fontSize: 13, color: C.muted, marginBottom: 8 }}>S/. {item.price.toFixed(2)}</div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <button onClick={() => onAddCart(item)} disabled={item.stock === 0} style={{ padding: "7px 16px", borderRadius: 100, border: "none", background: item.stock === 0 ? C.beigeDark : C.terracota, color: "white", fontSize: 11, fontWeight: 700, cursor: item.stock === 0 ? "not-allowed" : "pointer" }}>
+                        {item.stock === 0 ? "Sin stock" : "Añadir al carrito"}
+                      </button>
+                      <button onClick={() => onRemove(item.id)} style={{ background: "none", border: "none", cursor: "pointer", color: C.roseDeep, padding: 4 }}>
+                        <Icon d={Icons.trash} size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </motion.div>
     </>
@@ -1183,28 +1243,32 @@ function HeroSection({ config, onShop }) {
     </div>
   );
 }
-function ProductDetailModal({ product, categories, open, onClose, onAddCart, onWishlist, wishlist = [], config, isMobile = false }) {
+function ProductDetailModal({ product, categories, products = [], open, onClose, onAddCart, onWishlist, wishlist = [], onSelectRelated, config, isMobile = false }) {
   const [curImg, setCurImg] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const cat = categories.find(c => c.id === product?.categoryId);
   const inWish = product && wishlist.includes(product.id);
   const imgs = product?.images?.length > 0 ? product.images : [];
   const pc = config?.primaryColor || "#899180";
-  useEffect(() => { setCurImg(0); }, [product?.id]);
+  useEffect(() => { setCurImg(0); setImgLoaded(false); }, [product?.id]);
   if (!open || !product) return null;
   const lines = (product.details || "").split("\n").filter(l => l.trim());
+  const related = products.filter(p => p.active && p.id !== product.id && p.categoryId === product.categoryId).slice(0, 4);
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={e => e.target === e.currentTarget && onClose()}
         style={{ position: "fixed", inset: 0, background: "rgba(61,56,50,0.55)", zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", padding: 16, overflowY: "auto" }}>
         <motion.div initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0 }}
-          style={{ background: "#FFFFFF", borderRadius: 16, width: "100%", maxWidth: 860, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", boxShadow: "0 24px 80px rgba(0,0,0,0.22)", overflow: "hidden", maxHeight: "92vh" }}>
+          style={{ background: "#FFFFFF", borderRadius: 16, width: "100%", maxWidth: related.length ? 980 : 860, display: "flex", flexDirection: "column", boxShadow: "0 24px 80px rgba(0,0,0,0.22)", overflow: "hidden", maxHeight: "92vh" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", overflowY: "auto" }}>
 
           {/* Image panel */}
           <div style={{ position: "relative", background: product.bg || "#F5EEEC", minHeight: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
             {imgs.length > 0 ? (
               <>
-                <img src={imgs[curImg]} alt={product.name} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+                <img src={imgs[curImg]} alt={product.name} loading="lazy" decoding="async" onLoad={() => setImgLoaded(true)} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, opacity: imgLoaded ? 1 : 0, transition: "opacity 0.3s" }} />
+                {!imgLoaded && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%)", backgroundSize: "200% 100%", animation: "skeleton-shimmer 1.4s infinite" }} />}
                 {imgs.length > 1 && (
                   <>
                     <button onClick={() => setCurImg(i => Math.max(0, i - 1))} disabled={curImg === 0}
@@ -1296,6 +1360,32 @@ function ProductDetailModal({ product, categories, open, onClose, onAddCart, onW
               </div>
             </div>
           </div>
+          </div>
+
+          {related.length > 0 && (
+            <div style={{ borderTop: "1px solid #EDE8E2", padding: isMobile ? "20px" : "22px 26px", background: "#FAFAF8" }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: pc, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 14px" }}>También te puede gustar</p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 14 }}>
+                {related.map(rp => {
+                  const rThumb = rp.images && rp.images[0];
+                  return (
+                    <div key={rp.id} onClick={() => onSelectRelated && onSelectRelated(rp)} style={{ cursor: "pointer", background: "white", borderRadius: 12, overflow: "hidden", border: "1px solid #EDE8E2" }}>
+                      <div style={{ aspectRatio: "1/1", background: rp.bg || "#F5EEEC", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                        {rThumb
+                          ? <img src={rThumb} alt={rp.name} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          : React.createElement("image-slot", { id: `product-photo-${rp.id}`, shape: "rect", placeholder: "Foto", style: { width: "100%", height: "100%" } })
+                        }
+                      </div>
+                      <div style={{ padding: "8px 10px" }}>
+                        <p style={{ fontSize: 12, fontWeight: 500, color: "#3D3830", margin: "0 0 3px", lineHeight: 1.3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{rp.name}</p>
+                        <p style={{ fontSize: 12, fontWeight: 700, color: "#3D3830", margin: 0 }}>{config?.currency || "S/."} {rp.price.toFixed(2)}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -1310,6 +1400,8 @@ function WelcomePopup({ config, trigger = 0 }) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
   const code = config.welcomeCode || "BIENVENIDA10";
   useEffect(() => {
     if (config.popupActive === false) return;
@@ -1321,8 +1413,17 @@ function WelcomePopup({ config, trigger = 0 }) {
   useEffect(() => { if (trigger > 0) { setDone(false); setOpen(true); } }, [trigger]);
   const close = () => { setOpen(false); storage.set("vk_popup_seen", true); };
   const submit = async () => {
-    if (!email.includes("@")) { toast("Ingresa un correo válido", "error"); return; }
-    await saveLead(email, "popup"); setDone(true); storage.set("vk_popup_seen", true);
+    if (!email.includes("@") || !email.includes(".")) { toast("Ingresa un correo válido", "error"); return; }
+    setSubmitting(true);
+    await saveLead(email, "popup"); setDone(true); setSubmitting(false); storage.set("vk_popup_seen", true);
+  };
+  const copyCode = () => {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800); })
+        .catch(() => toast(`Copia el código manualmente: ${code}`));
+    } else {
+      toast(`Copia el código manualmente: ${code}`);
+    }
   };
   if (!open) return null;
   return (
@@ -1331,16 +1432,23 @@ function WelcomePopup({ config, trigger = 0 }) {
         <div style={{ textAlign: "center", padding: "6px 0 4px" }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}><BunnyMark size={54} color={C.noche} src={config.bunnyImage} /></div>
           <p style={{ color: C.muted, lineHeight: 1.7, marginBottom: 14 }}>Usa este código en tu primera compra:</p>
-          <div style={{ fontFamily: FONT.serif, fontSize: 26, letterSpacing: "0.12em", color: C.terracota, fontWeight: 700, padding: "12px", border: `1.5px dashed ${C.arena}`, borderRadius: 12, marginBottom: 18 }}>{code}</div>
-          <button onClick={close} style={{ padding: "12px 30px", borderRadius: 100, background: C.noche, color: "white", border: "none", fontWeight: 700, cursor: "pointer" }}>Empezar a comprar</button>
+          <button onClick={copyCode} style={{ width: "100%", cursor: "pointer", background: "none", border: `1.5px dashed ${C.arena}`, borderRadius: 12, padding: "12px", marginBottom: 18, display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+            <span style={{ fontFamily: FONT.serif, fontSize: 26, letterSpacing: "0.12em", color: C.terracota, fontWeight: 700 }}>{code}</span>
+            <Icon d={copied ? Icons.check : Icons.copy} size={16} style={{ color: copied ? C.salviaDark : C.muted, flexShrink: 0 }} />
+          </button>
+          <button onClick={close} style-hover={{ opacity: 0.9 }} style={{ padding: "12px 30px", borderRadius: 100, background: C.noche, color: "white", border: "none", fontWeight: 700, cursor: "pointer", transition: "opacity 0.2s" }}>Empezar a comprar</button>
         </div>
       ) : (
         <div style={{ textAlign: "center", padding: "2px 0" }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}><BunnyMark size={48} color={C.noche} src={config.bunnyImage} /></div>
           <p style={{ color: C.muted, lineHeight: 1.7, marginBottom: 18 }}>{config.popupText || "Suscríbete y recibe 10% de descuento en tu primera compra, además de novedades y lanzamientos."}</p>
-          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@correo.com" style={{ width: "100%", padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.arena}`, fontSize: 14, outline: "none", marginBottom: 12, textAlign: "center" }} />
-          <button onClick={submit} style={{ width: "100%", padding: "13px", borderRadius: 100, background: C.terracota, color: "white", border: "none", fontWeight: 700, cursor: "pointer", fontSize: 14 }}>Quiero mi 10%</button>
-          <p onClick={close} style={{ fontSize: 12, color: C.muted, opacity: 0.7, marginTop: 12, cursor: "pointer" }}>No, gracias</p>
+          <input value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === "Enter" && submit()} type="email" placeholder="tu@correo.com"
+            style-focus={{ borderColor: C.terracota }}
+            style={{ width: "100%", padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.arena}`, fontSize: 14, outline: "none", marginBottom: 12, textAlign: "center", transition: "border-color 0.15s" }} />
+          <button onClick={submit} disabled={submitting} style={{ width: "100%", padding: "13px", borderRadius: 100, background: C.terracota, color: "white", border: "none", fontWeight: 700, cursor: submitting ? "default" : "pointer", fontSize: 14, opacity: submitting ? 0.7 : 1 }}>
+            {submitting ? "Enviando..." : "Quiero mi 10%"}
+          </button>
+          <p onClick={close} style-hover={{ opacity: 1 }} style={{ fontSize: 12, color: C.muted, opacity: 0.7, marginTop: 12, cursor: "pointer", transition: "opacity 0.15s" }}>No, gracias</p>
         </div>
       )}
     </Modal>
@@ -1425,6 +1533,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
   const [cartBump, setCartBump] = useState(false);
   const bumpTimer = useRef(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
   const touchStartX = useRef(null);
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
@@ -1535,6 +1644,10 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
             <button onClick={() => toast("👤 Cuentas de cliente — próximamente")} aria-label="Mi cuenta" style={{ background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
               <Icon d={Icons.user} size={isMobile ? 20 : 18} strokeWidth={1.5} />
             </button>
+            <button onClick={() => setWishlistOpen(true)} aria-label="Favoritos" style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4 }}>
+              <Icon d={Icons.heart} size={isMobile ? 20 : 18} strokeWidth={1.5} />
+              {wishlist.length > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: bc, color: btc, fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{wishlist.length}</span>}
+            </button>
             <button onClick={() => setCartOpen(true)} style={{ position: "relative", background: "none", border: "none", cursor: "pointer", color: tc, display: "flex", padding: 4, borderRadius: 8, transform: cartBump ? "scale(1.32)" : "scale(1)", transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}>
               <Icon d={Icons.cart} size={isMobile ? 22 : 19} strokeWidth={1.4} />
               {cartCount > 0 && <span style={{ position: "absolute", top: 1, right: 1, background: bc, color: btc, fontSize: 8, fontWeight: 700, width: 13, height: 13, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>{cartCount}</span>}
@@ -1621,11 +1734,13 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
             style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: isMobile ? "wrap" : "nowrap" }}>
             <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })}
-              style={{ padding: isMobile ? "12px 24px" : "13px 28px", borderRadius: 2, background: config.heroBtn1Color || bc, color: config.heroBtn1TextColor || btc, border: "none", fontWeight: 600, fontSize: isMobile ? 13 : 13, cursor: "pointer", letterSpacing: "0.4px", width: isMobile ? "100%" : "auto" }}>
+              style-hover={{ opacity: 0.88 }}
+              style={{ padding: isMobile ? "12px 24px" : "13px 28px", borderRadius: 2, background: config.heroBtn1Color || bc, color: config.heroBtn1TextColor || btc, border: "none", fontWeight: 600, fontSize: isMobile ? 13 : 13, cursor: "pointer", letterSpacing: "0.4px", width: isMobile ? "100%" : "auto", transition: "opacity 0.2s" }}>
               {config.heroBtn1 || "Ver colección"}
             </button>
             <button onClick={() => document.getElementById("about-vk")?.scrollIntoView({ behavior: "smooth" })}
-              style={{ padding: isMobile ? "12px 24px" : "13px 20px", borderRadius: 2, background: config.heroBtn2Color || "transparent", color: config.heroBtn2TextColor || hc, border: `1px solid ${config.heroBtn2BorderColor || brd}`, fontWeight: 400, fontSize: 13, cursor: "pointer", letterSpacing: "0.3px", width: isMobile ? "100%" : "auto", textAlign: "center" }}>
+              style-hover={{ background: brd }}
+              style={{ padding: isMobile ? "12px 24px" : "13px 20px", borderRadius: 2, background: config.heroBtn2Color || "transparent", color: config.heroBtn2TextColor || hc, border: `1px solid ${config.heroBtn2BorderColor || brd}`, fontWeight: 400, fontSize: 13, cursor: "pointer", letterSpacing: "0.3px", width: isMobile ? "100%" : "auto", textAlign: "center", transition: "background 0.2s" }}>
               {config.heroBtn2 || "Nuestra historia"}
             </button>
           </motion.div>
@@ -1645,9 +1760,7 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           style={{ height: isMobile ? "50vw" : "74vh", minHeight: isMobile ? 240 : 0, borderRadius: 3, overflow: "hidden", position: "relative", order: isMobile ? 1 : 2 }}>
           {config.heroImage
             ? <img src={config.heroImage} alt="Hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            : <div style={{ width: "100%", height: "100%", background: config.heroBgGradient || "linear-gradient(160deg,#F5EEEC,#F5F2EE,#EDF0EC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center" }}><motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} style={{ display: "inline-block" }}><BunnyMark size={isMobile ? 70 : 96} color={C.noche} src={config.bunnyImage} /></motion.div><div style={{ marginTop: 16 }}><Wordmark text={config.storeName} size={isMobile ? 15 : 18} color={C.muted} /></div></div>
-              </div>
+            : React.createElement("image-slot", { id: "hero-photo", shape: "rect", placeholder: "Foto principal del hero", style: { width: "100%", height: "100%" } })
           }
           {!isMobile && (
             <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -1692,18 +1805,22 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
               <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 6px", fontWeight: 600 }}>{config.catSectionLabel || "Explorar"}</p>
               <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 28, fontWeight: 400, color: hc, margin: 0 }}>{config.catSectionTitle || "Todo lo que tu bebé necesita"}</h2>
             </div>
-            <button onClick={() => productsRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontWeight: 500, whiteSpace: "nowrap" }}>{config.catSectionLinkText || "Ver todo →"}</button>
+            <button onClick={() => { setFilterCat("all"); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }} style={{ fontSize: 11, color: pc, background: "none", border: "none", cursor: "pointer", fontWeight: 500, whiteSpace: "nowrap" }}>{config.catSectionLinkText || "Ver todo →"}</button>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : isTablet ? "repeat(4, 1fr)" : "repeat(6, 1fr)", gap: isMobile ? 10 : 14 }}>
             {categories.map((cat, i) => (
-              <motion.div key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -3 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
-                onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }} style={{ cursor: "pointer" }}>
-                <div style={{ aspectRatio: "3/4", borderRadius: 16, overflow: "hidden", background: `radial-gradient(120% 120% at 50% 28%, rgba(255,255,255,0.5), rgba(255,255,255,0) 60%), ${cat.color || "#F5EEEC"}`, marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", boxShadow: filterCat === cat.id ? "0 8px 20px rgba(43,58,74,0.14)" : "0 1px 8px rgba(43,58,74,0.05)", transition: "border-color 0.2s, box-shadow 0.2s" }}>
-                  {cat.image ? <img src={cat.image} alt={cat.name} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 26 : 32, filter: "drop-shadow(0 6px 10px rgba(43,58,74,0.12))" }}>{cat.emoji}</div>}
+              <motion.button key={cat.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -3 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }}
+                onClick={() => { setFilterCat(cat.id); productsRef.current?.scrollIntoView({ behavior: "smooth" }); }} aria-label={`Ver categoría ${cat.name}`}
+                style={{ cursor: "pointer", background: "none", border: "none", padding: 0, textAlign: "center", font: "inherit", display: "block" }}>
+                <div style={{ aspectRatio: "3/4", borderRadius: 16, overflow: "hidden", background: `radial-gradient(120% 120% at 50% 28%, rgba(255,255,255,0.5), rgba(255,255,255,0) 60%), ${cat.color || "#F5EEEC"}`, marginBottom: 10, border: filterCat === cat.id ? `2px solid ${pc}` : "2px solid transparent", boxShadow: filterCat === cat.id ? "0 8px 20px rgba(43,58,74,0.14)" : "0 1px 8px rgba(43,58,74,0.05)", transition: "border-color 0.2s, box-shadow 0.2s", position: "relative" }}>
+                  {cat.image
+                    ? <img src={cat.image} alt={cat.name} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    : React.createElement("image-slot", { id: `category-photo-${cat.id}`, shape: "rect", placeholder: cat.emoji || "📷", style: { width: "100%", height: "100%" } })
+                  }
                 </div>
-                <p style={{ fontSize: isMobile ? 10 : 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : hc, margin: "0 0 2px", textAlign: "center" }}>{cat.name}</p>
-                {!isMobile && <p style={{ fontSize: 10, color: tc, margin: 0, textAlign: "center", opacity: 0.7 }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>}
-              </motion.div>
+                <p style={{ fontSize: isMobile ? 10 : 12, fontWeight: filterCat === cat.id ? 600 : 400, color: filterCat === cat.id ? pc : hc, margin: "0 0 2px" }}>{cat.name}</p>
+                {!isMobile && <p style={{ fontSize: 10, color: tc, margin: 0, opacity: 0.7 }}>{products.filter(p => p.categoryId === cat.id && p.active).length} productos</p>}
+              </motion.button>
             ))}
           </div>
         </div>
@@ -1759,7 +1876,16 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
               </button>
             </div>
           )}
-          {filtered.length === 0 && <div style={{ textAlign: "center", padding: "60px 0" }}><p style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 300, color: tc }}>No encontramos productos con esa búsqueda</p></div>}
+          {filtered.length === 0 && (
+            <div style={{ textAlign: "center", padding: "60px 20px" }}>
+              <Icon d={Icons.search} size={30} strokeWidth={1.2} style={{ color: tc, opacity: 0.35, marginBottom: 14 }} />
+              <p style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 300, color: hc, margin: "0 0 8px" }}>No encontramos productos con esa búsqueda</p>
+              <p style={{ fontSize: 13, color: tc, opacity: 0.7, margin: "0 0 20px" }}>Prueba con otra categoría o quita los filtros de búsqueda.</p>
+              <button onClick={() => { setFilterCat("all"); setSearch(""); }} style={{ padding: "10px 24px", borderRadius: 100, border: `1px solid ${brd}`, background: "transparent", color: hc, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                Limpiar filtros
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1768,16 +1894,14 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: `0 ${isMobile ? "20px" : isTablet ? "32px" : "48px"}`, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 72, alignItems: "center" }}>
           <div>
             <p style={{ fontSize: 10, color: pc, textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 14px", fontWeight: 600 }}>{config.aboutLabel || "Nuestra historia"}</p>
-            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 400, color: hc, lineHeight: 1.35, marginBottom: 16 }}>"{config.aboutTitle}"</h2>
+            <h2 style={{ fontFamily: SERIF, fontSize: isMobile ? 22 : 30, fontWeight: 400, color: hc, lineHeight: 1.35, marginBottom: 16 }}>“{config.aboutTitle}”</h2>
             <p style={{ fontSize: isMobile ? 13 : 14, color: tc, lineHeight: 1.85, marginBottom: 24 }}>{config.aboutText}</p>
             <p style={{ fontFamily: SERIF, fontSize: 15, fontStyle: "italic", color: pc, margin: 0 }}>— {config.aboutSignature || "Con cariño, el equipo de Vittoli & Co."}</p>
           </div>
-          <div style={{ borderRadius: 3, overflow: "hidden" }}>
+          <div style={{ borderRadius: 3, overflow: "hidden", aspectRatio: "4/3" }}>
             {config.aboutImage
-              ? <img src={config.aboutImage} alt="About" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover" }} />
-              : <div style={{ aspectRatio: "4/3", background: `linear-gradient(135deg, ${pc}20, ${ac}30)`, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3 }}>
-                  <div style={{ textAlign: "center" }}><BunnyMark size={isMobile ? 56 : 72} color={C.noche} src={config.bunnyImage} /><p style={{ fontFamily: SERIF, fontSize: 15, color: tc, fontWeight: 400, marginTop: 12 }}>Hecho con cariño</p></div>
-                </div>
+              ? <img src={config.aboutImage} alt="About" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              : React.createElement("image-slot", { id: "about-photo", shape: "rect", placeholder: "Foto del equipo o el taller", style: { width: "100%", height: "100%" } })
             }
           </div>
         </div>
@@ -1793,9 +1917,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)", gap: 16 }}>
             {(config.testimonials || []).map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} viewport={{ once: true }}
-                style={{ background: config.cardBgColor || "white", borderRadius: 3, padding: isMobile ? "20px 18px" : "26px 22px", border: `1px solid ${brd}` }}>
-                <div style={{ color: "#C9A55A", fontSize: 12, marginBottom: 12, letterSpacing: "1px" }}>★★★★★</div>
-                <p style={{ fontSize: 13, lineHeight: 1.8, color: tc, fontStyle: "italic", marginBottom: 18 }}>"{t.text}"</p>
+                style={{ background: config.cardBgColor || "white", borderRadius: 16, padding: isMobile ? "22px 20px" : "28px 24px", border: `1px solid ${brd}`, boxShadow: "0 2px 16px rgba(43,58,74,0.05)" }}>
+                <div style={{ color: config.primaryColor || C.dorado, fontSize: 12, marginBottom: 12, letterSpacing: "1px" }}>★★★★★</div>
+                <p style={{ fontSize: 13, lineHeight: 1.8, color: tc, fontStyle: "italic", marginBottom: 18 }}>“{t.text}”</p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <div style={{ width: 34, height: 34, borderRadius: "50%", background: t.bg || pc + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: hc, flexShrink: 0 }}>{t.avatar}</div>
                   <div>
@@ -1869,17 +1993,26 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
                 ? <img src={config.logoImage} alt={config.storeName} style={{ height: 32, objectFit: "contain", marginBottom: 10 }} />
                 : <div style={{ marginBottom: 10 }}><Wordmark text={config.storeName} size={isMobile ? 17 : 20} color="#F5F2EE" /></div>
               }
-              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 14 }}>{config.footerTagline || config.tagline}</p>
+              <p style={{ fontSize: 12, color: "rgba(245,242,238,0.4)", lineHeight: 1.8, marginBottom: 16 }}>{config.footerTagline || config.tagline}</p>
+              <div style={{ display: "flex", gap: 10 }}>
+                {[["instagram", Icons.instagram], ["tiktok", Icons.tiktok], ["facebook", Icons.facebook]].filter(([k]) => config[k]).map(([k, d]) => (
+                  <a key={k} href={config[k]} target="_blank" rel="noopener noreferrer" aria-label={k}
+                    style-hover={{ background: "rgba(255,255,255,0.14)", color: "#F5F2EE" }}
+                    style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(245,242,238,0.5)", textDecoration: "none", transition: "background 0.2s, color 0.2s" }}>
+                    <Icon d={d} size={14} strokeWidth={1.6} />
+                  </a>
+                ))}
+              </div>
             </div>
             <div>
               <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 12 }}>{config.footerCol1Title || "Tienda"}</p>
-              {(config.footerCol1Links || "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas").split("|").map(l => <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7 }}>{l}</p>)}
+              {(config.footerCol1Links || "Recién nacidos|Conjuntos|Accesorios|Zapatos|Mantas").split("|").map(l => <p key={l} style-hover={{ color: "rgba(245,242,238,0.75)" }} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7, cursor: "pointer", transition: "color 0.15s", width: "fit-content" }}>{l}</p>)}
             </div>
             <div>
               <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(245,242,238,0.3)", textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: 12 }}>{config.footerCol2Title || "Ayuda"}</p>
               {(config.footerCol2Links || "Cómo comprar|Envíos|Cambios|FAQ").split("|").map(l => l.trim().toLowerCase() === "guía de tallas"
-                ? <p key={l} onClick={() => setSizeGuideOpen(true)} style={{ fontSize: 12, color: "rgba(245,242,238,0.6)", marginBottom: 7, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>{l}</p>
-                : <p key={l} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7 }}>{l}</p>)}
+                ? <p key={l} onClick={() => setSizeGuideOpen(true)} style-hover={{ color: "rgba(245,242,238,0.85)" }} style={{ fontSize: 12, color: "rgba(245,242,238,0.6)", marginBottom: 7, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px", width: "fit-content", transition: "color 0.15s" }}>{l}</p>
+                : <p key={l} style-hover={{ color: "rgba(245,242,238,0.75)" }} style={{ fontSize: 12, color: "rgba(245,242,238,0.45)", marginBottom: 7, cursor: "pointer", transition: "color 0.15s", width: "fit-content" }}>{l}</p>)}
             </div>
             {!isMobile && (
               <div>
@@ -1906,8 +2039,9 @@ function Storefront({ products, categories, config, coupons, cart, setCart, wish
       </motion.a>
 
       <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} config={config} onCheckout={() => { setCartOpen(false); setCheckoutOpen(true); }} isMobile={isMobile} />
+      <WishlistSidebar open={wishlistOpen} onClose={() => setWishlistOpen(false)} products={products} wishlist={wishlist} onRemove={toggleWishlist} onAddCart={addToCart} onDetail={(p) => { setWishlistOpen(false); setDetailProduct(p); }} config={config} isMobile={isMobile} />
       <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} cart={cart} config={config} products={products} coupons={coupons} onComplete={handleCheckoutComplete} />
-      <ProductDetailModal product={detailProduct} categories={categories} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} config={config} isMobile={isMobile} />
+      <ProductDetailModal product={detailProduct} categories={categories} products={products} open={!!detailProduct} onClose={() => setDetailProduct(null)} onAddCart={addToCart} onWishlist={toggleWishlist} wishlist={wishlist} onSelectRelated={setDetailProduct} config={config} isMobile={isMobile} />
       <SizeGuideModal open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
       <GiftQuizModal open={quizOpen} onClose={() => setQuizOpen(false)} products={products} onPick={(p) => { setQuizOpen(false); setDetailProduct(p); }} />
       <WelcomePopup config={config} trigger={offerTrigger} />
@@ -2299,6 +2433,36 @@ function AdminOrders({ orders, setOrders }) {
     toast("📥 Pedidos exportados como CSV");
   };
 
+  const exportOrder = (o) => {
+    const lines = [
+      `VITTOLI & CO. — Comprobante de pedido`,
+      `================================`,
+      `Pedido: ${o.orderNumber}`,
+      `Fecha: ${new Date(o.createdAt).toLocaleString("es-PE")}`,
+      ``,
+      `Cliente: ${o.customerName}`,
+      `Email: ${o.customerEmail}`,
+      `Teléfono: ${o.customerPhone || "-"}`,
+      `Dirección: ${o.address || "-"}`,
+      ``,
+      `Productos:`,
+      ...o.items.map(i => `  - ${i.name} x${i.qty} = S/. ${(i.price * i.qty).toFixed(2)}`),
+      ``,
+      `Subtotal: S/. ${o.subtotal?.toFixed(2) || "-"}`,
+      o.discount > 0 ? `Descuento: -S/. ${o.discount.toFixed(2)}` : null,
+      `Envío: ${o.shipping === 0 ? "Gratis" : "S/. " + o.shipping?.toFixed(2)}`,
+      `TOTAL: S/. ${o.total.toFixed(2)}`,
+      ``,
+      `Estado: ${statusConfig[o.status]?.label || o.status}`,
+      `Pago: ${statusConfig[o.paymentStatus]?.label || o.paymentStatus} (${o.paymentMethod || "-"})`,
+    ].filter(l => l !== null).join("\n");
+    const blob = new Blob([lines], { type: "text/plain;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = `pedido_${o.orderNumber}.txt`; a.click();
+    URL.revokeObjectURL(url);
+    toast("📥 Comprobante descargado");
+  };
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
@@ -2383,14 +2547,36 @@ function AdminOrders({ orders, setOrders }) {
               ))}
             </div>
             <div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Progreso del pedido</div>
+              <div style={{ display: "flex", alignItems: "center", marginBottom: 24 }}>
+                {["PENDING","CONFIRMED","PREPARING","SHIPPED","DELIVERED"].map((s, i, arr) => {
+                  const order = arr.indexOf(detail.status);
+                  const done = detail.status !== "CANCELLED" && i <= order;
+                  return (
+                    <React.Fragment key={s}>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, flexShrink: 0 }}>
+                        <div style={{ width: 26, height: 26, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: done ? C.roseDeep : C.beige, color: done ? "white" : C.muted }}>
+                          {done ? <Icon d={Icons.check} size={12} /> : <span style={{ fontSize: 10, fontWeight: 700 }}>{i + 1}</span>}
+                        </div>
+                        <span style={{ fontSize: 10, color: done ? C.charcoal : C.faint, fontWeight: done ? 600 : 400, whiteSpace: "nowrap" }}>{statusConfig[s]?.label}</span>
+                      </div>
+                      {i < arr.length - 1 && <div style={{ flex: 1, height: 1.5, background: i < order ? C.roseDeep : C.beigeDark, margin: "0 6px 16px" }} />}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+              {detail.status === "CANCELLED" && <div style={{ background: "#FBE8E8", color: "#8A2020", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 600, marginBottom: 16 }}>Este pedido fue cancelado</div>}
               <div style={{ fontSize: 11, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>Cambiar estado del pedido</div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
                 {["PENDING","CONFIRMED","PREPARING","SHIPPED","DELIVERED","CANCELLED"].map(s => (
                   <button key={s} onClick={() => updateStatus(detail.id, s)} style={{ padding: "8px 16px", borderRadius: 100, border: `2px solid ${detail.status === s ? C.roseDeep : C.beigeDark}`, background: detail.status === s ? C.roseLight : "transparent", color: detail.status === s ? C.roseDeep : C.muted, fontWeight: 600, fontSize: 12, cursor: "pointer" }}>
                     {statusConfig[s]?.label}
                   </button>
                 ))}
               </div>
+              <button onClick={() => exportOrder(detail)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 18px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 12, color: C.muted, fontWeight: 600 }}>
+                <Icon d={Icons.download} size={14} /> Descargar comprobante
+              </button>
             </div>
           </div>
         )}
@@ -3043,10 +3229,14 @@ function AdminClients({ orders, setOrders }) {
       map[o.customerEmail].spent += o.total;
       if (o.createdAt > map[o.customerEmail].lastOrder) map[o.customerEmail].lastOrder = o.createdAt;
     });
-    return Object.values(map).sort((a, b) => b.spent - a.spent);
+    return Object.values(map).map(c => ({ ...c, segment: c.orders >= 5 || c.spent >= 500 ? "vip" : c.orders >= 2 ? "recurrente" : "nuevo" })).sort((a, b) => b.spent - a.spent);
   }, [orders]);
 
+  const [segmentFilter, setSegmentFilter] = useState("all");
+  const segmentInfo = { vip: { label: "VIP", bg: C.doradoPale, color: "#8A6D1E" }, recurrente: { label: "Recurrente", bg: C.salviaPale, color: C.salviaDark }, nuevo: { label: "Nuevo", bg: C.terracotaLight, color: C.terracota } };
+
   const visibleClients = (showBlocked ? clients : clients.filter(c => !blockedEmails.includes(c.email)))
+    .filter(c => segmentFilter === "all" || c.segment === segmentFilter)
     .filter(c => !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.email.toLowerCase().includes(search.toLowerCase()));
 
   const blockedCount = blockedEmails.length;
@@ -3133,6 +3323,11 @@ function AdminClients({ orders, setOrders }) {
       </div>
 
       {/* Search */}
+      <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
+        {[["all","Todos"], ["nuevo","Nuevos"], ["recurrente","Recurrentes"], ["vip","VIP"]].map(([v, l]) => (
+          <button key={v} onClick={() => setSegmentFilter(v)} style={{ padding: "7px 16px", borderRadius: 100, border: `1.5px solid ${segmentFilter === v ? C.terracota : C.arenaDark}`, background: segmentFilter === v ? C.terracota : "transparent", color: segmentFilter === v ? "white" : C.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{l}</button>
+        ))}
+      </div>
       <div style={{ position: "relative", marginBottom: 18 }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar por nombre o email..." style={{ ...iS, paddingLeft: 36 }} />
         <Icon d={Icons.search} size={14} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: C.faint }} />
@@ -3158,7 +3353,7 @@ function AdminClients({ orders, setOrders }) {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ background: C.linen }}>
-              {["#", "Cliente", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Estado", "Acciones"].map(h => (
+              {["#", "Cliente", "Segmento", "Email", "Teléfono", "Pedidos", "Total gastado", "Último pedido", "Estado", "Acciones"].map(h => (
                 <th key={h} style={{ fontSize: 10, fontWeight: 700, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", padding: "12px 14px", textAlign: "left" }}>{h}</th>
               ))}
             </tr>
@@ -3181,6 +3376,9 @@ function AdminClients({ orders, setOrders }) {
                         {isBlocked && <p style={{ fontSize: 9, color: C.danger, margin: 0, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px" }}>Bloqueado</p>}
                       </div>
                     </div>
+                  </td>
+                  <td style={{ padding: "12px 14px" }}>
+                    <span style={{ fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 100, background: segmentInfo[c.segment].bg, color: segmentInfo[c.segment].color }}>{segmentInfo[c.segment].label}</span>
                   </td>
                   <td style={{ padding: "12px 14px", fontSize: 12, color: C.muted }}>{c.email}</td>
                   <td style={{ padding: "12px 14px", fontSize: 12, color: C.muted }}>{c.phone || "—"}</td>
@@ -3247,43 +3445,62 @@ function AdminReviews({ products }) {
     { id: "r3", productId: "p5", productName: "Manta Muslina Premium", author: "Camila R.", rating: 5, text: "La mejor manta que he comprado. Ultra suave.", date: Date.now() - 86400000, approved: false },
   ];
   const [reviews, setReviews] = useState(sampleReviews);
+  const [pendingOnly, setPendingOnly] = useState(false);
   const toast = useToast();
+  const pendingCount = reviews.filter(r => !r.approved).length;
+  const avgRating = reviews.length ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1) : "—";
+  const filtered = pendingOnly ? reviews.filter(r => !r.approved) : reviews;
 
   return (
     <div>
-      <h2 style={{ fontFamily: FONT.serif, fontSize: 28, color: C.charcoal, margin: "0 0 28px" }}>Reseñas de clientes</h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {reviews.map(r => (
-          <div key={r.id} style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)", display: "flex", gap: 20, alignItems: "flex-start", borderLeft: `4px solid ${r.approved ? C.success : C.warning}` }}>
-            <div style={{ width: 44, height: 44, borderRadius: "50%", background: C.roseLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: C.roseDeep, fontSize: 16, flexShrink: 0 }}>{r.author[0]}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+        <div style={{ display: "flex", gap: 22 }}>
+          <div>
+            <p style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 4px" }}>Total reseñas</p>
+            <p style={{ fontFamily: FONT.serif, fontSize: 26, color: C.charcoal, margin: 0 }}>{reviews.length}</p>
+          </div>
+          <div>
+            <p style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 4px" }}>Calificación promedio</p>
+            <p style={{ fontFamily: FONT.serif, fontSize: 26, color: C.charcoal, margin: 0, display: "flex", alignItems: "center", gap: 6 }}>{avgRating} <Stars rating={5} size={14} /></p>
+          </div>
+        </div>
+        <button onClick={() => setPendingOnly(v => !v)} style={{ display: "flex", alignItems: "center", gap: 6, whiteSpace: "nowrap", padding: "9px 16px", borderRadius: 100, border: `1.5px solid ${pendingOnly ? C.dorado : C.arenaDark}`, background: pendingOnly ? C.doradoPale : "white", color: pendingOnly ? "#8A6D1E" : C.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+          ⏳ Pendientes {pendingCount > 0 && `(${pendingCount})`}
+        </button>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {filtered.map(r => (
+          <div key={r.id} style={{ background: "white", borderRadius: 16, padding: 20, boxShadow: "0 2px 16px rgba(43,58,74,0.05)", display: "flex", gap: 16, alignItems: "flex-start", border: `1px solid ${C.beige}`, borderLeft: `3px solid ${r.approved ? C.salviaDark : C.dorado}` }}>
+            <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.terracotaLight, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: C.terracota, fontSize: 15, flexShrink: 0 }}>{r.author[0]}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8, flexWrap: "wrap", gap: 6 }}>
                 <div>
                   <span style={{ fontWeight: 700, fontSize: 14, color: C.charcoal }}>{r.author}</span>
-                  <span style={{ fontSize: 12, color: C.faint, marginLeft: 10 }}>en <strong>{r.productName}</strong></span>
+                  <span style={{ fontSize: 12, color: C.muted, marginLeft: 10 }}>en <strong>{r.productName}</strong></span>
                 </div>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <Stars rating={r.rating} />
-                  <span style={{ fontSize: 11, color: C.faint }}>{new Date(r.date).toLocaleDateString("es-PE")}</span>
+                  <span style={{ fontSize: 11, color: C.muted }}>{new Date(r.date).toLocaleDateString("es-PE")}</span>
                 </div>
               </div>
               <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.6, margin: "0 0 12px" }}>"{r.text}"</p>
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 100, background: r.approved ? "#D4EDDA" : "#FFF3CD", color: r.approved ? "#155724" : "#856404" }}>
-                  {r.approved ? "✅ Aprobada" : "⏳ Pendiente"}
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 100, background: r.approved ? C.salviaPale : C.doradoPale, color: r.approved ? C.salviaDark : "#8A6D1E" }}>
+                  {r.approved ? "Aprobada" : "Pendiente"}
                 </span>
-                <button onClick={() => { setReviews(rv => rv.map(x => x.id === r.id ? { ...x, approved: !x.approved } : x)); toast(r.approved ? "Reseña ocultada" : "✅ Reseña aprobada"); }}
-                  style={{ padding: "4px 14px", borderRadius: 100, border: `1.5px solid ${C.beigeDark}`, background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.muted }}>
+                <button onClick={() => { setReviews(rv => rv.map(x => x.id === r.id ? { ...x, approved: !x.approved } : x)); toast(r.approved ? "Reseña ocultada" : "✓ Reseña aprobada"); }}
+                  style={{ padding: "4px 14px", borderRadius: 100, border: `1.5px solid ${C.arenaDark}`, background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.muted }}>
                   {r.approved ? "Ocultar" : "Aprobar"}
                 </button>
                 <button onClick={() => { setReviews(rv => rv.filter(x => x.id !== r.id)); toast("Reseña eliminada"); }}
-                  style={{ padding: "4px 14px", borderRadius: 100, border: "1.5px solid #FFCDD2", background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.danger }}>
+                  style={{ padding: "4px 14px", borderRadius: 100, border: "1.5px solid #F0D0C8", background: "transparent", cursor: "pointer", fontSize: 11, fontWeight: 600, color: C.danger }}>
                   Eliminar
                 </button>
               </div>
             </div>
           </div>
         ))}
+        {filtered.length === 0 && <p style={{ padding: "32px", textAlign: "center", color: C.muted, fontSize: 13, background: "white", borderRadius: 16, border: `1px solid ${C.beige}` }}>No hay reseñas pendientes</p>}
       </div>
     </div>
   );
@@ -3477,7 +3694,17 @@ export default function App() {
   // Título de la pestaña del navegador (toma el nombre de la tienda)
   useEffect(() => {
     document.title = config.storeName ? `${config.storeName} — Esenciales de algodón` : "Vittoli & Co.";
-  }, [config.storeName]);
+    const desc = config.tagline || "Esenciales de algodón para los primeros años";
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) { meta = document.createElement("meta"); meta.setAttribute("name", "description"); document.head.appendChild(meta); }
+    meta.setAttribute("content", desc);
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) { ogTitle = document.createElement("meta"); ogTitle.setAttribute("property", "og:title"); document.head.appendChild(ogTitle); }
+    ogTitle.setAttribute("content", config.storeName || "Vittoli & Co.");
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) { ogDesc = document.createElement("meta"); ogDesc.setAttribute("property", "og:description"); document.head.appendChild(ogDesc); }
+    ogDesc.setAttribute("content", desc);
+  }, [config.storeName, config.tagline]);
 
   // Persist helpers
   const makeSetter = (key, setter) => useCallback(async (val) => {
@@ -3539,6 +3766,7 @@ export default function App() {
         input, select, textarea, button { font-family: inherit; }
         input:focus, select:focus, textarea:focus { border-color: ${C.roseDeep} !important; box-shadow: 0 0 0 3px ${C.roseDeep}22; }
         ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: ${C.beige}; } ::-webkit-scrollbar-thumb { background: ${C.beigeDark}; border-radius: 3px; }
+        @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
       `}</style>
 
       {/* Admin button (floating, store only) */}
