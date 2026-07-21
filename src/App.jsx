@@ -1178,6 +1178,11 @@ function CheckoutModal({ open, onClose, cart, config, products, coupons, onCompl
               {processing ? "Procesando..." : payMethod === "yape" ? `💬 Ir a WhatsApp · S/. ${total.toFixed(2)}` : `🔒 Pagar S/. ${total.toFixed(2)}`}
             </button>
           </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 18, marginTop: 16, flexWrap: "wrap" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: C.faint }}><Icon d={Icons.lock} size={13} strokeWidth={1.8} /> Pago 100% seguro</span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: C.faint }}><Icon d={Icons.check} size={13} strokeWidth={1.8} /> Satisfacción garantizada</span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: C.faint }}><Icon d={Icons.package} size={13} strokeWidth={1.8} /> Cambios sin costo</span>
+          </div>
         </div>
       )}
     </Modal>
@@ -2164,6 +2169,26 @@ function AdminDashboard({ products, orders, categories, config }) {
                 </div>
               </div>
             ))}
+          </div>
+          {/* Sales by category */}
+          <div style={{ background: C.white, borderRadius: 20, padding: 24, boxShadow: "0 4px 24px rgba(139,110,82,0.08)" }}>
+            <h3 style={{ fontFamily: FONT.serif, fontSize: 18, color: C.charcoal, margin: "0 0 16px" }}>Ventas por categoría</h3>
+            {categoryRevenue.length === 0 && <p style={{ fontSize: 13, color: C.faint, margin: 0 }}>Aún no hay ventas registradas.</p>}
+            <div style={{ display: "flex", height: 10, borderRadius: 100, overflow: "hidden", marginBottom: 16, background: C.beige }}>
+              {categoryRevenue.map(c => (
+                <div key={c.id} style={{ width: `${c.pct}%`, background: c.color }} title={`${c.name}: ${c.pct}%`} />
+              ))}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {categoryRevenue.map(c => (
+                <div key={c.id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 9, height: 9, borderRadius: "50%", background: c.color, flexShrink: 0 }} />
+                  <span style={{ fontSize: 12, color: C.charcoal, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.name}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: C.charcoal }}>S/. {c.revenue.toFixed(0)}</span>
+                  <span style={{ fontSize: 11, color: C.faint, width: 32, textAlign: "right" }}>{c.pct}%</span>
+                </div>
+              ))}
+            </div>
           </div>
           {/* Low stock alert */}
           {lowStock > 0 && (
